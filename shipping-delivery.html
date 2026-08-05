@@ -350,6 +350,10 @@
         <textarea id="items" name="items" placeholder="e.g. 1 console table, roughly 4ft wide — or a set of 6 wall lights" required></textarea>
       </div>
       <div class="field">
+        <label for="insta_link">Instagram link of product / Product name <span class="opt">(optional)</span></label>
+        <input type="text" id="insta_link" name="insta_link" placeholder="e.g. https://instagram.com/p/... or Terracotta Wave Pot">
+      </div>
+      <div class="field">
         <label for="handling">Any special handling notes <span class="opt">(optional)</span></label>
         <input type="text" id="handling" name="handling" placeholder="Fragile, oversized, needs installation, elevator access, etc.">
       </div>
@@ -390,6 +394,7 @@ Category: ${val('category')}
 
 SPECIFICS
 Item(s) / size / quantity: ${val('items')}
+Instagram Link / Product Name: ${val('insta_link') || '—'}
 Special handling: ${val('handling') || '—'}
 Needed by: ${val('needby') || 'No fixed date'}`;
 
