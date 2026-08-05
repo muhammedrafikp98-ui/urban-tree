@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade / Designers &amp; Bulk Projects — Urbanpots</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#efe6d6;
+    --ink-dim:#c9beac;
+    --base:#15130f;
+    --base-2:#1c1a14;
+    --base-3:#221f18;
+    --ochre:#bf6a24;
+    --brass:#b3934f;
+    --clay:#a8492b;
+    --walnut:#6b4a2f;
+    --sage:#5e6a4c;
+    --stone:#8d867a;
+    --line:rgba(239,230,214,0.12);
+    --line-strong:rgba(239,230,214,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{background:var(--base);}
+  body{
+    background:
+      radial-gradient(ellipse 60% 40% at 50% -10%, rgba(191,106,36,0.16), transparent 60%),
+      radial-gradient(ellipse 50% 30% at 90% 100%, rgba(94,106,76,0.10), transparent 60%),
+      var(--base);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:0 0 70px;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  .page{ width:100%; max-width:520px; padding:44px 22px 0; }
+
+  .back{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.02s;
+  }
+  .back:hover{ color:var(--ink); }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-top:28px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.08s;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:33px;
+    line-height:1.1;
+    margin-top:10px;
+    letter-spacing:-0.01em;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.14s;
+  }
+  h1 .spark{ color:var(--ochre); font-style:italic; font-weight:400; }
+  .intro{
+    color:var(--ink-dim);
+    font-size:14.5px;
+    line-height:1.6;
+    max-width:420px;
+    margin-top:12px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.2s;
+  }
+
+  .perks{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:24px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.24s;
+  }
+  .perk{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:13px;
+    color:var(--ink-dim);
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+  }
+  .perk b{ color:var(--ink); font-weight:600; }
+
+  form{ margin-top:32px; display:flex; flex-direction:column; gap:28px; }
+
+  .section{ opacity:0; animation:rise 0.6s ease forwards; }
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-bottom:14px;
+  }
+  .section-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .field{ margin-bottom:16px; }
+  .field:last-child{ margin-bottom:0; }
+  label{
+    display:block;
+    font-size:13.5px;
+    font-weight:500;
+    margin-bottom:7px;
+  }
+  label .opt{ color:var(--ink-dim); font-weight:400; font-size:12px; }
+  label .req{ color:var(--ochre); }
+
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea, select{
+    width:100%;
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    padding:11px 13px;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  input::placeholder, textarea::placeholder{ color:rgba(201,190,172,0.4); }
+  input:focus, textarea:focus, select:focus{
+    outline:none;
+    border-color:var(--brass);
+    background:var(--base-3);
+  }
+  textarea{ resize:vertical; min-height:88px; line-height:1.5; }
+
+  select{
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9beac' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    background-size:16px;
+    padding-right:36px;
+  }
+  select option{ background:var(--base-2); color:var(--ink); }
+
+  .pill-group{ display:flex; gap:10px; flex-wrap:wrap; }
+  .pill{ position:relative; }
+  .pill input{
+    position:absolute;
+    opacity:0;
+    width:100%; height:100%;
+    cursor:pointer;
+    margin:0;
+  }
+  .pill span{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 15px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    font-size:13.5px;
+    color:var(--ink-dim);
+    background:var(--base-2);
+    transition:border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  }
+  .pill input:checked + span{
+    border-color:var(--brass);
+    color:var(--ink);
+    background:rgba(179,147,79,0.14);
+  }
+  .pill input:focus-visible + span{ outline:2px solid var(--brass); outline-offset:2px; }
+
+  .hint{
+    font-size:12px;
+    color:var(--ink-dim);
+    margin-top:8px;
+    line-height:1.5;
+    padding:10px 12px;
+    background:rgba(179,147,79,0.08);
+    border:1px solid rgba(179,147,79,0.25);
+    border-radius:7px;
+  }
+
+  .submit-row{ margin-top:8px; opacity:0; animation:rise 0.6s ease forwards 0.78s; }
+  button[type=submit]{
+    width:100%;
+    padding:15px;
+    background:var(--ochre);
+    color:#1a1206;
+    font-weight:600;
+    font-size:14.5px;
+    border:none;
+    border-radius:9px;
+    cursor:pointer;
+    transition:filter 0.2s ease, transform 0.2s ease;
+  }
+  button[type=submit]:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+  button[type=submit]:active{ transform:translateY(0); }
+  .submit-note{ text-align:center; font-size:12px; color:var(--ink-dim); margin-top:10px; }
+
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .section:nth-of-type(1){ animation-delay:0.32s; }
+  .section:nth-of-type(2){ animation-delay:0.40s; }
+  .section:nth-of-type(3){ animation-delay:0.48s; }
+  .section:nth-of-type(4){ animation-delay:0.56s; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="index.html">← Back</a>
+
+  <p class="eyebrow">Partner With Us</p>
+  <h1>Trade / Designers &amp; <span class="spark">Bulk</span> Projects</h1>
+  <p class="intro">For designers, architects, retailers and developers ordering at scale. Tell us about the project and we'll come back with partner pricing and lead times.</p>
+
+  <div class="perks">
+    <div class="perk">🏷️ <div><b>Partner pricing</b> on volume orders across all categories</div></div>
+    <div class="perk">📐 <div><b>Custom specs</b> — sizing, finish &amp; material tailored to the project</div></div>
+    <div class="perk">🚚 <div><b>Coordinated delivery</b> for multi-site or phased rollouts</div></div>
+  </div>
+
+  <form id="trade-form">
+
+    <div class="section">
+      <p class="section-label">About your business</p>
+      <div class="field">
+        <label for="name">Contact name <span class="req">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="business">Business / studio name <span class="req">*</span></label>
+        <input type="text" id="business" name="business" placeholder="Studio, firm, or company name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@studio.com" required>
+      </div>
+      <div class="field">
+        <label for="phone">Phone / WhatsApp <span class="opt">(optional)</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="+91 …">
+      </div>
+      <div class="field">
+        <label for="website">Website / portfolio <span class="opt">(optional)</span></label>
+        <input type="url" id="website" name="website" placeholder="https://…">
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">You are a</p>
+      <div class="field">
+        <div class="pill-group">
+          <label class="pill">
+            <input type="radio" name="role" value="Interior designer / architect" required>
+            <span>📐 Designer / Architect</span>
+          </label>
+          <label class="pill">
+            <input type="radio" name="role" value="Retailer / reseller">
+            <span>🏬 Retailer / Reseller</span>
+          </label>
+          <label class="pill">
+            <input type="radio" name="role" value="Hospitality / developer">
+            <span>🏨 Hospitality / Developer</span>
+          </label>
+          <label class="pill">
+            <input type="radio" name="role" value="Other bulk buyer">
+            <span>📦 Other bulk buyer</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">The project</p>
+      <div class="field">
+        <label>Categories involved <span class="opt">(select any)</span></label>
+        <div class="pill-group">
+          <label class="pill"><input type="checkbox" name="cat_decor" value="Décor"><span>Décor</span></label>
+          <label class="pill"><input type="checkbox" name="cat_furniture" value="Furniture"><span>Furniture</span></label>
+          <label class="pill"><input type="checkbox" name="cat_lighting" value="Lighting"><span>Lighting</span></label>
+          <label class="pill"><input type="checkbox" name="cat_landscaping" value="Landscaping"><span>Landscaping</span></label>
+          <label class="pill"><input type="checkbox" name="cat_architectural" value="Architectural elements"><span>Architectural</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="scale">Estimated project scale <span class="req">*</span></label>
+        <select id="scale" name="scale" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>Single room / small order</option>
+          <option>Full property (residential)</option>
+          <option>Commercial / hospitality space</option>
+          <option>Multi-site / recurring supply</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="location">Project location <span class="req">*</span></label>
+        <input type="text" id="location" name="location" placeholder="City, country" required>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">The specifics</p>
+      <div class="field">
+        <label for="details">Project brief <span class="req">*</span></label>
+        <textarea id="details" name="details" placeholder="Rough quantities, styles, finishes, or anything that helps us scope pricing" required></textarea>
+      </div>
+      <div class="field">
+        <label for="timeline">Timeline <span class="opt">(optional)</span></label>
+        <select id="timeline" name="timeline">
+          <option value="" selected>No fixed date</option>
+          <option>Within a month</option>
+          <option>1–3 months</option>
+          <option>3–6 months</option>
+          <option>Ongoing / recurring</option>
+        </select>
+      </div>
+      <p class="hint">📎 Have a mood board, floor plan or BOQ? Attach it to the email that opens after you submit.</p>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit">Send project details →</button>
+      <p class="submit-note">Opens an email to our trade team with your answers filled in.</p>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  document.getElementById('trade-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = e.target;
+    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
+
+    const cats = ['cat_decor','cat_furniture','cat_lighting','cat_landscaping','cat_architectural']
+      .filter(n => f.elements[n] && f.elements[n].checked)
+      .map(n => f.elements[n].value);
+
+    const subject = `Trade / Bulk Project Inquiry — ${val('business')}`;
+    const body =
+`New trade / bulk inquiry from the Urbanpots site:
+
+ABOUT
+Contact name: ${val('name')}
+Business / studio: ${val('business')}
+Email: ${val('email')}
+Phone / WhatsApp: ${val('phone') || '—'}
+Website / portfolio: ${val('website') || '—'}
+
+ROLE
+${val('role')}
+
+PROJECT
+Categories: ${cats.length ? cats.join(', ') : '—'}
+Scale: ${val('scale')}
+Location: ${val('location')}
+
+BRIEF
+${val('details')}
+
+Timeline: ${val('timeline') || 'Not specified'}
+
+(Remember to attach a mood board, floor plan or BOQ before sending!)`;
+
+    const mailto = `mailto:contact.urbanpots@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+</script>
+</body>
+</html>
