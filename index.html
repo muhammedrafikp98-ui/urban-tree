@@ -203,6 +203,27 @@
   .links .card:nth-child(8){ animation-delay:0.73s; }
   .links .card:nth-child(9){ animation-delay:0.78s; }
 
+  .card-featured{
+    border-color:rgba(191,106,36,0.4);
+    background:linear-gradient(135deg, rgba(191,106,36,0.12) 0%, rgba(28,26,20,1) 100%);
+  }
+  .card-featured:hover{
+    border-color:var(--ochre);
+    background:linear-gradient(135deg, rgba(191,106,36,0.22) 0%, rgba(33,30,23,1) 100%);
+  }
+  .card-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--brass);
+    background:rgba(179,147,79,0.15);
+    padding:2px 6px;
+    border-radius:4px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+
   .card-icon{
     font-size:17px;
     line-height:1;
@@ -259,13 +280,13 @@
   <p class="tagline">Design-led indigenous luxury living — décor, furniture, lighting &amp; landscape, made by hand.</p>
 
   <nav class="links" aria-label="Quick links">
-    <a class="card" href="https://nadcatalogue.netlify.app/">
-      <span class="card-swatch" style="background:var(--clay)"></span>
+    <a class="card card-featured" href="https://nadliving.com/" target="_blank" rel="noopener">
+      <span class="card-swatch" style="background:var(--ochre)"></span>
       <span class="card-body">
-        <span class="card-icon">🛍️</span>
+        <span class="card-icon">🌐</span>
         <span class="card-text">
-          <span class="card-title">Shop / Price List</span>
-          <span class="card-sub">Browse the full catalogue</span>
+          <span class="card-title">Website <span class="card-badge">Official</span></span>
+          <span class="card-sub">Explore our collections, store &amp; products at nadliving.com</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
