@@ -379,7 +379,24 @@
     const f = e.target;
     const btn = f.querySelector('button[type=submit]');
     const note = f.querySelector('.submit-note');
-    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
+    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value.trim() : '—';
+
+    const email = val('email');
+    const phone = val('phone');
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      note.textContent = 'Please enter a valid email address (e.g. name@domain.com).';
+      return;
+    }
+
+    if (phone !== '—') {
+      const phoneDigits = phone.replace(/\D/g, '');
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        note.textContent = 'Please enter a valid phone number (7 to 15 digits).';
+        return;
+      }
+    }
 
     btn.disabled = true;
     btn.textContent = 'Sending…';

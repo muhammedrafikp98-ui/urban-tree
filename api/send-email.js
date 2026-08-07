@@ -24,6 +24,14 @@ export default async function handler(req, res) {
       html 
     } = req.body || {};
 
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (replyTo && !EMAIL_REGEX.test(replyTo)) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Invalid email address format.' 
+      });
+    }
+
     if (!text && !html) {
       return res.status(400).json({ success: false, error: 'Email content (text or html) is required.' });
     }

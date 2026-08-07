@@ -416,8 +416,10 @@
 
   document.getElementById('inquiryForm').addEventListener('submit', function(e){
     e.preventDefault();
-    if(!val('name') || !val('email')){
-      document.getElementById('status').textContent = 'Please add your name and email first.';
+    const email = val('email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!val('name') || !emailRegex.test(email)) {
+      document.getElementById('status').textContent = 'Please enter a valid name and email address.';
       return;
     }
     const statusEl = document.getElementById('status');

@@ -350,7 +350,7 @@
         <div class="field">
           <label for="duration">Duration <span class="req">*</span></label>
           <select id="duration" name="duration" required onchange="updatePricing()">
-            <option value="10min">10 min — quick query / screening call</option>
+            <option value="15min">15 min — Basic customization</option>
             <option value="30min" selected>30 min — standard consultation</option>
             <option value="60min">60 min — full consultation</option>
             <option value="90min">90 min — extended / project scoping</option>
@@ -372,12 +372,12 @@
           <label for="time">Preferred time <span class="opt">(mention your timezone)</span></label>
           <input type="text" id="time" name="time" placeholder="e.g. 4pm IST, or 9am AEST">
         </div>
-        <p class="hint">💳 Payment for the session is arranged after we confirm your slot by email — no payment is collected on this page.</p>
+        <p class="hint">💳 Payment for paid sessions is arranged after we confirm your slot by email — no payment is collected on this page.</p>
       </div>
 
       <div class="submit-row">
         <button type="submit">Request this consultation →</button>
-        <p class="submit-note">Opens an email to us with your answers filled in.</p>
+        <p class="submit-note"></p>
       </div>
 
     </form>
@@ -386,18 +386,18 @@
 
 <script>
   const PRICES = {
-    "10min": { label:"10 min", sub:"Quick query / screening call",
-      India:"₹800", Australia:"A$18 (₹1,200)", UK:"£10 (₹1,300)", Canada:"C$18 (₹1,250)",
-      Malaysia:"RM 50 (₹1,175)", Singapore:"S$16 (₹1,200)", US:"$13 (₹1,250)", Other:"Contact us for pricing" },
+    "15min": { label:"15 min", sub:"Basic customization",
+      India:"Free", Australia:"Free", UK:"Free", Canada:"Free",
+      Malaysia:"Free", Singapore:"Free", US:"Free", Other:"Free" },
     "30min": { label:"30 min", sub:"Standard consultation",
-      India:"₹1,500", Australia:"A$40 (₹2,700)", UK:"£22 (₹2,850)", Canada:"C$40 (₹2,750)",
-      Malaysia:"RM 120 (₹2,820)", Singapore:"S$38 (₹2,850)", US:"$30 (₹2,880)", Other:"Contact us for pricing" },
+      India:"₹500", Australia:"A$9.50 (₹500)", UK:"£4.90 (₹500)", Canada:"C$8.20 (₹500)",
+      Malaysia:"RM 28 (₹500)", Singapore:"S$8.50 (₹500)", US:"$6 (₹500)", Other:"₹500 (approx. $6 USD)" },
     "60min": { label:"60 min", sub:"Full consultation",
-      India:"₹3,000", Australia:"A$75 (₹5,000)", UK:"£40 (₹5,200)", Canada:"C$75 (₹5,175)",
-      Malaysia:"RM 220 (₹5,170)", Singapore:"S$70 (₹5,250)", US:"$55 (₹5,280)", Other:"Contact us for pricing" },
+      India:"₹1,999", Australia:"A$38 (₹1,999)", UK:"£19.50 (₹1,999)", Canada:"C$33 (₹1,999)",
+      Malaysia:"RM 112 (₹1,999)", Singapore:"S$33.50 (₹1,999)", US:"$24 (₹1,999)", Other:"₹1,999 (approx. $24 USD)" },
     "90min": { label:"90 min", sub:"Extended / project scoping",
-      India:"₹4,200", Australia:"A$105 (₹7,000)", UK:"£55 (₹7,150)", Canada:"C$100 (₹6,900)",
-      Malaysia:"RM 300 (₹7,050)", Singapore:"S$95 (₹7,125)", US:"$70 (₹6,720)", Other:"Contact us for pricing" }
+      India:"₹2,999", Australia:"A$57 (₹2,999)", UK:"£29.50 (₹2,999)", Canada:"C$49.50 (₹2,999)",
+      Malaysia:"RM 168 (₹2,999)", Singapore:"S$50.50 (₹2,999)", US:"$36 (₹2,999)", Other:"₹2,999 (approx. $36 USD)" }
   };
 
   function setMode(mode){
@@ -440,7 +440,24 @@
     const f = e.target;
     const btn = f.querySelector('button[type=submit]');
     const note = f.querySelector('.submit-note');
-    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
+    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value.trim() : '—';
+
+    const email = val('email');
+    const phone = val('phone');
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      if(note) note.textContent = 'Please enter a valid email address (e.g. name@domain.com).';
+      return;
+    }
+
+    if (phone !== '—') {
+      const phoneDigits = phone.replace(/\D/g, '');
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        if(note) note.textContent = 'Please enter a valid phone number (7 to 15 digits).';
+        return;
+      }
+    }
 
     const durationKey = val('duration');
     const durationInfo = PRICES[durationKey];

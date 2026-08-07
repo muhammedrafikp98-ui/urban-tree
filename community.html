@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Community — Urbanpots</title>
+<meta name="description" content="Connect with artisans, designers, craft enthusiasts, and creators in the Urbanpots community. Join our events, studio socials, and co-creation projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#efe6d6;
+    --ink-dim:#c9beac;
+    --base:#15130f;
+    --base-2:#1c1a14;
+    --base-3:#221f18;
+    --ochre:#bf6a24;
+    --brass:#b3934f;
+    --clay:#a8492b;
+    --walnut:#6b4a2f;
+    --sage:#5e6a4c;
+    --stone:#8d867a;
+    --line:rgba(239,230,214,0.12);
+    --line-strong:rgba(239,230,214,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{background:var(--base);}
+  body{
+    background:
+      radial-gradient(ellipse 60% 40% at 50% -10%, rgba(94,106,76,0.18), transparent 60%),
+      radial-gradient(ellipse 50% 30% at 90% 100%, rgba(191,106,36,0.10), transparent 60%),
+      var(--base);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:0 0 70px;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  .page{ width:100%; max-width:520px; padding:44px 22px 0; }
+
+  .back{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.02s;
+  }
+  .back:hover{ color:var(--ink); }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--sage);
+    margin-top:28px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.08s;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:34px;
+    line-height:1.08;
+    margin-top:10px;
+    letter-spacing:-0.01em;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.14s;
+  }
+  h1 .spark{ color:var(--brass); font-style:italic; font-weight:400; }
+  .intro{
+    color:var(--ink-dim);
+    font-size:14.5px;
+    line-height:1.6;
+    max-width:440px;
+    margin-top:12px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.2s;
+  }
+
+  .quick-facts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:28px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.26s;
+  }
+  .fact{
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .fact-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .fact-value{
+    font-size:14px;
+    font-weight:500;
+    margin-top:4px;
+    color:var(--ink);
+  }
+
+  form{
+    margin-top:32px;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+    opacity:0;
+    animation:rise 0.6s ease forwards 0.32s;
+  }
+
+  .section-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--sage);
+    margin-bottom:12px;
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:14px;
+  }
+  .field label{
+    font-size:13px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .field label .req{ color:var(--ochre); }
+  .field label .opt{ color:var(--ink-dim); font-weight:400; font-size:12px; }
+
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea{
+    width:100%;
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    outline:none;
+    transition:border-color 0.2s, background-color 0.2s;
+  }
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus, textarea:focus{
+    border-color:var(--sage);
+    background:var(--base-3);
+  }
+  textarea{ min-height:100px; resize:vertical; }
+
+  .pill-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:4px;
+  }
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:8px 14px;
+    font-size:13px;
+    cursor:pointer;
+    user-select:none;
+    transition:all 0.2s;
+  }
+  .pill input[type="radio"], .pill input[type="checkbox"]{ display:none; }
+  .pill:has(input:checked){
+    background:rgba(94,106,76,0.22);
+    border-color:var(--sage);
+    color:var(--ink);
+  }
+
+  .submit-row{
+    margin-top:10px;
+  }
+  button[type="submit"]{
+    width:100%;
+    background:var(--sage);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:15px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background-color 0.2s, transform 0.1s;
+  }
+  button[type="submit"]:hover{ background:#6b7957; }
+  button[type="submit"]:disabled{ opacity:0.6; cursor:not-allowed; }
+
+  .submit-note{
+    font-size:12.5px;
+    color:var(--ink-dim);
+    margin-top:10px;
+    text-align:center;
+    min-height:18px;
+  }
+
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(12px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <a href="index.html" class="back">← Back to home</a>
+  
+  <p class="eyebrow">Artisans &amp; Creators Network</p>
+  <h1>Join the <span class="spark">Community</span></h1>
+  <p class="intro">Urbanpots is more than a studio—it's a vibrant network of ceramicists, interior designers, craft lovers, and makers. Connect with us for events, studio socials, and co-creation projects.</p>
+
+  <div class="quick-facts">
+    <div class="fact">
+      <p class="fact-label">Network</p>
+      <p class="fact-value">Global &amp; Local</p>
+    </div>
+    <div class="fact">
+      <p class="fact-label">Gatherings</p>
+      <p class="fact-value">Monthly Socials</p>
+    </div>
+  </div>
+
+  <form id="community-form">
+
+    <div class="section">
+      <p class="section-label">1. General Information</p>
+      <div class="field">
+        <label for="name">Full name <span class="req">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email address <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+      </div>
+      <div class="field">
+        <label for="phone">Phone / WhatsApp <span class="opt">(optional)</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="+91 …">
+      </div>
+      <div class="field">
+        <label for="location">City &amp; Country <span class="req">*</span></label>
+        <input type="text" id="location" name="location" placeholder="Where are you based?" required>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">2. Your Connection to Craft</p>
+      <div class="field">
+        <label>How would you describe yourself? <span class="req">*</span></label>
+        <div class="pill-group">
+          <label class="pill">
+            <input type="radio" name="role" value="Artisan / Potter" checked required>
+            <span>🏺 Artisan / Potter</span>
+          </label>
+          <label class="pill">
+            <input type="radio" name="role" value="Architect / Interior Designer">
+            <span>📐 Architect / Designer</span>
+          </label>
+          <label class="pill">
+            <input type="radio" name="role" value="Craft Collector & Enthusiast">
+            <span>✨ Collector / Enthusiast</span>
+          </label>
+          <label class="pill">
+            <input type="radio" name="role" value="Student / Creative Learner">
+            <span>🎓 Student / Learner</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Interests &amp; Opportunities <span class="opt">(select any)</span></label>
+        <div class="pill-group">
+          <label class="pill"><input type="checkbox" name="interest_events" value="Studio Socials & Meetups"><span>🎉 Studio Socials</span></label>
+          <label class="pill"><input type="checkbox" name="interest_collab" value="Co-creation Projects"><span>🤝 Co-creation</span></label>
+          <label class="pill"><input type="checkbox" name="interest_exhibitions" value="Exhibitions & Pop-ups"><span>🖼️ Exhibitions</span></label>
+          <label class="pill"><input type="checkbox" name="interest_sustainability" value="Eco-sourcing & Material Study"><span>🌿 Sustainability</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">3. Specific Details</p>
+      <div class="field">
+        <label for="background">Tell us a bit about your work or interest <span class="req">*</span></label>
+        <textarea id="background" name="background" placeholder="What draws you to Urbanpots? Tell us about your background, portfolio, or craft passion..." required></textarea>
+      </div>
+      <div class="field">
+        <label for="ideas">Ideas for community initiatives or workshops <span class="opt">(optional)</span></label>
+        <textarea id="ideas" name="ideas" placeholder="Any events, talks, or collaborative ideas you'd love to see happen?"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit">Join the community →</button>
+      <p class="submit-note"></p>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  document.getElementById('community-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    const note = f.querySelector('.submit-note');
+    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value.trim() : '—';
+
+    const email = val('email');
+    const phone = val('phone');
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      if(note) note.textContent = 'Please enter a valid email address (e.g. name@domain.com).';
+      return;
+    }
+
+    if (phone !== '—') {
+      const phoneDigits = phone.replace(/\D/g, '');
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        if(note) note.textContent = 'Please enter a valid phone number (7 to 15 digits).';
+        return;
+      }
+    }
+
+    const interests = ['interest_events','interest_collab','interest_exhibitions','interest_sustainability']
+      .filter(n => f.elements[n] && f.elements[n].checked)
+      .map(n => f.elements[n].value);
+
+    const textContent =
+`New Community Membership Request — Urbanpots
+
+ABOUT
+Name: ${val('name')}
+Email: ${val('email')}
+Phone / WhatsApp: ${val('phone')}
+Location: ${val('location')}
+
+CRAFT & ENGAGEMENT
+Role: ${val('role')}
+Interests: ${interests.length ? interests.join(', ') : '—'}
+
+SPECIFICS
+Background & Craft Interest:
+${val('background')}
+
+Ideas / Initiatives:
+${val('ideas')}`;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    if(note) note.textContent = '';
+
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `New Community Request — ${val('name')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = '✓ Request Sent';
+        if(note) note.textContent = "Welcome! We'll keep you updated on upcoming community gatherings.";
+        f.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = 'Join the community →';
+      if(note) note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    });
+  });
+</script>
+</body>
+</html>

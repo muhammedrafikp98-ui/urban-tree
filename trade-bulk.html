@@ -316,17 +316,22 @@
       </div>
       <div class="field">
         <label for="scale">Estimated project scale <span class="req">*</span></label>
-        <select id="scale" name="scale" required>
+        <select id="scale" name="scale" required onchange="toggleOtherScale(this.value)">
           <option value="" disabled selected>Choose one</option>
           <option>Single room / small order</option>
           <option>Full property (residential)</option>
           <option>Commercial / hospitality space</option>
           <option>Multi-site / recurring supply</option>
+          <option value="Other">Other (specify below)</option>
         </select>
       </div>
+      <div class="field" id="scale-other-group" style="display:none; margin-top: -8px;">
+        <label for="scale_other">Specify scale <span class="req">*</span></label>
+        <input type="text" id="scale_other" name="scale_other" placeholder="e.g. 50+ custom planters for boutique hotel">
+      </div>
       <div class="field">
-        <label for="location">Project location <span class="req">*</span></label>
-        <input type="text" id="location" name="location" placeholder="City, country" required>
+        <label for="location">Project location <span class="opt">(optional)</span></label>
+        <input type="text" id="location" name="location" placeholder="City, country">
       </div>
     </div>
 
@@ -346,28 +351,63 @@
           <option>Ongoing / recurring</option>
         </select>
       </div>
-      <p class="hint">📎 Have a mood board, floor plan or BOQ? Attach it to the email that opens after you submit.</p>
+      <p class="hint">📎 Have a mood board, floor plan or BOQ? Add details above to help us scope your project.</p>
     </div>
 
     <div class="submit-row">
       <button type="submit">Send project details →</button>
-      <p class="submit-note">Opens an email to our trade team with your answers filled in.</p>
+      <p class="submit-note"></p>
     </div>
 
   </form>
 </div>
 
 <script>
+  function toggleOtherScale(val) {
+    const group = document.getElementById('scale-other-group');
+    const input = document.getElementById('scale_other');
+    if (val === 'Other') {
+      group.style.display = 'block';
+      input.setAttribute('required', 'required');
+    } else {
+      group.style.display = 'none';
+      input.removeAttribute('required');
+      input.value = '';
+    }
+  }
+
   document.getElementById('trade-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
     const btn = f.querySelector('button[type=submit]');
     const note = f.querySelector('.submit-note');
-    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
+    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value.trim() : '—';
+
+    const email = val('email');
+    const phone = val('phone');
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      if(note) note.textContent = 'Please enter a valid email address (e.g. name@domain.com).';
+      return;
+    }
+
+    if (phone !== '—') {
+      const phoneDigits = phone.replace(/\D/g, '');
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        if(note) note.textContent = 'Please enter a valid phone number (7 to 15 digits).';
+        return;
+      }
+    }
 
     const cats = ['cat_decor','cat_furniture','cat_lighting','cat_landscaping','cat_architectural']
       .filter(n => f.elements[n] && f.elements[n].checked)
       .map(n => f.elements[n].value);
+
+    let scaleVal = val('scale');
+    if (scaleVal === 'Other') {
+      scaleVal = `Other: ${val('scale_other')}`;
+    }
 
     const textContent =
 `New trade / bulk inquiry from the Urbanpots site:
@@ -384,8 +424,8 @@ ${val('role')}
 
 PROJECT
 Categories: ${cats.length ? cats.join(', ') : '—'}
-Scale: ${val('scale')}
-Location: ${val('location')}
+Scale: ${scaleVal}
+Location: ${val('location') || '—'}
 
 BRIEF
 ${val('details')}
