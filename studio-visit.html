@@ -405,10 +405,11 @@
   document.getElementById('visit-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    const note = f.querySelector('.submit-note');
     const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
 
-    const subject = `Studio Visit — ${val('name')}`;
-    const body =
+    const textContent =
 `New studio visit notice from the Urbanpots site:
 
 ABOUT
@@ -425,8 +426,34 @@ Preferred time: ${val('time') || 'No preference'}
 NOTES
 ${val('interest') || '—'}`;
 
-    const mailto = `mailto:contact.urbanpots@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    if(note) note.textContent = '';
+
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `Studio Visit — ${val('name')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = '✓ Notice Sent';
+        if(note) note.textContent = "Thanks! We'll confirm your visit soon.";
+        f.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = "Let us know you're coming →";
+      if(note) note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    });
   });
 </script>
 </body>

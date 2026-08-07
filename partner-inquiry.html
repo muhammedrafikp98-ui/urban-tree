@@ -420,10 +420,38 @@
       document.getElementById('status').textContent = 'Please add your name and email first.';
       return;
     }
-    const subject = encodeURIComponent(`[${catLabels[activeCat]}] Inquiry from ${val('name')}`);
-    const body = encodeURIComponent(buildBody());
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    document.getElementById('status').textContent = 'Opening your email app…';
+    const statusEl = document.getElementById('status');
+    const submitBtn = e.target.querySelector('button[type=submit]');
+    if(submitBtn) submitBtn.disabled = true;
+    statusEl.textContent = 'Sending…';
+
+    const subject = `[${catLabels[activeCat]}] Inquiry from ${val('name')}`;
+    const textContent = buildBody();
+
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        statusEl.textContent = "✓ Thanks! Your inquiry has been sent via email.";
+        e.target.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      statusEl.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    })
+    .finally(() => {
+      if(submitBtn) submitBtn.disabled = false;
+    });
   });
 
   document.getElementById('copyBtn').addEventListener('click', async function(){

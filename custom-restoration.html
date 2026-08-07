@@ -338,11 +338,12 @@
   document.getElementById('request-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    const note = f.querySelector('.submit-note');
     const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
 
-    const subject = `Custom & Restoration Request — ${val('name')}`;
-    const body =
-`New request from the Urbanpots site:
+    const textContent =
+`New custom & restoration request from the Urbanpots site:
 
 ABOUT
 Name: ${val('name')}
@@ -358,12 +359,36 @@ DETAILS
 ${val('details')}
 
 Budget: ${val('budget') || 'Not specified'}
-Timeline: ${val('timeline') || 'Not specified'}
+Timeline: ${val('timeline') || 'Not specified'}`;
 
-(Remember to attach any reference or damage photos before sending!)`;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    if(note) note.textContent = '';
 
-    const mailto = `mailto:custom@urbanpots.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `Custom & Restoration Request — ${val('name')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = '✓ Request Sent';
+        if(note) note.textContent = "Thanks! Your request has been received.";
+        f.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = 'Send request →';
+      if(note) note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    });
   });
 </script>
 </body>

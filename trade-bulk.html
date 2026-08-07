@@ -361,14 +361,15 @@
   document.getElementById('trade-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    const note = f.querySelector('.submit-note');
     const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
 
     const cats = ['cat_decor','cat_furniture','cat_lighting','cat_landscaping','cat_architectural']
       .filter(n => f.elements[n] && f.elements[n].checked)
       .map(n => f.elements[n].value);
 
-    const subject = `Trade / Bulk Project Inquiry — ${val('business')}`;
-    const body =
+    const textContent =
 `New trade / bulk inquiry from the Urbanpots site:
 
 ABOUT
@@ -389,12 +390,36 @@ Location: ${val('location')}
 BRIEF
 ${val('details')}
 
-Timeline: ${val('timeline') || 'Not specified'}
+Timeline: ${val('timeline') || 'Not specified'}`;
 
-(Remember to attach a mood board, floor plan or BOQ before sending!)`;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    if(note) note.textContent = '';
 
-    const mailto = `mailto:contact.urbanpots@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `Trade / Bulk Project Inquiry — ${val('business')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = '✓ Inquiry Sent';
+        if(note) note.textContent = "Thanks! Your project inquiry has been received.";
+        f.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = 'Send trade inquiry →';
+      if(note) note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    });
   });
 </script>
 </body>

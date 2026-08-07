@@ -289,8 +289,7 @@
     </div>
   </div>
 
-  <form id="shipping-form" action="https://formspree.io/f/meajoqyw" method="POST">
-    <input type="hidden" name="_subject" value="New Shipping Inquiry — Urbanpots">
+  <form id="shipping-form">
 
     <div class="section">
       <p class="section-label">About you</p>
@@ -363,12 +362,12 @@
         <label for="needby">Do you need it by a specific date?</label>
         <input type="text" id="needby" name="needby" placeholder="e.g. before a housewarming on 20 Sept, or no rush">
       </div>
-      <p class="hint">📎 Ordering something already in our catalogue? Attach a screenshot or link when the email opens — it speeds up the quote.</p>
+      <p class="hint">📎 Ordering something already in our catalogue? Add details above to help us quote quickly.</p>
     </div>
 
     <div class="submit-row">
       <button type="submit">Send shipping inquiry →</button>
-      <p class="submit-note">Opens an email to us with your answers filled in.</p>
+      <p class="submit-note"></p>
     </div>
 
   </form>
@@ -380,28 +379,54 @@
     const f = e.target;
     const btn = f.querySelector('button[type=submit]');
     const note = f.querySelector('.submit-note');
+    const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
 
     btn.disabled = true;
     btn.textContent = 'Sending…';
+    note.textContent = '';
 
-    fetch(f.action, {
+    const textContent =
+`New Shipping Inquiry — Urbanpots
+
+ABOUT
+Name: ${val('name')}
+Email: ${val('email')}
+Phone / WhatsApp: ${val('phone')}
+Destination: ${val('destination')}
+
+WHAT'S SHIPPING
+Scope: ${val('scope')}
+Category: ${val('category')}
+
+SPECIFICS
+Items: ${val('items')}
+Instagram / Product: ${val('insta_link')}
+Special Handling: ${val('handling')}
+Need By Date: ${val('needby')}`;
+
+    fetch('/api/send-email', {
       method: 'POST',
-      body: new FormData(f),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `New Shipping Inquiry — ${val('name')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
     })
-    .then(res => {
-      if (res.ok) {
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
         btn.textContent = '✓ Sent — we\'ll be in touch';
         note.textContent = "Thanks! Your inquiry has been received.";
         f.reset();
       } else {
-        throw new Error();
+        throw new Error(data.error || 'Failed to send');
       }
     })
-    .catch(() => {
+    .catch((err) => {
       btn.disabled = false;
       btn.textContent = 'Send shipping inquiry →';
-      note.textContent = 'Something went wrong — please try again or email us directly.';
+      note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
     });
   });
 </script>

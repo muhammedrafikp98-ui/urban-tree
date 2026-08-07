@@ -437,10 +437,11 @@
   document.getElementById('careers-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    const note = f.querySelector('.submit-note');
     const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
 
-    const subject = `Careers / Learning Inquiry — ${val('name')}`;
-    const body =
+    const textContent =
 `New careers / learning inquiry from the Urbanpots site:
 
 ABOUT
@@ -461,12 +462,36 @@ Can start: ${val('start') || 'Not specified'}
 Portfolio / resume link: ${val('portfolio') || '—'}
 
 MESSAGE
-${val('message')}
+${val('message')}`;
 
-(Remember to attach a resume or portfolio file before sending!)`;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    if(note) note.textContent = '';
 
-    const mailto = `mailto:contact.urbanpots@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `Careers / Learning Inquiry — ${val('name')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = '✓ Application Sent';
+        if(note) note.textContent = "Thanks! Your application has been received.";
+        f.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = 'Send application →';
+      if(note) note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    });
   });
 </script>
 </body>

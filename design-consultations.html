@@ -438,6 +438,8 @@
   document.getElementById('consult-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    const note = f.querySelector('.submit-note');
     const val = (name) => (f.elements[name] && f.elements[name].value) ? f.elements[name].value : '—';
 
     const durationKey = val('duration');
@@ -445,8 +447,7 @@
     const country = val('country');
     const price = (durationInfo && country && durationInfo[country]) ? durationInfo[country] : 'To be confirmed';
 
-    const subject = `Design Consultation Request — ${val('name')}`;
-    const body =
+    const textContent =
 `New design consultation request from the Urbanpots site:
 
 ABOUT
@@ -466,8 +467,34 @@ Preferred time: ${val('time') || 'Not specified'}
 
 (Payment will be arranged after we confirm the slot by email.)`;
 
-    const mailto = `mailto:contact.urbanpots@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    if(note) note.textContent = '';
+
+    fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subject: `Design Consultation Request — ${val('name')}`,
+        replyTo: val('email'),
+        text: textContent
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = '✓ Sent — we\'ll be in touch';
+        if(note) note.textContent = "Thanks! Your request has been received.";
+        f.reset();
+      } else {
+        throw new Error(data.error || 'Failed to send');
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = 'Book consultation →';
+      if(note) note.textContent = 'Something went wrong (' + (err.message || 'Error') + ') — please try again.';
+    });
   });
 </script>
 </body>
