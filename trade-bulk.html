@@ -255,7 +255,7 @@
   <form id="trade-form">
 
     <div class="section">
-      <p class="section-label">About your business</p>
+      <p class="section-label">ABOUT YOU</p>
       <div class="field">
         <label for="name">Contact name <span class="req">*</span></label>
         <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -279,8 +279,9 @@
     </div>
 
     <div class="section">
-      <p class="section-label">You are an</p>
+      <p class="section-label">WHAT YOU’RE LOOKING FOR / YOUR REQUIREMENT</p>
       <div class="field">
+        <label>You are an <span class="req">*</span></label>
         <div class="pill-group">
           <label class="pill">
             <input type="radio" name="role" value="Architect / Interior Designer" required>
@@ -308,34 +309,26 @@
           </label>
         </div>
       </div>
-    </div>
-
-    <div class="section">
-      <p class="section-label">The project</p>
       <div class="field">
         <label>Categories involved <span class="opt">(select any)</span></label>
         <div class="pill-group">
           <label class="pill"><input type="checkbox" name="cat_decor" value="Décor"><span>Décor</span></label>
           <label class="pill"><input type="checkbox" name="cat_furniture" value="Furniture"><span>Furniture</span></label>
           <label class="pill"><input type="checkbox" name="cat_lighting" value="Lighting"><span>Lighting</span></label>
-          <label class="pill"><input type="checkbox" name="cat_landscaping" value="Landscaping"><span>Landscaping</span></label>
           <label class="pill"><input type="checkbox" name="cat_architectural" value="Architectural elements"><span>Architectural</span></label>
         </div>
       </div>
       <div class="field">
-        <label for="scale">Estimated project scale <span class="req">*</span></label>
-        <select id="scale" name="scale" required onchange="toggleOtherScale(this.value)">
+        <label for="scale">Estimated project scope <span class="req">*</span></label>
+        <select id="scale" name="scale" required>
           <option value="" disabled selected>Choose one</option>
-          <option>Single room / small order</option>
-          <option>Full property (residential)</option>
-          <option>Commercial / hospitality space</option>
-          <option>Multi-site / recurring supply</option>
-          <option value="Other">Other (specify below)</option>
+          <option>1–5 pieces</option>
+          <option>6–20 pieces</option>
+          <option>20+ pieces</option>
+          <option>Complete room / residence</option>
+          <option>Hospitality / commercial project</option>
+          <option>Not sure yet</option>
         </select>
-      </div>
-      <div class="field" id="scale-other-group" style="display:none; margin-top: -8px;">
-        <label for="scale_other">Specify scale <span class="req">*</span></label>
-        <input type="text" id="scale_other" name="scale_other" placeholder="e.g. 50+ custom planters for boutique hotel">
       </div>
       <div class="field">
         <label for="location">Project location <span class="opt">(optional)</span></label>
@@ -344,11 +337,15 @@
     </div>
 
     <div class="section">
-      <p class="section-label">The specifics</p>
+      <p class="section-label">DETAILS</p>
       <div class="field">
         <label for="details">Project brief <span class="req">*</span></label>
         <textarea id="details" name="details" placeholder="Rough quantities, styles, finishes, or anything that helps us scope pricing" required></textarea>
       </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">TIMELINE / LOGISTICS</p>
       <div class="field">
         <label for="timeline">Timeline <span class="opt">(optional)</span></label>
         <select id="timeline" name="timeline">
@@ -371,19 +368,6 @@
 </div>
 
 <script>
-  function toggleOtherScale(val) {
-    const group = document.getElementById('scale-other-group');
-    const input = document.getElementById('scale_other');
-    if (val === 'Other') {
-      group.style.display = 'block';
-      input.setAttribute('required', 'required');
-    } else {
-      group.style.display = 'none';
-      input.removeAttribute('required');
-      input.value = '';
-    }
-  }
-
   document.getElementById('trade-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
@@ -408,17 +392,14 @@
       }
     }
 
-    const cats = ['cat_decor','cat_furniture','cat_lighting','cat_landscaping','cat_architectural']
+    const cats = ['cat_decor','cat_furniture','cat_lighting','cat_architectural']
       .filter(n => f.elements[n] && f.elements[n].checked)
       .map(n => f.elements[n].value);
 
-    let scaleVal = val('scale');
-    if (scaleVal === 'Other') {
-      scaleVal = `Other: ${val('scale_other')}`;
-    }
+    const scaleVal = val('scale');
 
     const textContent =
-`New trade / bulk inquiry from the Urbanpots site:
+`New project inquiry from NAD Living:
 
 ABOUT
 Contact name: ${val('name')}
@@ -427,17 +408,16 @@ Email: ${val('email')}
 Phone / WhatsApp: ${val('phone') || '—'}
 Website / portfolio: ${val('website') || '—'}
 
-ROLE
-${val('role')}
-
-PROJECT
+ROLE & REQUIREMENT
+Role: ${val('role')}
 Categories: ${cats.length ? cats.join(', ') : '—'}
-Scale: ${scaleVal}
+Scope: ${scaleVal}
 Location: ${val('location') || '—'}
 
-BRIEF
+DETAILS
 ${val('details')}
 
+TIMELINE / LOGISTICS
 Timeline: ${val('timeline') || 'Not specified'}`;
 
     btn.disabled = true;

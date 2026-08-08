@@ -240,12 +240,12 @@
 
   <p class="eyebrow">Bespoke &amp; Craft Heritage</p>
   <h1>Custom, Bespoke &amp; <span class="spark">Restoration</span></h1>
-  <p class="intro">Custom furniture • Bespoke décor • Heritage restoration • Reimagining old pieces. Tell us what you have in mind or what vintage treasure you'd like transformed.</p>
+  <p class="intro">Tell us what you’d like created, restored or reimagined.</p>
 
   <form id="request-form">
 
     <div class="section">
-      <p class="section-label">About you</p>
+      <p class="section-label">ABOUT YOU</p>
       <div class="field">
         <label for="name">Full name <span class="req">*</span></label>
         <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -265,49 +265,43 @@
     </div>
 
     <div class="section">
-      <p class="section-label">Your request</p>
+      <p class="section-label">WHAT YOU’RE LOOKING FOR / YOUR REQUIREMENT</p>
       <div class="field">
-        <label>This is a <span class="req">*</span></label>
+        <label>What would you like us to help you with? <span class="req">*</span></label>
         <div class="pill-group">
           <label class="pill">
-            <input type="radio" name="request_type" value="Custom furniture" required>
-            <span>🪑 Custom furniture</span>
+            <input type="radio" name="request_type" value="Create something bespoke" required onchange="handleRequestTypeChange(this.value)">
+            <span>✨ Create something bespoke</span>
           </label>
           <label class="pill">
-            <input type="radio" name="request_type" value="Bespoke décor">
-            <span>✨ Bespoke décor</span>
+            <input type="radio" name="request_type" value="Reimagine something I already own" onchange="handleRequestTypeChange(this.value)">
+            <span>🪵 Reimagine something I already own</span>
           </label>
           <label class="pill">
-            <input type="radio" name="request_type" value="Heritage restoration">
-            <span>🏛️ Heritage restoration</span>
-          </label>
-          <label class="pill">
-            <input type="radio" name="request_type" value="Reimagining old pieces">
-            <span>🪵 Reimagining old pieces</span>
+            <input type="radio" name="request_type" value="Restore an existing / heritage piece" onchange="handleRequestTypeChange(this.value)">
+            <span>🏛️ Restore an existing / heritage piece</span>
           </label>
         </div>
       </div>
-      <div class="field">
-        <label for="category">Category <span class="req">*</span></label>
-        <select id="category" name="category" required>
+      <div class="field" id="sub-category-group" style="display:none;">
+        <label for="sub_category" id="sub-category-label">Category <span class="req">*</span></label>
+        <select id="sub_category" name="sub_category">
           <option value="" disabled selected>Choose one</option>
-          <option>Décor</option>
-          <option>Furniture</option>
-          <option>Lighting</option>
-          <option>Landscaping</option>
-          <option>Architectural elements</option>
-          <option>Other / not listed</option>
         </select>
       </div>
     </div>
 
     <div class="section">
-      <p class="section-label">The specifics</p>
+      <p class="section-label">DETAILS</p>
       <div class="field">
-        <label for="details">Describe what you have in mind — or what's damaged <span class="req">*</span></label>
-        <textarea id="details" name="details" placeholder="Material, size, style references, or what's broken/worn and since when…" required></textarea>
+        <label for="details">Tell us about your idea or the piece you’d like us to work on. <span class="req">*</span></label>
+        <textarea id="details" name="details" placeholder="Material, size, style references, or details of the piece…" required></textarea>
         <p class="hint">📎 Describe any reference pieces, dimensions, or damage in detail above to help us scope this.</p>
       </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">TIMELINE / LOGISTICS</p>
       <div class="field">
         <label for="budget">Approximate budget <span class="opt">(optional)</span></label>
         <select id="budget" name="budget">
@@ -339,6 +333,46 @@
 </div>
 
 <script>
+  function handleRequestTypeChange(val) {
+    const group = document.getElementById('sub-category-group');
+    const label = document.getElementById('sub-category-label');
+    const select = document.getElementById('sub_category');
+    select.replaceChildren();
+    
+    if (val === 'Create something bespoke') {
+      group.style.display = 'block';
+      label.innerHTML = 'What would you like us to create? <span class="req">*</span>';
+      select.setAttribute('required', 'required');
+      const options = ['Furniture', 'Lighting', 'Décor', 'Architectural element', 'Other'];
+      const defaultOpt = document.createElement('option');
+      defaultOpt.value = ''; defaultOpt.disabled = true; defaultOpt.selected = true;
+      defaultOpt.textContent = 'Choose one';
+      select.appendChild(defaultOpt);
+      options.forEach(opt => {
+        const o = document.createElement('option');
+        o.value = opt; o.textContent = opt;
+        select.appendChild(o);
+      });
+    } else if (val === 'Reimagine something I already own') {
+      group.style.display = 'block';
+      label.innerHTML = 'What are you bringing to us? <span class="req">*</span>';
+      select.setAttribute('required', 'required');
+      const options = ['Furniture', 'Door / Window', 'Pillar / Architectural element', 'Reclaimed wood / Material', 'Object / Heirloom', 'Other'];
+      const defaultOpt = document.createElement('option');
+      defaultOpt.value = ''; defaultOpt.disabled = true; defaultOpt.selected = true;
+      defaultOpt.textContent = 'Choose one';
+      select.appendChild(defaultOpt);
+      options.forEach(opt => {
+        const o = document.createElement('option');
+        o.value = opt; o.textContent = opt;
+        select.appendChild(o);
+      });
+    } else {
+      group.style.display = 'none';
+      select.removeAttribute('required');
+    }
+  }
+
   document.getElementById('request-form').addEventListener('submit', function(e){
     e.preventDefault();
     const f = e.target;
@@ -363,8 +397,10 @@
       }
     }
 
+    const subCat = f.elements['sub_category'] ? val('sub_category') : '—';
+
     const textContent =
-`New custom & restoration request from the Urbanpots site:
+`New custom & restoration request from NAD Living:
 
 ABOUT
 Name: ${val('name')}
@@ -374,11 +410,12 @@ City / Country: ${val('city') || '—'}
 
 REQUEST
 Type: ${val('request_type')}
-Category: ${val('category')}
+Specific Category / Item: ${subCat}
 
 DETAILS
 ${val('details')}
 
+TIMELINE / LOGISTICS
 Budget: ${val('budget') || 'Not specified'}
 Timeline: ${val('timeline') || 'Not specified'}`;
 
@@ -401,6 +438,7 @@ Timeline: ${val('timeline') || 'Not specified'}`;
         btn.textContent = '✓ Request Sent';
         if(note) note.textContent = "Thanks! Your request has been received.";
         f.reset();
+        document.getElementById('sub-category-group').style.display = 'none';
       } else {
         throw new Error(data.error || 'Failed to send');
       }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Work with NAD — Nature Art &amp; Design</title>
+<title>Work with NAD — NAD Living</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -207,10 +207,7 @@
 <body>
 <div class="wrap">
 
-  <a class="back-link" href="index.html">
-    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M5 1L1 5L5 9" stroke="currentColor" stroke-width="1.4"/><path d="M1 5H13" stroke="currentColor" stroke-width="1.4"/></svg>
-    Back to main page
-  </a>
+  <a class="back-link" href="index.html">← Back</a>
 
   <div class="eyebrow">WORK WITH NAD</div>
   <h1>Let's build<br><em>something rooted.</em></h1>
@@ -221,7 +218,6 @@
   <div class="tabs" role="tablist" aria-label="Inquiry type">
     <div class="tab active" data-cat="artist" role="tab">🎨 Artist / Artisan</div>
     <div class="tab" data-cat="brand" role="tab">🏷️ Brand Collaboration</div>
-    <div class="tab" data-cat="architect" role="tab">📐 Architect / Designer</div>
     <div class="tab" data-cat="vendor" role="tab">📦 Supplier / Vendor</div>
     <div class="tab" data-cat="press" role="tab">📰 Press / Media</div>
     <div class="tab" data-cat="creator" role="tab">📸 Creator / Influencer</div>
@@ -282,26 +278,6 @@
       <div class="field-group">
         <label for="brand-idea">Collaboration proposal</label>
         <textarea id="brand-idea" placeholder="Outline your co-branding concept, capsule collection or joint event proposal..."></textarea>
-      </div>
-    </div>
-
-    <!-- 3. ARCHITECT / DESIGNER -->
-    <div class="category-block" data-block="architect">
-      <div class="block-label">Architect / Designer Collaboration</div>
-      <div class="field-group">
-        <label for="arch-type">Project nature</label>
-        <select id="arch-type">
-          <option value="">Select type</option>
-          <option>Residential Sanctuary</option>
-          <option>Boutique Hotel / Resort</option>
-          <option>Restaurant / Café</option>
-          <option>Commercial / Cultural Space</option>
-          <option>Product Co-design</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <label for="arch-details">Bespoke requirements</label>
-        <textarea id="arch-details" placeholder="Tell us about custom sizing, indigenous finishes or furniture pieces needed for your project..."></textarea>
       </div>
     </div>
 
@@ -422,7 +398,6 @@
   const catLabels = {
     artist: 'Artist / Artisan Collaboration',
     brand: 'Brand Collaboration',
-    architect: 'Architect / Designer Collaboration',
     vendor: 'Supplier / Vendor Enquiry',
     press: 'Press & Media',
     creator: 'Content & Influencer Collaboration',

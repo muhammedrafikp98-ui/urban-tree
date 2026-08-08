@@ -291,7 +291,7 @@
   <form id="shipping-form">
 
     <div class="section">
-      <p class="section-label">About you</p>
+      <p class="section-label">ABOUT YOU</p>
       <div class="field">
         <label for="name">Full name <span class="req">*</span></label>
         <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -311,52 +311,23 @@
     </div>
 
     <div class="section">
-      <p class="section-label">What's shipping</p>
-      <div class="field">
-        <label>Delivery is <span class="req">*</span></label>
-        <div class="pill-group">
-          <label class="pill">
-            <input type="radio" name="scope" value="Domestic (within India)" required>
-            <span>🇮🇳 Domestic</span>
-          </label>
-          <label class="pill">
-            <input type="radio" name="scope" value="International">
-            <span>🌍 International</span>
-          </label>
-          <label class="pill">
-            <input type="radio" name="scope" value="Not sure yet">
-            <span>🤔 Not sure yet</span>
-          </label>
-        </div>
-      </div>
-      <div class="field">
-        <label for="category">Category <span class="req">*</span></label>
-        <select id="category" name="category" required>
-          <option value="" disabled selected>Choose one</option>
-          <option>Décor</option>
-          <option>Furniture</option>
-          <option>Lighting</option>
-          <option>Landscaping</option>
-          <option>Architectural elements</option>
-          <option>Other / not listed</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="section">
-      <p class="section-label">The specifics</p>
+      <p class="section-label">DETAILS</p>
       <div class="field">
         <label for="items">Item(s) &amp; approximate size or quantity <span class="req">*</span></label>
         <textarea id="items" name="items" placeholder="e.g. 1 console table, roughly 4ft wide — or a set of 6 wall lights" required></textarea>
       </div>
       <div class="field">
-        <label for="insta_link">Instagram link of product / Product name <span class="opt">(optional)</span></label>
-        <input type="text" id="insta_link" name="insta_link" placeholder="e.g. https://instagram.com/p/... or Terracotta Wave Pot">
+        <label for="insta_link">Product name or reference link <span class="opt">(optional)</span></label>
+        <input type="text" id="insta_link" name="insta_link" placeholder="e.g. Product name, catalogue link, Instagram post/reel or other reference">
       </div>
       <div class="field">
         <label for="handling">Any special handling notes <span class="opt">(optional)</span></label>
         <input type="text" id="handling" name="handling" placeholder="Fragile, oversized, needs installation, elevator access, etc.">
       </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">TIMELINE / LOGISTICS</p>
       <div class="field">
         <label for="needby">Do you need it by a specific date?</label>
         <input type="text" id="needby" name="needby" placeholder="e.g. before a housewarming on 20 Sept, or no rush">
@@ -402,7 +373,7 @@
     note.textContent = '';
 
     const textContent =
-`New Shipping Inquiry — Urbanpots
+`New Shipping Inquiry — NAD Living
 
 ABOUT
 Name: ${val('name')}
@@ -410,14 +381,12 @@ Email: ${val('email')}
 Phone / WhatsApp: ${val('phone')}
 Destination: ${val('destination')}
 
-WHAT'S SHIPPING
-Scope: ${val('scope')}
-Category: ${val('category')}
-
-SPECIFICS
+DETAILS
 Items: ${val('items')}
-Instagram / Product: ${val('insta_link')}
+Product / Reference: ${val('insta_link')}
 Special Handling: ${val('handling')}
+
+TIMELINE / LOGISTICS
 Need By Date: ${val('needby')}`;
 
     fetch('/api/send-email', {

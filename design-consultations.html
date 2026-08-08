@@ -298,6 +298,10 @@
   <h1>Design &amp; Product <span class="spark">Consultations</span></h1>
   <p class="intro">Need help choosing, customising or creating the right NAD pieces for your space? Speak with our design team online or at the studio.</p>
 
+  <div class="hint" style="margin-top:14px; border-color:var(--brass); background:rgba(179,147,79,0.12); color:var(--ink); font-size:13px; line-height:1.5;">
+    💬 <b>Note:</b> General product enquiries and ordering assistance are available via WhatsApp. Consultations are for customers seeking dedicated one-to-one design guidance.
+  </div>
+
   <div class="mode-toggle">
     <div class="mode-btn active" id="mode-online" onclick="setMode('online')">💻 Video call</div>
     <div class="mode-btn" id="mode-inperson" onclick="setMode('inperson')">📍 Studio meeting</div>
@@ -316,7 +320,7 @@
     <form id="consult-form">
 
       <div class="section">
-        <p class="section-label">About you</p>
+        <p class="section-label">ABOUT YOU</p>
         <div class="field">
           <label for="name">Full name <span class="req">*</span></label>
           <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -346,15 +350,16 @@
       </div>
 
       <div class="section">
-        <p class="section-label">Consultation Focus &amp; Session</p>
+        <p class="section-label">WHAT YOU’RE LOOKING FOR / YOUR REQUIREMENT</p>
         <div class="field">
           <label for="focus">Consultation Focus <span class="req">*</span></label>
           <select id="focus" name="focus" required>
             <option value="" disabled selected>Choose focus area</option>
-            <option value="Product Selection">🛍️ Product Selection — Choosing the right NAD pieces</option>
-            <option value="Custom Furniture / Décor">✨ Custom Furniture / Décor — Customization &amp; finishes</option>
-            <option value="Styling & Placement">🪴 Styling &amp; Placement — Spatial styling with NAD work</option>
-            <option value="Bespoke Space / Project Requirement">🏗️ Bespoke Space / Project Requirement — Complete residential/commercial spaces</option>
+            <option value="Selecting the right NAD pieces for a space">🛍️ Selecting the right NAD pieces for a space</option>
+            <option value="Combining furniture, lighting and décor">🎨 Combining furniture, lighting and décor</option>
+            <option value="Customising dimensions, colours or finishes">✨ Customising dimensions, colours or finishes</option>
+            <option value="Planning multiple NAD pieces together">📐 Planning multiple NAD pieces together</option>
+            <option value="Dedicated design guidance for a particular space">🏠 Dedicated design guidance for a particular space</option>
             <option value="International Client Consultation">🌍 International Client Consultation — Global shipping &amp; custom sizing</option>
           </select>
         </div>
@@ -370,11 +375,15 @@
       </div>
 
       <div class="section">
-        <p class="section-label">The specifics</p>
+        <p class="section-label">DETAILS</p>
         <div class="field">
           <label for="topic">What would you like to discuss <span class="req">*</span></label>
           <textarea id="topic" name="topic" placeholder="A room you're designing, a custom piece idea, sourcing for a project, styling advice…" required></textarea>
         </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">TIMELINE / LOGISTICS</p>
         <div class="field">
           <label for="date">Preferred date</label>
           <input type="date" id="date" name="date">
