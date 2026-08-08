@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Collaborations / Vendors / Press — Urbanpots</title>
+<title>Work with NAD — Nature Art &amp; Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
     font-family:'Inter', sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:760px;margin:0 auto;padding:64px 24px 96px;}
+  .wrap{max-width:780px;margin:0 auto;padding:54px 24px 84px;}
 
   /* ---- hero ---- */
   .eyebrow{
@@ -36,31 +36,31 @@
     display:flex;
     align-items:center;
     gap:10px;
-    margin-bottom:22px;
+    margin-bottom:20px;
   }
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold);display:inline-block;}
   h1{
     font-family:'Fraunces', serif;
     font-weight:500;
     font-optical-sizing:auto;
-    font-size:clamp(36px,6vw,54px);
+    font-size:clamp(34px,5.5vw,50px);
     line-height:1.06;
     letter-spacing:-0.01em;
-    margin:0 0 18px;
+    margin:0 0 16px;
   }
   h1 em{font-style:italic;color:var(--gold);font-weight:400;}
   .lede{
     color:var(--muted);
-    font-size:16px;
+    font-size:15px;
     line-height:1.6;
-    max-width:52ch;
+    max-width:54ch;
     margin:0 0 8px;
   }
 
-  /* ---- stitch divider (signature element) ---- */
+  /* ---- stitch divider ---- */
   .stitch{
     display:flex;align-items:center;gap:7px;
-    margin:40px 0 36px;
+    margin:32px 0 30px;
     overflow:hidden;
   }
   .stitch span{
@@ -73,61 +73,54 @@
 
   /* ---- category tabs ---- */
   .tabs{
-    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;
   }
   .tab{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
+    font-size:11.5px;
     letter-spacing:.03em;
-    padding:11px 16px;
+    padding:9px 13px;
     background:var(--panel);
     border:1px solid var(--line);
     color:var(--muted);
-    border-radius:3px;
+    border-radius:4px;
     cursor:pointer;
     position:relative;
     transition:color .2s ease, border-color .2s ease, background .2s ease;
   }
-  .tab .tag{color:var(--clay); margin-right:8px;}
   .tab.active{
     color:var(--cream);
     border-color:var(--gold);
     background:var(--panel-hi);
   }
-  .tab.active .tag{color:var(--gold);}
-  .tab.active::after{
-    content:"";
-    position:absolute;left:12px;right:12px;bottom:-1px;height:2px;
-    background:var(--gold);
-  }
 
   /* ---- form ---- */
-  form{margin-top:34px;}
+  form{margin-top:28px;}
   fieldset{border:0;margin:0;padding:0;}
-  .field-group{margin-bottom:26px;}
+  .field-group{margin-bottom:22px;}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   @media (max-width:560px){.field-row{grid-template-columns:1fr;}}
   label{
     display:block;
     font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px;
+    font-size:11px;
     letter-spacing:.06em;
     text-transform:uppercase;
     color:var(--muted);
-    margin-bottom:9px;
+    margin-bottom:8px;
   }
   label .opt{
     text-transform:none;letter-spacing:0;color:var(--line);font-style:italic;
   }
-  input[type=text], input[type=email], input[type=date], select, textarea{
+  input[type=text], input[type=email], input[type=url], input[type=date], select, textarea{
     width:100%;
     background:var(--panel);
     border:1px solid var(--line);
     color:var(--cream);
     font-family:'Inter', sans-serif;
-    font-size:14.5px;
-    padding:13px 14px;
-    border-radius:3px;
+    font-size:14px;
+    padding:12px 14px;
+    border-radius:4px;
     outline:none;
     transition:border-color .2s ease, background .2s ease;
   }
@@ -136,29 +129,29 @@
     border-color:var(--gold);
     background:var(--panel-hi);
   }
-  textarea{resize:vertical;min-height:96px;line-height:1.5;}
+  textarea{resize:vertical;min-height:92px;line-height:1.5;}
   select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239A8C77'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;}
 
   .checks{display:flex;flex-wrap:wrap;gap:10px;}
   .chk{
     display:flex;align-items:center;gap:8px;
-    border:1px solid var(--line);border-radius:3px;
-    padding:9px 13px;font-size:13.5px;color:var(--cream);cursor:pointer;
+    border:1px solid var(--line);border-radius:4px;
+    padding:8px 12px;font-size:13px;color:var(--cream);cursor:pointer;
     background:var(--panel);
   }
   .chk input{width:14px;height:14px;accent-color:var(--gold);}
 
   .category-block{
-    border-left:2px solid var(--clay);
-    padding-left:20px;
-    margin:8px 0 30px;
+    border-left:2px solid var(--gold);
+    padding-left:18px;
+    margin:8px 0 24px;
     display:none;
   }
   .category-block.visible{display:block;}
   .category-block .block-label{
     font-family:'IBM Plex Mono', monospace;
-    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);
-    margin-bottom:20px;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:16px;
   }
 
   button[type=submit]{
@@ -167,50 +160,48 @@
     color:#1a1410;
     border:none;
     font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:17px;
-    padding:17px 20px;
-    border-radius:3px;
+    font-weight:600;
+    font-size:16px;
+    padding:16px 20px;
+    border-radius:4px;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;gap:10px;
     transition:background .2s ease, transform .1s ease;
   }
   button[type=submit]:hover{background:#dbb266;}
   button[type=submit]:active{transform:scale(.99);}
-  button[type=submit]:focus-visible{outline:2px solid var(--cream);outline-offset:3px;}
 
   .copy-fallback{
     display:block;width:100%;background:transparent;color:var(--muted);
     border:1px solid var(--line);font-family:'Inter',sans-serif;font-size:13px;
-    padding:12px;border-radius:3px;margin-top:10px;cursor:pointer;
+    padding:12px;border-radius:4px;margin-top:10px;cursor:pointer;
   }
   .copy-fallback:hover{color:var(--cream);border-color:var(--gold);}
 
   .note{
-    font-size:12.5px;color:var(--line);line-height:1.6;margin-top:14px;
+    font-size:12px;color:var(--muted);line-height:1.5;margin-top:12px;
   }
   .status{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px;color:var(--gold);margin-top:12px;min-height:16px;
+    font-size:12px;color:var(--gold);margin-top:10px;min-height:16px;
   }
 
   .foot{
-    margin-top:60px;padding-top:28px;border-top:1px solid var(--line);
+    margin-top:50px;padding-top:24px;border-top:1px solid var(--line);
     display:flex;justify-content:space-between;align-items:center;
-    font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--line);
+    font-family:'IBM Plex Mono', monospace;font-size:11px;color:var(--muted);
     letter-spacing:.05em;
   }
 
   .back-link{
-    display:inline-flex;align-items:center;gap:9px;
+    display:inline-flex;align-items:center;gap:8px;
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--muted);text-decoration:none;
-    margin-bottom:34px;
+    margin-bottom:28px;
     transition:color .2s ease;
   }
   .back-link:hover{color:var(--gold);}
-  .back-link svg{flex:0 0 auto;}
 </style>
 </head>
 <body>
@@ -221,136 +212,202 @@
     Back to main page
   </a>
 
-  <div class="eyebrow">Urbanpots &nbsp;/&nbsp; NAD Village</div>
+  <div class="eyebrow">WORK WITH NAD</div>
   <h1>Let's build<br><em>something rooted.</em></h1>
-  <p class="lede">Collaborations, vendor partnerships and press — reach the team directly. Pick what brings you here, and we'll only ask what's relevant.</p>
+  <p class="lede">Collaborate with our team across art, design, craft, supply, press and education. Select your intent below and the form will adapt.</p>
 
   <div class="stitch"><span></span><span class="knot"></span><span></span><span class="knot"></span><div class="fill"></div></div>
 
   <div class="tabs" role="tablist" aria-label="Inquiry type">
-    <div class="tab active" data-cat="collab" role="tab" aria-selected="true" tabindex="0"><span class="tag">01</span>Collaboration</div>
-    <div class="tab" data-cat="vendor" role="tab" aria-selected="false" tabindex="0"><span class="tag">02</span>Vendor &amp; Supplier</div>
-    <div class="tab" data-cat="press" role="tab" aria-selected="false" tabindex="0"><span class="tag">03</span>Press</div>
+    <div class="tab active" data-cat="artist" role="tab">🎨 Artist / Artisan</div>
+    <div class="tab" data-cat="brand" role="tab">🏷️ Brand Collaboration</div>
+    <div class="tab" data-cat="architect" role="tab">📐 Architect / Designer</div>
+    <div class="tab" data-cat="vendor" role="tab">📦 Supplier / Vendor</div>
+    <div class="tab" data-cat="press" role="tab">📰 Press / Media</div>
+    <div class="tab" data-cat="creator" role="tab">📸 Creator / Influencer</div>
+    <div class="tab" data-cat="educator" role="tab">🎓 Workshop Facilitator</div>
   </div>
 
   <form id="inquiryForm">
-    <!-- general, always-asked fields -->
+    <!-- General fields -->
     <div class="field-group field-row">
       <div>
-        <label for="name">Full name</label>
+        <label for="name">Full name *</label>
         <input type="text" id="name" placeholder="Your name" required>
       </div>
       <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="you@studio.com" required>
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="you@domain.com" required>
       </div>
     </div>
     <div class="field-group field-row">
       <div>
-        <label for="org">Organisation <span class="opt">(optional)</span></label>
-        <input type="text" id="org" placeholder="Brand, studio or publication">
+        <label for="org">Studio / Brand / Outlet <span class="opt">(optional)</span></label>
+        <input type="text" id="org" placeholder="Organisation or Instagram handle">
       </div>
       <div>
-        <label for="location">Location</label>
-        <input type="text" id="location" placeholder="City, country">
+        <label for="location">Location *</label>
+        <input type="text" id="location" placeholder="City, country" required>
       </div>
     </div>
 
-    <!-- COLLABORATION -->
-    <div class="category-block visible" data-block="collab">
-      <div class="block-label">About the collaboration</div>
+    <!-- 1. ARTIST / ARTISAN -->
+    <div class="category-block visible" data-block="artist">
+      <div class="block-label">Artist / Artisan Collaboration</div>
       <div class="field-group">
-        <label for="collab-type">What kind of collaboration is this?</label>
-        <select id="collab-type">
-          <option value="">Select one</option>
-          <option>Brand partnership</option>
-          <option>Influencer / creator</option>
-          <option>Interior designer or architect tie-up</option>
-          <option>Event or exhibition</option>
-          <option>Other</option>
+        <label for="artist-medium">Craft medium &amp; techniques</label>
+        <input type="text" id="artist-medium" placeholder="e.g. Woodcarving, Brass casting, Ceramic glazing, Textile dyeing">
+      </div>
+      <div class="field-group">
+        <label for="artist-portfolio">Portfolio / Work link <span class="opt">(optional)</span></label>
+        <input type="url" id="artist-portfolio" placeholder="https://...">
+      </div>
+      <div class="field-group">
+        <label for="artist-idea">Proposed collaboration idea</label>
+        <textarea id="artist-idea" placeholder="Describe the piece, collection, or technique you'd like to co-create with NAD..."></textarea>
+      </div>
+    </div>
+
+    <!-- 2. BRAND COLLABORATION -->
+    <div class="category-block" data-block="brand">
+      <div class="block-label">Brand Collaboration</div>
+      <div class="field-group">
+        <label for="brand-type">Brand alignment &amp; category</label>
+        <input type="text" id="brand-type" placeholder="e.g. Luxury hospitality, Fashion, Craft beverage, Architecture journal">
+      </div>
+      <div class="field-group">
+        <label for="brand-reach">Audience / Reach <span class="opt">(optional)</span></label>
+        <input type="text" id="brand-reach" placeholder="e.g. Instagram following, monthly magazine readers, store footprint">
+      </div>
+      <div class="field-group">
+        <label for="brand-idea">Collaboration proposal</label>
+        <textarea id="brand-idea" placeholder="Outline your co-branding concept, capsule collection or joint event proposal..."></textarea>
+      </div>
+    </div>
+
+    <!-- 3. ARCHITECT / DESIGNER -->
+    <div class="category-block" data-block="architect">
+      <div class="block-label">Architect / Designer Collaboration</div>
+      <div class="field-group">
+        <label for="arch-type">Project nature</label>
+        <select id="arch-type">
+          <option value="">Select type</option>
+          <option>Residential Sanctuary</option>
+          <option>Boutique Hotel / Resort</option>
+          <option>Restaurant / Café</option>
+          <option>Commercial / Cultural Space</option>
+          <option>Product Co-design</option>
         </select>
       </div>
       <div class="field-group">
-        <label for="collab-reach">Your audience or reach <span class="opt">(optional)</span></label>
-        <input type="text" id="collab-reach" placeholder="e.g. Instagram following, past clients, exhibition footfall">
-      </div>
-      <div class="field-group">
-        <label for="collab-idea">Tell us about the idea</label>
-        <textarea id="collab-idea" placeholder="What are you proposing, and why Urbanpots?"></textarea>
+        <label for="arch-details">Bespoke requirements</label>
+        <textarea id="arch-details" placeholder="Tell us about custom sizing, indigenous finishes or furniture pieces needed for your project..."></textarea>
       </div>
     </div>
 
-    <!-- VENDOR -->
+    <!-- 4. SUPPLIER / VENDOR -->
     <div class="category-block" data-block="vendor">
-      <div class="block-label">About what you supply</div>
+      <div class="block-label">Supplier / Vendor Enquiry</div>
       <div class="field-group">
-        <label for="vendor-type">What do you supply?</label>
+        <label for="vendor-type">Material or product supplied</label>
         <select id="vendor-type">
-          <option value="">Select one</option>
-          <option>Raw materials</option>
-          <option>Furniture components</option>
-          <option>Lighting</option>
-          <option>Textiles / décor</option>
-          <option>Landscaping materials</option>
+          <option value="">Select category</option>
+          <option>Raw timber &amp; reclaimed wood</option>
+          <option>Metals (Brass, Copper, Iron)</option>
+          <option>Clay, terracotta &amp; ceramics</option>
+          <option>Natural dyes &amp; pigments</option>
+          <option>Stone &amp; masonry</option>
+          <option>Packaging &amp; crating</option>
           <option>Other</option>
         </select>
       </div>
       <div class="field-group field-row">
         <div>
-          <label for="vendor-moq">Minimum order quantity / capacity</label>
-          <input type="text" id="vendor-moq" placeholder="e.g. 500 units/month">
+          <label for="vendor-moq">Capacity / MOQ</label>
+          <input type="text" id="vendor-moq" placeholder="e.g. 100 units / month">
         </div>
         <div>
           <label for="vendor-lead">Typical lead time</label>
-          <input type="text" id="vendor-lead" placeholder="e.g. 3–4 weeks">
+          <input type="text" id="vendor-lead" placeholder="e.g. 2–3 weeks">
         </div>
       </div>
       <div class="field-group">
-        <label for="vendor-cert">Certifications or samples available <span class="opt">(optional)</span></label>
-        <input type="text" id="vendor-cert" placeholder="e.g. FSC certified, sample kit available on request">
+        <label for="vendor-cert">Certifications / Sample details</label>
+        <input type="text" id="vendor-cert" placeholder="e.g. FSC certified, sample catalog available">
       </div>
     </div>
 
-    <!-- PRESS -->
+    <!-- 5. PRESS / MEDIA -->
     <div class="category-block" data-block="press">
-      <div class="block-label">About the story</div>
+      <div class="block-label">Press &amp; Media Enquiry</div>
       <div class="field-group field-row">
         <div>
-          <label for="press-outlet">Publication / outlet</label>
-          <input type="text" id="press-outlet" placeholder="Name of publication">
+          <label for="press-outlet">Publication / Platform</label>
+          <input type="text" id="press-outlet" placeholder="Name of media outlet">
         </div>
         <div>
-          <label for="press-deadline">Your deadline</label>
+          <label for="press-deadline">Deadline</label>
           <input type="date" id="press-deadline">
         </div>
       </div>
       <div class="field-group">
-        <label for="press-angle">What's the story angle?</label>
-        <textarea id="press-angle" placeholder="What are you covering, and how does Urbanpots fit in?"></textarea>
+        <label for="press-angle">Story angle</label>
+        <textarea id="press-angle" placeholder="What story are you featuring and how does NAD Living fit into the narrative?"></textarea>
       </div>
       <div class="field-group">
-        <label>What do you need from us? <span class="opt">(optional)</span></label>
+        <label>Assets required <span class="opt">(select any)</span></label>
         <div class="checks">
-          <label class="chk"><input type="checkbox" value="Product images"> Product images</label>
-          <label class="chk"><input type="checkbox" value="Founder interview"> Founder interview</label>
-          <label class="chk"><input type="checkbox" value="Studio visit"> Studio visit</label>
+          <label class="chk"><input type="checkbox" value="High-res product photography"> Product imagery</label>
+          <label class="chk"><input type="checkbox" value="Founder & Artisan interview"> Founder interview</label>
+          <label class="chk"><input type="checkbox" value="Studio press visit"> Studio visit</label>
         </div>
       </div>
     </div>
 
-    <div class="field-group">
-      <label for="message">Anything else we should know? <span class="opt">(optional)</span></label>
-      <textarea id="message" placeholder="Timelines, budget range, links to previous work — whatever's useful."></textarea>
+    <!-- 6. CREATOR / INFLUENCER -->
+    <div class="category-block" data-block="creator">
+      <div class="block-label">Content &amp; Influencer Collaboration</div>
+      <div class="field-group field-row">
+        <div>
+          <label for="creator-handle">Social handle / Channel</label>
+          <input type="text" id="creator-handle" placeholder="@yourhandle or YouTube channel">
+        </div>
+        <div>
+          <label for="creator-niche">Content focus</label>
+          <input type="text" id="creator-niche" placeholder="Interior design, Architecture, Craft, Lifestyle">
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="creator-idea">Content proposal</label>
+        <textarea id="creator-idea" placeholder="Tell us how you would like to showcase NAD pieces or document studio experiences..."></textarea>
+      </div>
     </div>
 
-    <button type="submit">Send to our team →</button>
-    <button type="button" class="copy-fallback" id="copyBtn">Mail app not opening? Copy the details instead</button>
+    <!-- 7. WORKSHOP FACILITATOR / EDUCATOR -->
+    <div class="category-block" data-block="educator">
+      <div class="block-label">Workshop Facilitator / Educator</div>
+      <div class="field-group">
+        <label for="edu-craft">Technique / Masterclass you teach</label>
+        <input type="text" id="edu-craft" placeholder="e.g. Traditional Wood Distressing, Natural Indigo Dyeing, Metal Embossing">
+      </div>
+      <div class="field-group">
+        <label for="edu-exp">Teaching background &amp; experience</label>
+        <textarea id="edu-exp" placeholder="Briefly describe your craft background, past workshops hosted, and proposed curriculum for NAD learners..."></textarea>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label for="message">Additional details <span class="opt">(optional)</span></label>
+      <textarea id="message" placeholder="Timelines, links, reference photos, or anything else helpful for our team."></textarea>
+    </div>
+
+    <button type="submit">Submit to NAD Team →</button>
+    <button type="button" class="copy-fallback" id="copyBtn">Email app not opening? Copy details instead</button>
     <div class="status" id="status"></div>
-    <p class="note">This opens a message to our team in your email app, pre-filled with what you've entered — nothing is sent until you hit send there.</p>
   </form>
 
   <div class="foot">
-    <span>Urbanpots × NAD Livivng</span>
+    <span>NAD Living · by Urbanpots</span>
     <span>contact.urbanpots@gmail.com</span>
   </div>
 
@@ -358,59 +415,76 @@
 
 <script>
   const CONTACT_EMAIL = "contact.urbanpots@gmail.com";
-
   const tabs = document.querySelectorAll('.tab');
   const blocks = document.querySelectorAll('.category-block');
-  let activeCat = 'collab';
+  let activeCat = 'artist';
+
+  const catLabels = {
+    artist: 'Artist / Artisan Collaboration',
+    brand: 'Brand Collaboration',
+    architect: 'Architect / Designer Collaboration',
+    vendor: 'Supplier / Vendor Enquiry',
+    press: 'Press & Media',
+    creator: 'Content & Influencer Collaboration',
+    educator: 'Workshop Facilitator / Educator'
+  };
 
   function setActive(cat){
     activeCat = cat;
     tabs.forEach(t => {
       const on = t.dataset.cat === cat;
       t.classList.toggle('active', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
     });
     blocks.forEach(b => b.classList.toggle('visible', b.dataset.block === cat));
   }
 
   tabs.forEach(t => {
     t.addEventListener('click', () => setActive(t.dataset.cat));
-    t.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setActive(t.dataset.cat); }
-    });
   });
-
-  const catLabels = { collab: 'Collaboration', vendor: 'Vendor & Supplier', press: 'Press' };
 
   function val(id){ return (document.getElementById(id)?.value || '').trim(); }
 
   function buildBody(){
     const lines = [];
-    lines.push(`Inquiry type: ${catLabels[activeCat]}`);
+    lines.push(`Work with NAD — Intent: ${catLabels[activeCat]}`);
     lines.push(`Name: ${val('name')}`);
     lines.push(`Email: ${val('email')}`);
-    if(val('org')) lines.push(`Organisation: ${val('org')}`);
-    if(val('location')) lines.push(`Location: ${val('location')}`);
+    if(val('org')) lines.push(`Organisation/Handle: ${val('org')}`);
+    lines.push(`Location: ${val('location')}`);
     lines.push('');
 
-    if(activeCat === 'collab'){
-      if(val('collab-type')) lines.push(`Collaboration type: ${val('collab-type')}`);
-      if(val('collab-reach')) lines.push(`Reach: ${val('collab-reach')}`);
-      if(val('collab-idea')) lines.push(`Idea:\n${val('collab-idea')}`);
+    if(activeCat === 'artist'){
+      if(val('artist-medium')) lines.push(`Craft Medium: ${val('artist-medium')}`);
+      if(val('artist-portfolio')) lines.push(`Portfolio: ${val('artist-portfolio')}`);
+      if(val('artist-idea')) lines.push(`Proposal:\n${val('artist-idea')}`);
+    } else if(activeCat === 'brand'){
+      if(val('brand-type')) lines.push(`Category: ${val('brand-type')}`);
+      if(val('brand-reach')) lines.push(`Reach: ${val('brand-reach')}`);
+      if(val('brand-idea')) lines.push(`Proposal:\n${val('brand-idea')}`);
+    } else if(activeCat === 'architect'){
+      if(val('arch-type')) lines.push(`Project Nature: ${val('arch-type')}`);
+      if(val('arch-details')) lines.push(`Requirements:\n${val('arch-details')}`);
     } else if(activeCat === 'vendor'){
       if(val('vendor-type')) lines.push(`Supplies: ${val('vendor-type')}`);
-      if(val('vendor-moq')) lines.push(`MOQ / capacity: ${val('vendor-moq')}`);
-      if(val('vendor-lead')) lines.push(`Lead time: ${val('vendor-lead')}`);
-      if(val('vendor-cert')) lines.push(`Certifications / samples: ${val('vendor-cert')}`);
+      if(val('vendor-moq')) lines.push(`Capacity/MOQ: ${val('vendor-moq')}`);
+      if(val('vendor-lead')) lines.push(`Lead Time: ${val('vendor-lead')}`);
+      if(val('vendor-cert')) lines.push(`Certifications: ${val('vendor-cert')}`);
     } else if(activeCat === 'press'){
       if(val('press-outlet')) lines.push(`Outlet: ${val('press-outlet')}`);
       if(val('press-deadline')) lines.push(`Deadline: ${val('press-deadline')}`);
-      if(val('press-angle')) lines.push(`Story angle:\n${val('press-angle')}`);
+      if(val('press-angle')) lines.push(`Story Angle:\n${val('press-angle')}`);
       const checks = Array.from(document.querySelectorAll('.category-block[data-block="press"] .chk input:checked')).map(c=>c.value);
-      if(checks.length) lines.push(`Needs: ${checks.join(', ')}`);
+      if(checks.length) lines.push(`Assets Needed: ${checks.join(', ')}`);
+    } else if(activeCat === 'creator'){
+      if(val('creator-handle')) lines.push(`Handle: ${val('creator-handle')}`);
+      if(val('creator-niche')) lines.push(`Focus: ${val('creator-niche')}`);
+      if(val('creator-idea')) lines.push(`Proposal:\n${val('creator-idea')}`);
+    } else if(activeCat === 'educator'){
+      if(val('edu-craft')) lines.push(`Technique Taught: ${val('edu-craft')}`);
+      if(val('edu-exp')) lines.push(`Background & Proposal:\n${val('edu-exp')}`);
     }
 
-    if(val('message')){ lines.push(''); lines.push(`Additional notes:\n${val('message')}`); }
+    if(val('message')){ lines.push(''); lines.push(`Additional Notes:\n${val('message')}`); }
     return lines.join('\n');
   }
 
@@ -425,9 +499,9 @@
     const statusEl = document.getElementById('status');
     const submitBtn = e.target.querySelector('button[type=submit]');
     if(submitBtn) submitBtn.disabled = true;
-    statusEl.textContent = 'Sending…';
+    statusEl.textContent = 'Sending to NAD team…';
 
-    const subject = `[${catLabels[activeCat]}] Inquiry from ${val('name')}`;
+    const subject = `[Work with NAD: ${catLabels[activeCat]}] Inquiry from ${val('name')}`;
     const textContent = buildBody();
 
     fetch('/api/send-email', {
@@ -442,7 +516,7 @@
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        statusEl.textContent = "✓ Thanks! Your inquiry has been sent via email.";
+        statusEl.textContent = "✓ Inquiry sent! The NAD team will review and respond shortly.";
         e.target.reset();
       } else {
         throw new Error(data.error || 'Failed to send');
@@ -457,12 +531,12 @@
   });
 
   document.getElementById('copyBtn').addEventListener('click', async function(){
-    const text = `To: ${CONTACT_EMAIL}\nSubject: [${catLabels[activeCat]}] Inquiry from ${val('name') || '(your name)'}\n\n${buildBody()}`;
+    const text = `To: ${CONTACT_EMAIL}\nSubject: [Work with NAD: ${catLabels[activeCat]}] Inquiry from ${val('name') || '(your name)'}\n\n${buildBody()}`;
     try{
-      await navigator.clipboard.writeText(text);
-      document.getElementById('status').textContent = 'Copied — paste it into an email to ' + CONTACT_EMAIL;
+      await navigator.clipboard-writeText(text);
+      document.getElementById('status').textContent = 'Copied details to clipboard — paste into an email to ' + CONTACT_EMAIL;
     }catch(err){
-      document.getElementById('status').textContent = 'Could not copy automatically — please select and copy manually.';
+      document.getElementById('status').textContent = 'Could not copy automatically.';
     }
   });
 </script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urbanpots — NAD Village</title>
+<title>NAD — Nature Art &amp; Design Living (by Urbanpots)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -65,8 +65,8 @@
     font-family:'Fraunces', serif;
     font-optical-sizing:auto;
     font-weight:600;
-    font-size:44px;
-    line-height:1.02;
+    font-size:38px;
+    line-height:1.05;
     text-align:center;
     margin-top:14px;
     letter-spacing:-0.01em;
@@ -78,12 +78,23 @@
     font-weight:400;
     color:var(--ochre);
   }
+  .sub-brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--stone);
+    text-align:center;
+    margin-top:6px;
+    opacity:0;
+    animation:rise 0.7s ease forwards 0.2s;
+  }
   .tagline{
     text-align:center;
     color:var(--ink-dim);
-    font-size:14.5px;
+    font-size:14px;
     line-height:1.55;
-    max-width:320px;
+    max-width:340px;
     margin:14px auto 0;
     opacity:0;
     animation:rise 0.7s ease forwards 0.25s;
@@ -183,6 +194,7 @@
     font-size:12.5px;
     color:var(--ink-dim);
     margin-top:3px;
+    line-height:1.4;
   }
   .card-arrow{
     font-size:16px;
@@ -202,6 +214,8 @@
   .links .card:nth-child(7){ animation-delay:0.68s; }
   .links .card:nth-child(8){ animation-delay:0.73s; }
   .links .card:nth-child(9){ animation-delay:0.78s; }
+  .links .card:nth-child(10){ animation-delay:0.83s; }
+  .links .card:nth-child(11){ animation-delay:0.88s; }
 
   .card-featured{
     border-color:rgba(191,106,36,0.4);
@@ -275,18 +289,19 @@
     </svg>
   </div>
 
-  <p class="eyebrow">NAD Living</p>
-  <h1 class="wordmark">Urban<em>pots</em></h1>
-  <p class="tagline">Design-led indigenous luxury living — décor, furniture, lighting &amp; landscape, made by hand.</p>
+  <p class="eyebrow">Nature Art &amp; Design</p>
+  <h1 class="wordmark">NAD Living</h1>
+  <p class="sub-brand">by Urbanpots</p>
+  <p class="tagline">Contemporary Indian furniture, lighting, décor, spaces &amp; experiences — rooted in art, craft, architecture and culture.</p>
 
   <nav class="links" aria-label="Quick links">
-    <a class="card card-featured" href="https://nadliving.com/" target="_blank" rel="noopener">
+    <a class="card card-featured" href="https://nadcatalogue.netlify.app/" target="_blank" rel="noopener">
       <span class="card-swatch" style="background:var(--ochre)"></span>
       <span class="card-body">
-        <span class="card-icon">🌐</span>
+        <span class="card-icon">🛍️</span>
         <span class="card-text">
-          <span class="card-title">Website <span class="card-badge">Official</span></span>
-          <span class="card-sub">Explore our collections, store &amp; products at nadliving.com</span>
+          <span class="card-title">Explore Our Collection</span>
+          <span class="card-sub">Furniture • Lighting • Décor • One-of-a-kind pieces</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -297,8 +312,8 @@
       <span class="card-body">
         <span class="card-icon">✨</span>
         <span class="card-text">
-          <span class="card-title">Custom &amp; Restoration Requests</span>
-          <span class="card-sub">Tell us what you need made or repaired</span>
+          <span class="card-title">Custom, Bespoke &amp; Restoration</span>
+          <span class="card-sub">Custom furniture • Bespoke décor • Heritage restoration • Reimagining old pieces</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -320,7 +335,8 @@
       <span class="card-swatch" style="background:var(--walnut)"></span>
       <span class="card-body">
         <span class="card-icon">📦</span>
-        <span class="card-text">          <span class="card-title">Shipping &amp; Delivery Info</span>
+        <span class="card-text">
+          <span class="card-title">Shipping &amp; Delivery Info</span>
           <span class="card-sub">Timelines, packaging &amp; coverage</span>
         </span>
         <span class="card-arrow">→</span>
@@ -332,8 +348,8 @@
       <span class="card-body">
         <span class="card-icon">🏗️</span>
         <span class="card-text">
-          <span class="card-title">Trade / Designers &amp; Bulk Projects</span>
-          <span class="card-sub">Partner pricing for the trade</span>
+          <span class="card-title">Architects, Designers &amp; Projects</span>
+          <span class="card-sub">Trade partnerships • Hospitality • Residential • Commercial • Bespoke project requirements</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -344,20 +360,20 @@
       <span class="card-body">
         <span class="card-icon">📍</span>
         <span class="card-text">
-          <span class="card-title">Visit Us / Studio Location</span>
+          <span class="card-title">Visit NAD Studio</span>
           <span class="card-sub">Find us on the map</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
     </a>
 
-    <a class="card"  href="design-consultations.html">
+    <a class="card" href="design-consultations.html">
       <span class="card-swatch" style="background:var(--brass)"></span>
       <span class="card-body">
         <span class="card-icon">🌍</span>
         <span class="card-text">
-          <span class="card-title">Design Consultations</span>
-          <span class="card-sub">1:1 sessions, including for clients abroad</span>
+          <span class="card-title">Design &amp; Product Consultations</span>
+          <span class="card-sub">Need help choosing, customising or creating the right NAD pieces for your space?</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -368,8 +384,8 @@
       <span class="card-body">
         <span class="card-icon">🤝</span>
         <span class="card-text">
-          <span class="card-title">Collaborations / Vendors / Press</span>
-          <span class="card-sub">Get in touch with the team</span>
+          <span class="card-title">Work with NAD</span>
+          <span class="card-sub">Artist / Artisan • Brand • Designer • Vendor • Press • Creator • Educator</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -378,22 +394,10 @@
     <a class="card" href="workshops.html">
       <span class="card-swatch" style="background:var(--ochre)"></span>
       <span class="card-body">
-        <span class="card-icon">🏺</span>
+        <span class="card-icon">🎨</span>
         <span class="card-text">
-          <span class="card-title">Workshops &amp; Masterclasses</span>
-          <span class="card-sub">Hands-on pottery &amp; ceramic design</span>
-        </span>
-        <span class="card-arrow">→</span>
-      </span>
-    </a>
-
-    <a class="card" href="community.html">
-      <span class="card-swatch" style="background:var(--sage)"></span>
-      <span class="card-body">
-        <span class="card-icon">🌱</span>
-        <span class="card-text">
-          <span class="card-title">Join the Community</span>
-          <span class="card-sub">Events, socials &amp; artisan network</span>
+          <span class="card-title">Workshops &amp; Creative Experiences</span>
+          <span class="card-sub">Hands-on craft experiences where you learn by making beautiful, functional objects</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -404,8 +408,20 @@
       <span class="card-body">
         <span class="card-icon">🎓</span>
         <span class="card-text">
-          <span class="card-title">Careers / Learning With Us</span>
-          <span class="card-sub">Apprenticeships &amp; open roles</span>
+          <span class="card-title">Learn &amp; Grow With NAD</span>
+          <span class="card-sub">Masterclasses • Apprenticeships • Internships • Careers</span>
+        </span>
+        <span class="card-arrow">→</span>
+      </span>
+    </a>
+
+    <a class="card" href="community.html">
+      <span class="card-swatch" style="background:var(--sage)"></span>
+      <span class="card-body">
+        <span class="card-icon">🌱</span>
+        <span class="card-text">
+          <span class="card-title">NAD Community</span>
+          <span class="card-sub">Events, design conversations, exhibitions &amp; artisan network</span>
         </span>
         <span class="card-arrow">→</span>
       </span>
@@ -422,9 +438,6 @@
     <a class="social-btn" href="https://www.facebook.com/urbanpots.in/" aria-label="Facebook" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 21v-7h2.5l.5-3H14V9c0-.86.24-1.45 1.48-1.45H17V4.9c-.26-.03-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.76V11H8.5v3H11.15v7Z" stroke-linejoin="round"/></svg>
     </a>
-    <a class="social-btn" href="LINKEDIN_LINK" aria-label="LinkedIn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="9" r="0.6" fill="currentColor" stroke="none"/><path d="M8 12v6M8 12v6M12.5 18v-4c0-1.2.8-2 2-2s2 .8 2 2v4M12.5 18v-3.5" stroke-linecap="round"/></svg>
-    </a>
     <a class="social-btn" href="https://www.youtube.com/@urbanpots" aria-label="YouTube" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="6" width="19" height="12" rx="4"/><path d="M10.5 9.5v5l4.5-2.5Z" fill="currentColor" stroke="none"/></svg>
     </a>
@@ -433,7 +446,7 @@
     </a>
   </div>
 
-  <footer>© NAD Living · handmade, always</footer>
+  <footer>© NAD Living · by Urbanpots · handmade, always</footer>
 
 </div>
 </body>

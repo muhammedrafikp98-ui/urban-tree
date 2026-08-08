@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shipping &amp; Delivery Info — Urbanpots</title>
+<title>Shipping &amp; Delivery Info — NAD Living</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -88,10 +88,10 @@
     animation:rise 0.6s ease forwards 0.2s;
   }
 
-  /* ---- Quick facts strip ---- */
+  /* ---- Shipping policy cards strip ---- */
   .facts{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    display:flex;
+    flex-direction:column;
     gap:10px;
     margin-top:26px;
     opacity:0;
@@ -101,20 +101,23 @@
     background:var(--base-2);
     border:1px solid var(--line);
     border-radius:9px;
-    padding:13px 14px;
+    padding:14px 16px;
   }
   .fact-label{
     font-family:'JetBrains Mono', monospace;
-    font-size:9.5px;
-    letter-spacing:0.08em;
+    font-size:10px;
+    letter-spacing:0.1em;
     text-transform:uppercase;
-    color:var(--stone);
+    color:var(--brass);
+    display:flex;
+    align-items:center;
+    gap:6px;
   }
   .fact-value{
-    font-family:'Fraunces', serif;
-    font-weight:500;
-    font-size:15px;
-    margin-top:4px;
+    font-size:13.5px;
+    color:var(--ink-dim);
+    margin-top:5px;
+    line-height:1.5;
   }
 
   form{ margin-top:32px; display:flex; flex-direction:column; gap:28px; }
@@ -272,20 +275,16 @@
 
   <div class="facts">
     <div class="fact">
-      <p class="fact-label">Domestic (India)</p>
-      <p class="fact-value">7–14 days</p>
+      <p class="fact-label">📦 Ready-to-ship pieces</p>
+      <p class="fact-value">Timeline depends on destination and product size.</p>
     </div>
     <div class="fact">
-      <p class="fact-label">International</p>
-      <p class="fact-value">3–6 weeks</p>
+      <p class="fact-label">🔨 Made-to-order pieces</p>
+      <p class="fact-value">Production timeline + transit timeline will be confirmed before order.</p>
     </div>
     <div class="fact">
-      <p class="fact-label">Packaging</p>
-      <p class="fact-value">Crated &amp; insured</p>
-    </div>
-    <div class="fact">
-      <p class="fact-label">Made to order</p>
-      <p class="fact-value">Ships after completion</p>
+      <p class="fact-label">🌍 International shipping available</p>
+      <p class="fact-value">Quoted individually based on destination, dimensions and handling requirements.</p>
     </div>
   </div>
 
