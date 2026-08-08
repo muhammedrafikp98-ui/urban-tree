@@ -46,7 +46,7 @@
     *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
   }
 
-  .page{ width:100%; max-width:860px; padding:36px 20px 0; }
+  .page{ width:100%; max-width:880px; padding:36px 20px 0; }
 
   /* Nav Header */
   .top-nav{
@@ -106,13 +106,13 @@
     color:var(--ink-dim);
     font-size:15px;
     line-height:1.6;
-    max-width:620px;
+    max-width:640px;
     margin-top:10px;
     opacity:0;
     animation:rise 0.6s ease forwards 0.2s;
   }
 
-  /* Tabs / Navigation Modes */
+  /* Tabs Navigation */
   .hub-nav{
     display:flex;
     gap:10px;
@@ -214,7 +214,7 @@
   }
   .filter-select:focus{ border-color:var(--brass); }
 
-  /* Category Cards Grid (Home View) */
+  /* Category Cards Grid */
   .category-grid{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
@@ -257,7 +257,7 @@
   .cat-icon-badge{
     position:absolute;
     top:10px; right:10px;
-    background:rgba(21,19,15,0.75);
+    background:rgba(21,19,15,0.8);
     backdrop-filter:blur(6px);
     border:1px solid var(--line);
     width:34px; height:34px;
@@ -276,7 +276,6 @@
     font-size:18px;
     font-weight:600;
     letter-spacing:-0.01em;
-    display:flex; align-items:center; gap:8px;
   }
   .cat-desc{
     font-size:13px;
@@ -297,10 +296,10 @@
   }
   .cat-card:hover .cat-action{ gap:10px; color:#d87b30; }
 
-  /* Visual Product Cards (Category / Filtered View) */
+  /* Visual Product Cards (Each with distinct visual product illustration) */
   .products-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns:repeat(auto-fill, minmax(255px, 1fr));
     gap:18px;
     margin-top:24px;
   }
@@ -321,13 +320,17 @@
     transform:translateY(-3px);
     border-color:rgba(239,230,214,0.3);
     background:var(--base-3);
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
   }
   .prod-img-box{
     position:relative;
     width:100%;
-    height:150px;
+    height:165px;
     background:var(--base-3);
     overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   .prod-img-box img{
     width:100%;
@@ -343,10 +346,11 @@
     backdrop-filter:blur(4px);
     border:1px solid var(--line);
     border-radius:4px;
-    padding:3px 7px;
+    padding:3px 8px;
     font-family:'JetBrains Mono', monospace;
     font-size:10px;
     color:var(--brass);
+    letter-spacing:0.04em;
   }
   .prod-body{
     padding:16px;
@@ -370,8 +374,8 @@
   }
   .prod-price{
     font-weight:600;
-    color:var(--ink);
-    font-size:14px;
+    color:var(--ochre);
+    font-size:14.5px;
   }
   .prod-footer{
     margin-top:14px;
@@ -405,6 +409,7 @@
     overflow:hidden;
     position:relative;
     border:1px solid var(--line);
+    background:var(--base-3);
   }
   .detail-hero img{
     width:100%;
@@ -528,10 +533,11 @@
     margin-top:12px;
   }
   .gallery-thumb{
-    height:120px;
+    height:130px;
     border-radius:8px;
     overflow:hidden;
     border:1px solid var(--line);
+    background:var(--base-3);
   }
   .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
 
@@ -906,6 +912,117 @@
 
 <script>
 // ==========================================
+// DYNAMIC SVG ILLUSTRATION GENERATOR FOR ALL 69 PRODUCTS
+// Generates distinct, customer-friendly visual artwork for every single product!
+// ==========================================
+
+function getProductVisual(catId, prodId, prodName) {
+  // Pre-generated photos for key products if present
+  if (prodId === 'scrunchie') return 'assets/workshops/botanical-scrunchie.png';
+  if (prodId === 'moon-lamp') return 'assets/workshops/mini-moon-lamp.png';
+  if (prodId === 'river-table') return 'assets/workshops/resin-river-table.png';
+  if (prodId === 'bookmark-set') return 'assets/workshops/cyanotype-bookmark.png';
+
+  // Theme palettes per category
+  const themeMap = {
+    'botanical-printing': { bg: '#1a2418', accent: '#7ca86b', line: '#a5d694', sub: '#405936' },
+    'linocut': { bg: '#241b17', accent: '#bf6a24', line: '#e08f48', sub: '#4a2c1b' },
+    'moon-texture-art': { bg: '#141622', accent: '#b3934f', line: '#f5d996', sub: '#2c314a' },
+    'cyanotype': { bg: '#0d1f38', accent: '#4a90e2', line: '#96c2f5', sub: '#1a3b66' },
+    'mirror-mosaic': { bg: '#211c26', accent: '#a875cf', line: '#d4b2f0', sub: '#443554' },
+    'block-printing': { bg: '#261b17', accent: '#c45a3c', line: '#f28e74', sub: '#542e23' },
+    'resin-art': { bg: '#122426', accent: '#26a69a', line: '#80cbd2', sub: '#1f484d' },
+    'hand-painting': { bg: '#242018', accent: '#d99b26', line: '#f7cf7c', sub: '#4a3d21' }
+  };
+
+  const theme = themeMap[catId] || { bg: '#1c1a14', accent: '#bf6a24', line: '#efe6d6', sub: '#2b261c' };
+
+  // Draw product shape SVG
+  let shapeSVG = '';
+
+  if (prodId.includes('scrunchie')) {
+    shapeSVG = `<circle cx="150" cy="100" r="45" fill="none" stroke="${theme.accent}" stroke-width="26" stroke-dasharray="12 6"/>
+                <circle cx="150" cy="100" r="28" fill="${theme.bg}"/>
+                <path d="M 125 80 Q 150 60 175 80 Q 185 100 175 120 Q 150 140 125 120 Z" fill="none" stroke="${theme.line}" stroke-width="2"/>`;
+  } else if (prodId.includes('scarf')) {
+    shapeSVG = `<path d="M 80 40 C 130 30, 180 70, 220 50 C 200 110, 150 130, 80 150 Z" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 90 60 Q 140 70 200 70" fill="none" stroke="${theme.line}" stroke-width="2" stroke-dasharray="4 4"/>`;
+  } else if (prodId.includes('tote')) {
+    shapeSVG = `<rect x="95" y="70" width="110" height="90" rx="6" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 120 70 V 40 C 120 30, 180 30, 180 40 V 70" fill="none" stroke="${theme.line}" stroke-width="4"/>
+                <circle cx="150" cy="115" r="18" fill="none" stroke="${theme.line}" stroke-width="2"/>`;
+  } else if (prodId.includes('cushion')) {
+    shapeSVG = `<rect x="90" y="45" width="120" height="110" rx="14" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 90 45 L 210 155 M 210 45 L 90 155" fill="none" stroke="${theme.line}" stroke-width="1" opacity="0.3"/>
+                <circle cx="150" cy="100" r="22" fill="${theme.bg}" stroke="${theme.line}" stroke-width="2"/>`;
+  } else if (prodId.includes('towel') || prodId.includes('napkin')) {
+    shapeSVG = `<rect x="100" y="35" width="100" height="130" rx="4" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <line x1="100" y1="65" x2="200" y2="65" stroke="${theme.line}" stroke-width="2"/>
+                <line x1="100" y1="135" x2="200" y2="135" stroke="${theme.line}" stroke-width="3" stroke-dasharray="6 4"/>`;
+  } else if (prodId.includes('runner')) {
+    shapeSVG = `<rect x="50" y="80" width="200" height="40" rx="4" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <line x1="50" y1="100" x2="250" y2="100" stroke="${theme.line}" stroke-width="2" stroke-dasharray="8 4"/>`;
+  } else if (prodId.includes('journal') || prodId.includes('notebook')) {
+    shapeSVG = `<rect x="105" y="40" width="90" height="120" rx="6" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <rect x="105" y="40" width="14" height="120" fill="${theme.accent}"/>
+                <line x1="170" y1="40" x2="170" y2="175" stroke="${theme.line}" stroke-width="3"/>`;
+  } else if (prodId.includes('pouch')) {
+    shapeSVG = `<path d="M 90 70 L 210 70 L 200 140 L 100 140 Z" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <line x1="90" y1="70" x2="210" y2="70" stroke="${theme.line}" stroke-width="4"/>
+                <circle cx="215" cy="70" r="5" fill="${theme.line}"/>`;
+  } else if (prodId.includes('apron')) {
+    shapeSVG = `<path d="M 120 40 H 180 L 195 90 V 160 H 105 V 90 Z" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 130 40 C 130 20, 170 20, 170 40" fill="none" stroke="${theme.line}" stroke-width="3"/>
+                <rect x="125" y="110" width="50" height="35" rx="3" fill="none" stroke="${theme.line}" stroke-width="2"/>`;
+  } else if (prodId.includes('stamp')) {
+    shapeSVG = `<rect x="110" y="90" width="80" height="50" rx="4" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 140 90 V 55 C 140 45, 160 45, 160 55 V 90" fill="${theme.accent}"/>
+                <path d="M 130 115 L 150 100 L 170 115 L 150 130 Z" fill="none" stroke="${theme.line}" stroke-width="2"/>`;
+  } else if (prodId.includes('lamp')) {
+    shapeSVG = `<circle cx="150" cy="90" r="45" fill="${theme.sub}" stroke="${theme.line}" stroke-width="3"/>
+                <path d="M 120 135 L 150 165 L 180 135" fill="none" stroke="${theme.accent}" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="135" cy="80" r="10" fill="${theme.line}" opacity="0.3"/>`;
+  } else if (prodId.includes('clock')) {
+    shapeSVG = `<circle cx="150" cy="100" r="55" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="4"/>
+                <line x1="150" y1="100" x2="150" y2="65" stroke="${theme.line}" stroke-width="3"/>
+                <line x1="150" y1="100" x2="180" y2="100" stroke="${theme.line}" stroke-width="3"/>
+                <circle cx="150" cy="100" r="5" fill="${theme.accent}"/>`;
+  } else if (prodId.includes('mirror') || prodId.includes('frame')) {
+    shapeSVG = `<rect x="90" y="40" width="120" height="120" rx="10" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="8"/>
+                <circle cx="150" cy="100" r="35" fill="${theme.bg}" stroke="${theme.line}" stroke-width="2"/>`;
+  } else if (prodId.includes('tray') || prodId.includes('dish')) {
+    shapeSVG = `<ellipse cx="150" cy="100" rx="70" ry="40" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="4"/>
+                <ellipse cx="150" cy="100" rx="52" ry="26" fill="none" stroke="${theme.line}" stroke-width="2" stroke-dasharray="6 3"/>`;
+  } else if (prodId.includes('coaster')) {
+    shapeSVG = `<rect x="95" y="60" width="65" height="65" rx="10" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3" transform="rotate(10 127 92)"/>
+                <rect x="135" y="75" width="65" height="65" rx="10" fill="${theme.sub}" stroke="${theme.line}" stroke-width="3"/>`;
+  } else if (prodId.includes('planter')) {
+    shapeSVG = `<path d="M 105 70 L 195 70 L 180 150 L 120 150 Z" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 150 70 Q 130 30 110 40 Q 140 45 150 70 Q 160 30 190 35 Q 160 50 150 70" fill="${theme.line}"/>`;
+  } else if (prodId.includes('table')) {
+    shapeSVG = `<ellipse cx="150" cy="70" rx="75" ry="25" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="4"/>
+                <path d="M 100 70 L 90 160 M 200 70 L 210 160 M 150 70 L 150 160" stroke="${theme.line}" stroke-width="4"/>`;
+  } else if (prodId.includes('jewellery') || prodId.includes('box')) {
+    shapeSVG = `<rect x="95" y="65" width="110" height="75" rx="8" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <line x1="95" y1="95" x2="205" y2="95" stroke="${theme.line}" stroke-width="2"/>
+                <circle cx="150" cy="95" r="6" fill="${theme.accent}"/>`;
+  } else {
+    // Elegant Art Motif
+    shapeSVG = `<circle cx="150" cy="100" r="48" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+                <path d="M 120 100 Q 150 60 180 100 Q 150 140 120 100 Z" fill="none" stroke="${theme.line}" stroke-width="2"/>`;
+  }
+
+  const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="100%" height="100%">
+    <rect width="300" height="200" fill="${theme.bg}"/>
+    <circle cx="150" cy="100" r="85" fill="none" stroke="${theme.line}" stroke-width="1" opacity="0.15"/>
+    ${shapeSVG}
+    <text x="150" y="184" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="${theme.line}" text-anchor="middle" letter-spacing="1">${prodName.toUpperCase()}</text>
+  </svg>`;
+
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svgStr);
+}
+
+// ==========================================
 // WORKSHOP HUB DATA STORE (8 Categories, 69 Products, 8 Custom Workshops)
 // ==========================================
 
@@ -918,15 +1035,15 @@ const CATEGORIES = [
     tagline: 'Create beautiful lifestyle products using real leaves and flowers.',
     description: 'Immerse yourself in eco-printing using natural tannins, steam, and fresh flora pressed onto natural fabrics.',
     products: [
-      { id: 'scrunchie', name: 'Botanical Scrunchie', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends', 'Kids'], sizes: 'Standard Set of 2', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'scarf', name: 'Botanical Scarf', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Pure Silk / Linen (180cm)', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'tote-bag', name: 'Botanical Tote Bag', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Friends', 'Corporate'], sizes: 'Heavy Canvas Tote', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'cushion-cover', name: 'Botanical Cushion Cover', duration: 'Half Day', price: 2200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '16x16" / 18x18" Cotton', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'tea-towel', name: 'Botanical Tea Towel', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pair of 2 Kitchen Towels', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'table-runner', name: 'Botanical Table Runner', duration: 'Full Day', price: 3500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6-ft Natural Linen Runner', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'journal-cover', name: 'Botanical Journal Cover', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Hardbound Notebook', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'fabric-pouch', name: 'Botanical Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zippered Utility Pouch', image: 'assets/workshops/botanical-printing.png' },
-      { id: 'apron', name: 'Botanical Apron', duration: 'Half Day', price: 2500, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Adjustable Chef/Artisan Apron', image: 'assets/workshops/botanical-printing.png' }
+      { id: 'scrunchie', name: 'Botanical Scrunchie', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends', 'Kids'], sizes: 'Standard Set of 2' },
+      { id: 'scarf', name: 'Botanical Scarf', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Pure Silk / Linen (180cm)' },
+      { id: 'tote-bag', name: 'Botanical Tote Bag', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Friends', 'Corporate'], sizes: 'Heavy Canvas Tote' },
+      { id: 'cushion-cover', name: 'Botanical Cushion Cover', duration: 'Half Day', price: 2200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '16x16" / 18x18" Cotton' },
+      { id: 'tea-towel', name: 'Botanical Tea Towel', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pair of 2 Kitchen Towels' },
+      { id: 'table-runner', name: 'Botanical Table Runner', duration: 'Full Day', price: 3500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6-ft Natural Linen Runner' },
+      { id: 'journal-cover', name: 'Botanical Journal Cover', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Hardbound Notebook' },
+      { id: 'fabric-pouch', name: 'Botanical Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zippered Utility Pouch' },
+      { id: 'apron', name: 'Botanical Apron', duration: 'Half Day', price: 2500, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Adjustable Chef/Artisan Apron' }
     ]
   },
   {
@@ -937,15 +1054,15 @@ const CATEGORIES = [
     tagline: 'Design and carve your own reusable stamps and printed products.',
     description: 'Master the art of gouging, ink rolling, and relief printmaking to craft bespoke stamps & art prints.',
     products: [
-      { id: 'name-stamp', name: 'Personalised Name Stamp', duration: '2 Hours', price: 1499, level: 'Beginner', suitable: ['Individual', 'Kids'], sizes: 'Custom Rubber Block', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'couple-stamp', name: 'Couple Stamp', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Couples'], sizes: 'Dual Initial Crest Block', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'family-stamp', name: 'Family Stamp', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Friends', 'Kids'], sizes: 'Family Coat / Crest Block', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'business-logo-stamp', name: 'Business Logo Stamp', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Corporate', 'Individual'], sizes: 'Brand Packaging Stamp', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'library-stamp', name: 'Library Stamp', duration: '2 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Ex Libris Book Stamp', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'packaging-stamp', name: 'Packaging Stamp', duration: 'Half Day', price: 2900, level: 'Intermediate', suitable: ['Corporate'], sizes: 'Large Box Stamp Block', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'printed-tote-bag', name: 'Printed Tote Bag', duration: '2.5 Hours', price: 1900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Heavyweight Canvas', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'printed-tea-towel', name: 'Printed Tea Towel', duration: '2.5 Hours', price: 1500, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Pure Cotton Linen', image: 'assets/workshops/linocut-printing.png' },
-      { id: 'printed-journal', name: 'Printed Journal', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Hand-stamped A5 Journal', image: 'assets/workshops/linocut-printing.png' }
+      { id: 'name-stamp', name: 'Personalised Name Stamp', duration: '2 Hours', price: 1499, level: 'Beginner', suitable: ['Individual', 'Kids'], sizes: 'Custom Rubber Block' },
+      { id: 'couple-stamp', name: 'Couple Stamp', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Couples'], sizes: 'Dual Initial Crest Block' },
+      { id: 'family-stamp', name: 'Family Stamp', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Friends', 'Kids'], sizes: 'Family Coat / Crest Block' },
+      { id: 'business-logo-stamp', name: 'Business Logo Stamp', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Corporate', 'Individual'], sizes: 'Brand Packaging Stamp' },
+      { id: 'library-stamp', name: 'Library Stamp', duration: '2 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Ex Libris Book Stamp' },
+      { id: 'packaging-stamp', name: 'Packaging Stamp', duration: 'Half Day', price: 2900, level: 'Intermediate', suitable: ['Corporate'], sizes: 'Large Box Stamp Block' },
+      { id: 'printed-tote-bag', name: 'Printed Tote Bag', duration: '2.5 Hours', price: 1900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Heavyweight Canvas' },
+      { id: 'printed-tea-towel', name: 'Printed Tea Towel', duration: '2.5 Hours', price: 1500, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Pure Cotton Linen' },
+      { id: 'printed-journal', name: 'Printed Journal', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Hand-stamped A5 Journal' }
     ]
   },
   {
@@ -956,13 +1073,13 @@ const CATEGORIES = [
     tagline: 'Create textured décor and lighting objects.',
     description: 'Sculpt lunar craters, plaster reliefs, and luminous cosmic surfaces with ambient lighting elements.',
     products: [
-      { id: 'moon-lamp', name: 'Mini Moon Lamp', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: '20cm Illuminated Orb', image: 'assets/workshops/moon-texture-art.png' },
-      { id: 'moon-tray', name: 'Moon Tray', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: '30cm Circular Resin Tray', image: 'assets/workshops/moon-texture-art.png' },
-      { id: 'moon-wall-art', name: 'Moon Wall Art', duration: 'Full Day', price: 4500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '40cm Canvas / Panel', image: 'assets/workshops/moon-texture-art.png' },
-      { id: 'moon-clock', name: 'Moon Clock', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Quartz Wall Clock', image: 'assets/workshops/moon-texture-art.png' },
-      { id: 'jewellery-tray', name: 'Jewellery Tray', duration: '2 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Dish Set of 2', image: 'assets/workshops/moon-texture-art.png' },
-      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '45cm Lunar Mirror', image: 'assets/workshops/moon-texture-art.png' },
-      { id: 'tea-light-holder', name: 'Tea Light Holder', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Pair of Votive Holders', image: 'assets/workshops/moon-texture-art.png' }
+      { id: 'moon-lamp', name: 'Mini Moon Lamp', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: '20cm Illuminated Orb' },
+      { id: 'moon-tray', name: 'Moon Tray', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: '30cm Circular Resin Tray' },
+      { id: 'moon-wall-art', name: 'Moon Wall Art', duration: 'Full Day', price: 4500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '40cm Canvas / Panel' },
+      { id: 'moon-clock', name: 'Moon Clock', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Quartz Wall Clock' },
+      { id: 'jewellery-tray', name: 'Jewellery Tray', duration: '2 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Dish Set of 2' },
+      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '45cm Lunar Mirror' },
+      { id: 'tea-light-holder', name: 'Tea Light Holder', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Pair of Votive Holders' }
     ]
   },
   {
@@ -973,14 +1090,14 @@ const CATEGORIES = [
     tagline: 'Create botanical sun prints on fabric and paper.',
     description: 'Harness sunlight and iron salts to produce magical Prussian-blue sun prints on organic substrates.',
     products: [
-      { id: 'bookmark-set', name: 'Bookmark Set', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Set of 5 Handmade Cards', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Linen Notebook', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Cotton Drawstring Pouch', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'tote-bag', name: 'Tote Bag', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Natural Canvas Bag', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'scarf', name: 'Scarf', duration: 'Half Day', price: 2600, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Botanical Blue Silk Scarf', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'botanical-wall-art', name: 'Botanical Wall Art', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Framed A3 Sunprint', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'greeting-cards', name: 'Greeting Cards', duration: '2 Hours', price: 990, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Pack of 6 Cards with Envelopes', image: 'assets/workshops/cyanotype-printing.png' },
-      { id: 'table-runner', name: 'Table Runner', duration: 'Full Day', price: 3800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Sunprinted Linen', image: 'assets/workshops/cyanotype-printing.png' }
+      { id: 'bookmark-set', name: 'Bookmark Set', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Set of 5 Handmade Cards' },
+      { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Linen Notebook' },
+      { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Cotton Drawstring Pouch' },
+      { id: 'tote-bag', name: 'Tote Bag', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Natural Canvas Bag' },
+      { id: 'scarf', name: 'Scarf', duration: 'Half Day', price: 2600, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Botanical Blue Silk Scarf' },
+      { id: 'botanical-wall-art', name: 'Botanical Wall Art', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Framed A3 Sunprint' },
+      { id: 'greeting-cards', name: 'Greeting Cards', duration: '2 Hours', price: 990, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Pack of 6 Cards with Envelopes' },
+      { id: 'table-runner', name: 'Table Runner', duration: 'Full Day', price: 3800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Sunprinted Linen' }
     ]
   },
   {
@@ -991,14 +1108,14 @@ const CATEGORIES = [
     tagline: 'Create mosaic décor and functional home accessories.',
     description: 'Cut, arrange, and grout reflective glass mosaic tiles onto beautiful home accents.',
     products: [
-      { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Compact Oval Tray', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'jewellery-tray', name: 'Jewellery Tray', duration: '3 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Rectangular Vanity Tray', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'coaster-set', name: 'Coaster Set', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Set of 4 Mosaic Coasters', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Round Frame', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'photo-frame', name: 'Photo Frame', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: '5x7" Tabletop Frame', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'planter', name: 'Planter', duration: 'Half Day', price: 2700, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6" Ceramic Plant Pot', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7500, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '18" Tabletop Accent', image: 'assets/workshops/mirror-mosaic.png' },
-      { id: 'wall-mirror', name: 'Wall Mirror', duration: 'Full Day', price: 5400, level: 'Advanced', suitable: ['Individual'], sizes: '60cm Statement Mirror', image: 'assets/workshops/mirror-mosaic.png' }
+      { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Compact Oval Tray' },
+      { id: 'jewellery-tray', name: 'Jewellery Tray', duration: '3 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Rectangular Vanity Tray' },
+      { id: 'coaster-set', name: 'Coaster Set', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Set of 4 Mosaic Coasters' },
+      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Round Frame' },
+      { id: 'photo-frame', name: 'Photo Frame', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: '5x7" Tabletop Frame' },
+      { id: 'planter', name: 'Planter', duration: 'Half Day', price: 2700, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6" Ceramic Plant Pot' },
+      { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7500, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '18" Tabletop Accent' },
+      { id: 'wall-mirror', name: 'Wall Mirror', duration: 'Full Day', price: 5400, level: 'Advanced', suitable: ['Individual'], sizes: '60cm Statement Mirror' }
     ]
   },
   {
@@ -1009,14 +1126,14 @@ const CATEGORIES = [
     tagline: 'Print beautiful everyday textiles.',
     description: 'Experience traditional woodblock printing with hand-carved heritage motifs and pigment dyes.',
     products: [
-      { id: 'tote-bag', name: 'Tote Bag', duration: '2 Hours', price: 1300, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Organic Cotton Bag', image: 'assets/workshops/block-printing.png' },
-      { id: 'tea-towel', name: 'Tea Towel', duration: '2 Hours', price: 1150, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 2 Kitchen Towels', image: 'assets/workshops/block-printing.png' },
-      { id: 'table-runner', name: 'Table Runner', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Linen Table Runner', image: 'assets/workshops/block-printing.png' },
-      { id: 'napkin-set', name: 'Napkin Set', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Corporate'], sizes: 'Set of 6 Cloth Napkins', image: 'assets/workshops/block-printing.png' },
-      { id: 'apron', name: 'Apron', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Artisan Workshop Apron', image: 'assets/workshops/block-printing.png' },
-      { id: 'cushion-cover', name: 'Cushion Cover', duration: '3 Hours', price: 2100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '18x18" Pillow Case', image: 'assets/workshops/block-printing.png' },
-      { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zipper Pouch', image: 'assets/workshops/block-printing.png' },
-      { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1450, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Handbound A5 Journal', image: 'assets/workshops/block-printing.png' }
+      { id: 'tote-bag', name: 'Tote Bag', duration: '2 Hours', price: 1300, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Organic Cotton Bag' },
+      { id: 'tea-towel', name: 'Tea Towel', duration: '2 Hours', price: 1150, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 2 Kitchen Towels' },
+      { id: 'table-runner', name: 'Table Runner', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Linen Table Runner' },
+      { id: 'napkin-set', name: 'Napkin Set', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Corporate'], sizes: 'Set of 6 Cloth Napkins' },
+      { id: 'apron', name: 'Apron', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Artisan Workshop Apron' },
+      { id: 'cushion-cover', name: 'Cushion Cover', duration: '3 Hours', price: 2100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '18x18" Pillow Case' },
+      { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zipper Pouch' },
+      { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1450, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Handbound A5 Journal' }
     ]
   },
   {
@@ -1027,16 +1144,16 @@ const CATEGORIES = [
     tagline: 'Create functional décor and resin products.',
     description: 'Cast clear epoxy resin with metallic pigments, dried botanicals, and gold leaf flakes.',
     products: [
-      { id: 'jewellery', name: 'Jewellery', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pendant & Earrings Set', image: 'assets/workshops/resin-art.png' },
-      { id: 'coasters', name: 'Coasters', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Set of 4 Geode Coasters', image: 'assets/workshops/resin-art.png' },
-      { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Oval Dish', image: 'assets/workshops/resin-art.png' },
-      { id: 'serving-tray', name: 'Serving Tray', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '14" Wood & Resin Tray', image: 'assets/workshops/resin-art.png' },
-      { id: 'bookmark', name: 'Bookmark', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 3 Resin Bookmarks', image: 'assets/workshops/resin-art.png' },
-      { id: 'jewellery-dish', name: 'Jewellery Dish', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Ring & Accessory Dish', image: 'assets/workshops/resin-art.png' },
-      { id: 'wall-clock', name: 'Wall Clock', duration: 'Full Day', price: 4800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Resin Ocean Clock', image: 'assets/workshops/resin-art.png' },
-      { id: 'coffee-table', name: 'Coffee Table', duration: 'Multi-Day', price: 9800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '24" River Accent Table', image: 'assets/workshops/resin-art.png' },
-      { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7200, level: 'Advanced', suitable: ['Individual'], sizes: '18" Resin Top Table', image: 'assets/workshops/resin-art.png' },
-      { id: 'river-table', name: 'River Table', duration: 'Multi-Day', price: 14500, level: 'Advanced', suitable: ['Individual', 'Corporate'], sizes: '36" Masterpiece Table', image: 'assets/workshops/resin-art.png' }
+      { id: 'jewellery', name: 'Jewellery', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pendant & Earrings Set' },
+      { id: 'coasters', name: 'Coasters', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Set of 4 Geode Coasters' },
+      { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Oval Dish' },
+      { id: 'serving-tray', name: 'Serving Tray', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '14" Wood & Resin Tray' },
+      { id: 'bookmark', name: 'Bookmark', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 3 Resin Bookmarks' },
+      { id: 'jewellery-dish', name: 'Jewellery Dish', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Ring & Accessory Dish' },
+      { id: 'wall-clock', name: 'Wall Clock', duration: 'Full Day', price: 4800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Resin Ocean Clock' },
+      { id: 'coffee-table', name: 'Coffee Table', duration: 'Multi-Day', price: 9800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '24" River Accent Table' },
+      { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7200, level: 'Advanced', suitable: ['Individual'], sizes: '18" Resin Top Table' },
+      { id: 'river-table', name: 'River Table', duration: 'Multi-Day', price: 14500, level: 'Advanced', suitable: ['Individual', 'Corporate'], sizes: '36" Masterpiece Table' }
     ]
   },
   {
@@ -1047,16 +1164,16 @@ const CATEGORIES = [
     tagline: 'Paint everyday lifestyle products in the NAD style.',
     description: 'Learn brush techniques, color mixing, and sealants to paint lifestyle home accents in signature NAD aesthetic.',
     products: [
-      { id: 'wooden-tray', name: 'Wooden Tray', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Hand-painted Mango Wood Tray', image: 'assets/workshops/hand-painting.png' },
-      { id: 'jewellery-box', name: 'Jewellery Box', duration: '3 Hours', price: 2100, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Keepsake Wooden Box', image: 'assets/workshops/hand-painting.png' },
-      { id: 'serving-board', name: 'Serving Board', duration: '2.5 Hours', price: 1850, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Teak Charcuterie Board', image: 'assets/workshops/hand-painting.png' },
-      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Painted Frame', image: 'assets/workshops/hand-painting.png' },
-      { id: 'planter', name: 'Planter', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Terracotta Plant Pot', image: 'assets/workshops/hand-painting.png' },
-      { id: 'stool', name: 'Stool', duration: 'Full Day', price: 4900, level: 'Intermediate', suitable: ['Individual'], sizes: 'Wooden Accent Stool', image: 'assets/workshops/hand-painting.png' },
-      { id: 'shelf', name: 'Shelf', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Wall Floating Shelf', image: 'assets/workshops/hand-painting.png' },
-      { id: 'lamp', name: 'Lamp', duration: 'Full Day', price: 4600, level: 'Intermediate', suitable: ['Individual'], sizes: 'Table Base Lamp', image: 'assets/workshops/hand-painting.png' },
-      { id: 'wall-plate', name: 'Wall Plate', duration: '2.5 Hours', price: 1550, level: 'Beginner', suitable: ['Friends', 'Kids', 'Corporate'], sizes: '10" Ceramic Decor Plate', image: 'assets/workshops/hand-painting.png' },
-      { id: 'tissue-box', name: 'Tissue Box', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Wooden Tissue Holder', image: 'assets/workshops/hand-painting.png' }
+      { id: 'wooden-tray', name: 'Wooden Tray', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Hand-painted Mango Wood Tray' },
+      { id: 'jewellery-box', name: 'Jewellery Box', duration: '3 Hours', price: 2100, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Keepsake Wooden Box' },
+      { id: 'serving-board', name: 'Serving Board', duration: '2.5 Hours', price: 1850, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Teak Charcuterie Board' },
+      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Painted Frame' },
+      { id: 'planter', name: 'Planter', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Terracotta Plant Pot' },
+      { id: 'stool', name: 'Stool', duration: 'Full Day', price: 4900, level: 'Intermediate', suitable: ['Individual'], sizes: 'Wooden Accent Stool' },
+      { id: 'shelf', name: 'Shelf', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Wall Floating Shelf' },
+      { id: 'lamp', name: 'Lamp', duration: 'Full Day', price: 4600, level: 'Intermediate', suitable: ['Individual'], sizes: 'Table Base Lamp' },
+      { id: 'wall-plate', name: 'Wall Plate', duration: '2.5 Hours', price: 1550, level: 'Beginner', suitable: ['Friends', 'Kids', 'Corporate'], sizes: '10" Ceramic Decor Plate' },
+      { id: 'tissue-box', name: 'Tissue Box', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Wooden Tissue Holder' }
     ]
   }
 ];
@@ -1071,6 +1188,13 @@ const CUSTOM_WORKSHOPS = [
   { id: 'corporate', name: 'Corporate Workshops', icon: '🏢', desc: 'Team bonding craft experiences, offsites & corporate gifting workshops.' },
   { id: 'collaborations', name: 'Brand Collaborations', icon: '🤝', desc: 'Bespoke popup experiences, brand activation workshops & festival booths.' }
 ];
+
+// Attach custom visual to every product
+CATEGORIES.forEach(cat => {
+  cat.products.forEach(p => {
+    p.image = getProductVisual(cat.id, p.id, p.name);
+  });
+});
 
 // ==========================================
 // STATE MANAGEMENT & ROUTING
@@ -1113,7 +1237,6 @@ function parseRoute() {
   const parts = hash.split('/').filter(Boolean);
 
   if (parts.length === 0) {
-    // Default home view
     activeCategoryId = null;
     activeProductId = null;
     if (activeTab !== 'custom' && activeTab !== 'all-products') activeTab = 'categories';
@@ -1126,7 +1249,6 @@ function parseRoute() {
     activeCategoryId = null;
     activeProductId = null;
   } else {
-    // Category or Product
     const cat = CATEGORIES.find(c => c.id === parts[0]);
     if (cat) {
       activeCategoryId = cat.id;
@@ -1214,7 +1336,7 @@ function renderUI() {
   // Render All Products View
   if (activeTab === 'all-products') {
     mainTitle.innerHTML = `EXPLORE ALL <span class="spark">PRODUCTS</span>`;
-    mainSubtitle.textContent = `Browse our entire range of 69 creative workshop experiences across 8 craft techniques.`;
+    mainSubtitle.textContent = `Browse our entire range of 69 creative workshop experiences across 8 craft techniques. Each product card has a custom visual representation.`;
     filterPanel.style.display = 'flex';
     renderAllProductsView();
     return;
@@ -1246,7 +1368,7 @@ function renderCategoryHomeView() {
         <div class="cat-body">
           <h3 class="cat-title">${cat.name}</h3>
           <p class="cat-desc">${cat.tagline}</p>
-          <span class="cat-action">→ Explore Products</span>
+          <span class="cat-action">→ Explore Products (${cat.products.length})</span>
         </div>
       </a>
     `;
@@ -1303,7 +1425,7 @@ function renderCategoryProducts(cat) {
             <span class="prod-price">₹${prod.price.toLocaleString('en-IN')}</span>
           </div>
           <div class="prod-footer">
-            <span style="font-size:11.5px; color:var(--ink-dim);">Includes all materials</span>
+            <span style="font-size:11.5px; color:var(--ink-dim);">${prod.sizes}</span>
             <span class="view-btn">View Details →</span>
           </div>
         </div>
@@ -1333,7 +1455,7 @@ function renderAllProductsView() {
   let html = `<div class="products-grid">`;
   allProds.forEach((prod, index) => {
     html += `
-      <div class="prod-card" onclick="updateHash('${prod.categoryId}/${prod.id}')" style="animation-delay:${0.03 * (index + 1)}s;">
+      <div class="prod-card" onclick="updateHash('${prod.categoryId}/${prod.id}')" style="animation-delay:${0.02 * (index + 1)}s;">
         <div class="prod-img-box">
           <img src="${prod.image}" alt="${prod.name}" loading="lazy">
           <span class="prod-chip">${prod.categoryIcon} ${prod.categoryName}</span>
@@ -1433,9 +1555,8 @@ function renderProductDetail(catId, prodId) {
       <div class="detail-section">
         <h3 class="detail-section-title">Gallery</h3>
         <div class="gallery-grid">
-          <div class="gallery-thumb"><img src="${prod.image}" alt="Workshop moment"></div>
-          <div class="gallery-thumb"><img src="${cat.image}" alt="Finished piece"></div>
-          <div class="gallery-thumb"><img src="${prod.image}" alt="Craft detail"></div>
+          <div class="gallery-thumb"><img src="${prod.image}" alt="${prod.name}"></div>
+          <div class="gallery-thumb"><img src="${cat.image}" alt="Workshop ambiance"></div>
         </div>
       </div>
 
