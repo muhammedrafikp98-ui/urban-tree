@@ -1,1296 +1,1493 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workshops &amp; Creative Experiences — NAD Living</title>
-<meta name="description" content="Discover creative hands-on craft experiences where you learn by making beautiful, functional objects. Botanical Dyeing, Linocut, Moon Texture Art, Cyanotype, Mirror Mosaic, Block Printing, Resin Art, and Hand Painting Objects.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#efe6d6;
-    --ink-dim:#c9beac;
-    --base:#15130f;
-    --base-2:#1c1a14;
-    --base-3:#242019;
-    --base-card:rgba(28,26,20,0.9);
-    --ochre:#bf6a24;
-    --ochre-glow:rgba(191,106,36,0.25);
-    --brass:#b3934f;
-    --clay:#a8492b;
-    --walnut:#6b4a2f;
-    --sage:#5e6a4c;
-    --stone:#8d867a;
-    --line:rgba(239,230,214,0.12);
-    --line-strong:rgba(239,230,214,0.22);
-    --radius:12px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{background:var(--base); scroll-behavior:smooth;}
-  body{
-    background:
-      radial-gradient(ellipse 70% 40% at 50% -10%, rgba(191,106,36,0.14), transparent 70%),
-      radial-gradient(ellipse 50% 30% at 90% 100%, rgba(94,106,76,0.10), transparent 70%),
-      var(--base);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding:0 0 80px;
-    -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshops &amp; Creative Experiences — NAD Living</title>
+  <meta name="description"
+    content="Discover creative hands-on craft experiences where you learn by making beautiful, functional objects. Botanical Dyeing, Linocut, Moon Texture Art, Cyanotype, Mirror Mosaic, Block Printing, Resin Art, and Hand Painting Objects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #efe6d6;
+      --ink-dim: #c9beac;
+      --base: #15130f;
+      --base-2: #1c1a14;
+      --base-3: #242019;
+      --base-card: rgba(28, 26, 20, 0.9);
+      --ochre: #bf6a24;
+      --ochre-glow: rgba(191, 106, 36, 0.25);
+      --brass: #b3934f;
+      --clay: #a8492b;
+      --walnut: #6b4a2f;
+      --sage: #5e6a4c;
+      --stone: #8d867a;
+      --line: rgba(239, 230, 214, 0.12);
+      --line-strong: rgba(239, 230, 214, 0.22);
+      --radius: 12px;
+    }
 
-  .page{ width:100%; max-width:880px; padding:36px 20px 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* Nav Header */
-  .top-nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:28px;
-    padding-bottom:16px;
-    border-bottom:1px solid var(--line);
-    opacity:0;
-    animation:rise 0.6s ease forwards;
-  }
-  .back{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    font-size:13px;
-    color:var(--ink-dim);
-    text-decoration:none;
-    transition:color 0.2s, transform 0.2s;
-    cursor:pointer;
-  }
-  .back:hover{ color:var(--ink); transform:translateX(-2px); }
-  .brand-badge{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--brass);
-  }
+    html {
+      background: var(--base);
+      scroll-behavior: smooth;
+    }
 
-  /* Typography */
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--brass);
-    margin-top:8px;
-    opacity:0;
-    animation:rise 0.6s ease forwards 0.08s;
-  }
-  h1{
-    font-family:'Fraunces', serif;
-    font-optical-sizing:auto;
-    font-weight:600;
-    font-size:clamp(28px, 5vw, 42px);
-    line-height:1.1;
-    margin-top:8px;
-    letter-spacing:-0.01em;
-    opacity:0;
-    animation:rise 0.6s ease forwards 0.14s;
-  }
-  h1 .spark{ color:var(--ochre); font-style:italic; font-weight:400; }
-  .hero-subtitle{
-    color:var(--ink-dim);
-    font-size:15px;
-    line-height:1.6;
-    max-width:640px;
-    margin-top:10px;
-    opacity:0;
-    animation:rise 0.6s ease forwards 0.2s;
-  }
+    body {
+      background:
+        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(191, 106, 36, 0.14), transparent 70%),
+        radial-gradient(ellipse 50% 30% at 90% 100%, rgba(94, 106, 76, 0.10), transparent 70%),
+        var(--base);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 0 0 80px;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* Tabs Navigation */
-  .hub-nav{
-    display:flex;
-    gap:10px;
-    margin-top:28px;
-    border-bottom:1px solid var(--line);
-    padding-bottom:12px;
-    overflow-x:auto;
-    scrollbar-width:none;
-    opacity:0;
-    animation:rise 0.6s ease forwards 0.24s;
-  }
-  .hub-nav::-webkit-scrollbar{ display:none; }
-  .tab-btn{
-    background:none;
-    border:1px solid transparent;
-    border-radius:20px;
-    padding:8px 16px;
-    color:var(--ink-dim);
-    font-family:'Inter', sans-serif;
-    font-size:13.5px;
-    font-weight:500;
-    cursor:pointer;
-    white-space:nowrap;
-    transition:all 0.2s;
-  }
-  .tab-btn:hover{ color:var(--ink); background:rgba(239,230,214,0.05); }
-  .tab-btn.active{
-    background:rgba(191,106,36,0.15);
-    border-color:var(--ochre);
-    color:var(--ink);
-  }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
 
-  /* Global Filters Bar */
-  .filter-panel{
-    background:var(--base-2);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:18px;
-    margin-top:24px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    opacity:0;
-    animation:rise 0.6s ease forwards 0.28s;
-  }
-  .filter-title-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .filter-heading{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--brass);
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  .clear-filters{
-    font-size:12px;
-    color:var(--ink-dim);
-    background:none;
-    border:none;
-    cursor:pointer;
-    text-decoration:underline;
-  }
-  .clear-filters:hover{ color:var(--ochre); }
+    .page {
+      width: 100%;
+      max-width: 880px;
+      padding: 36px 20px 0;
+    }
 
-  .filter-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-    gap:12px;
-  }
-  .filter-group{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
-  .filter-group label{
-    font-size:11.5px;
-    font-weight:500;
-    color:var(--ink-dim);
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-  }
-  .filter-select{
-    background:var(--base-3);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:9px 12px;
-    color:var(--ink);
-    font-size:13px;
-    font-family:'Inter', sans-serif;
-    outline:none;
-    cursor:pointer;
-    transition:border-color 0.2s;
-  }
-  .filter-select:focus{ border-color:var(--brass); }
+    /* Nav Header */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      animation: rise 0.6s ease forwards;
+    }
 
-  /* Category Cards Grid */
-  .category-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
-    gap:18px;
-    margin-top:28px;
-  }
-  .cat-card{
-    background:var(--base-2);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    text-decoration:none;
-    color:var(--ink);
-    transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    opacity:0;
-    animation:rise 0.6s ease forwards;
-    position:relative;
-  }
-  .cat-card:hover{
-    transform:translateY(-4px);
-    border-color:rgba(239,230,214,0.3);
-    box-shadow:0 12px 30px rgba(0,0,0,0.5), 0 0 20px var(--ochre-glow);
-  }
-  .cat-img-wrapper{
-    width:100%;
-    height:165px;
-    position:relative;
-    overflow:hidden;
-    background:var(--base-3);
-  }
-  .cat-img-wrapper img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:transform 0.5s ease;
-  }
-  .cat-card:hover .cat-img-wrapper img{ transform:scale(1.06); }
-  .cat-icon-badge{
-    position:absolute;
-    top:10px; right:10px;
-    background:rgba(21,19,15,0.8);
-    backdrop-filter:blur(6px);
-    border:1px solid var(--line);
-    width:34px; height:34px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-size:16px;
-  }
-  .cat-body{
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    flex:1;
-  }
-  .cat-title{
-    font-family:'Fraunces', serif;
-    font-size:18px;
-    font-weight:600;
-    letter-spacing:-0.01em;
-  }
-  .cat-desc{
-    font-size:13px;
-    color:var(--ink-dim);
-    line-height:1.5;
-    margin-top:6px;
-    flex:1;
-  }
-  .cat-action{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    font-size:13px;
-    font-weight:600;
-    color:var(--ochre);
-    margin-top:14px;
-    transition:gap 0.2s;
-  }
-  .cat-card:hover .cat-action{ gap:10px; color:#d87b30; }
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--ink-dim);
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
 
-  /* Visual Product Cards (Each with distinct visual product illustration) */
-  .products-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(255px, 1fr));
-    gap:18px;
-    margin-top:24px;
-  }
-  .prod-card{
-    background:var(--base-2);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    color:var(--ink);
-    transition:all 0.25s ease;
-    opacity:0;
-    animation:rise 0.5s ease forwards;
-    cursor:pointer;
-  }
-  .prod-card:hover{
-    transform:translateY(-3px);
-    border-color:rgba(239,230,214,0.3);
-    background:var(--base-3);
-    box-shadow:0 8px 24px rgba(0,0,0,0.4);
-  }
-  .prod-img-box{
-    position:relative;
-    width:100%;
-    height:175px;
-    background:var(--base-3);
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .prod-img-box img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:transform 0.4s ease;
-  }
-  .prod-card:hover .prod-img-box img{ transform:scale(1.05); }
-  .prod-chip{
-    position:absolute;
-    bottom:8px; left:8px;
-    background:rgba(21,19,15,0.85);
-    backdrop-filter:blur(4px);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:3px 8px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    color:var(--brass);
-    letter-spacing:0.04em;
-  }
-  .prod-body{
-    padding:16px;
-    display:flex;
-    flex-direction:column;
-    flex:1;
-  }
-  .prod-name{
-    font-family:'Fraunces', serif;
-    font-size:17px;
-    font-weight:600;
-    line-height:1.25;
-  }
-  .prod-meta-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-top:10px;
-    font-size:12.5px;
-    color:var(--ink-dim);
-  }
-  .prod-price{
-    font-weight:600;
-    color:var(--ochre);
-    font-size:14.5px;
-  }
-  .prod-footer{
-    margin-top:14px;
-    padding-top:12px;
-    border-top:1px dashed var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .view-btn{
-    font-size:12.5px;
-    font-weight:600;
-    color:var(--ochre);
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-  }
+    .back:hover {
+      color: var(--ink);
+      transform: translateX(-2px);
+    }
 
-  /* Product Detail Subpage View */
-  .detail-view{
-    display:flex;
-    flex-direction:column;
-    gap:28px;
-    margin-top:10px;
-    animation:rise 0.5s ease forwards;
-  }
-  .detail-hero{
-    width:100%;
-    height:300px;
-    border-radius:var(--radius);
-    overflow:hidden;
-    position:relative;
-    border:1px solid var(--line);
-    background:var(--base-3);
-  }
-  .detail-hero img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-  .detail-hero-overlay{
-    position:absolute; inset:0;
-    background:linear-gradient(to top, rgba(21,19,15,0.95) 0%, rgba(21,19,15,0.2) 60%, transparent 100%);
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    padding:24px;
-  }
-  .detail-cat-tag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--brass);
-  }
-  .detail-title{
-    font-family:'Fraunces', serif;
-    font-size:clamp(26px, 4vw, 36px);
-    font-weight:700;
-    margin-top:4px;
-  }
+    .brand-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass);
+    }
 
-  .detail-quick-specs{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
-    gap:12px;
-  }
-  .spec-box{
-    background:var(--base-2);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:12px 14px;
-  }
-  .spec-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--ink-dim);
-  }
-  .spec-val{
-    font-size:14px;
-    font-weight:600;
-    margin-top:4px;
-    color:var(--ink);
-  }
+    /* Typography */
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-top: 8px;
+      opacity: 0;
+      animation: rise 0.6s ease forwards 0.08s;
+    }
 
-  .detail-section{
-    background:var(--base-2);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:22px;
-  }
-  .detail-section-title{
-    font-family:'Fraunces', serif;
-    font-size:20px;
-    font-weight:600;
-    margin-bottom:12px;
-    color:var(--ink);
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .detail-section-title::before{
-    content:"";
-    width:3px; height:18px;
-    background:var(--ochre);
-    border-radius:2px;
-  }
-  .detail-text{
-    font-size:14.5px;
-    line-height:1.65;
-    color:var(--ink-dim);
-  }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.1;
+      margin-top: 8px;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: rise 0.6s ease forwards 0.14s;
+    }
 
-  .tags-list{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:8px;
-  }
-  .tag-pill{
-    background:var(--base-3);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:6px 12px;
-    font-size:12.5px;
-    color:var(--ink);
-  }
+    h1 .spark {
+      color: var(--ochre);
+      font-style: italic;
+      font-weight: 400;
+    }
 
-  .included-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-    gap:12px;
-    margin-top:12px;
-  }
-  .included-item{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:13.5px;
-    color:var(--ink);
-    background:var(--base-3);
-    border:1px solid var(--line);
-    padding:10px 12px;
-    border-radius:8px;
-  }
-  .included-item .check{ color:var(--sage); font-weight:bold; }
+    .hero-subtitle {
+      color: var(--ink-dim);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 640px;
+      margin-top: 10px;
+      opacity: 0;
+      animation: rise 0.6s ease forwards 0.2s;
+    }
 
-  /* Gallery Grid */
-  .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-    gap:12px;
-    margin-top:12px;
-  }
-  .gallery-thumb{
-    height:130px;
-    border-radius:8px;
-    overflow:hidden;
-    border:1px solid var(--line);
-    background:var(--base-3);
-  }
-  .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
+    /* Tabs Navigation */
+    .hub-nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      opacity: 0;
+      animation: rise 0.6s ease forwards 0.24s;
+    }
 
-  /* FAQ Accordion */
-  .faq-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-top:12px;
-  }
-  .faq-item{
-    background:var(--base-3);
-    border:1px solid var(--line);
-    border-radius:8px;
-    overflow:hidden;
-  }
-  .faq-question{
-    width:100%;
-    background:none;
-    border:none;
-    padding:14px 16px;
-    text-align:left;
-    font-family:'Inter', sans-serif;
-    font-size:14px;
-    font-weight:600;
-    color:var(--ink);
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
-  .faq-answer{
-    padding:0 16px 14px;
-    font-size:13.5px;
-    line-height:1.55;
-    color:var(--ink-dim);
-    display:none;
-  }
-  .faq-item.open .faq-answer{ display:block; }
-  .faq-item.open .faq-question span{ transform:rotate(180deg); }
+    .hub-nav::-webkit-scrollbar {
+      display: none;
+    }
 
-  /* Action Bar */
-  .action-bar{
-    display:flex;
-    gap:12px;
-    margin-top:10px;
-    flex-wrap:wrap;
-  }
-  .btn-primary{
-    flex:1;
-    min-width:200px;
-    background:var(--ochre);
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    padding:15px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    text-align:center;
-    text-decoration:none;
-    transition:all 0.2s;
-    box-shadow:0 4px 15px rgba(191,106,36,0.3);
-  }
-  .btn-primary:hover{ background:#d6772a; transform:translateY(-1px); }
-  .btn-whatsapp{
-    flex:1;
-    min-width:200px;
-    background:#25D366;
-    color:#000;
-    border:none;
-    border-radius:10px;
-    padding:15px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    text-align:center;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    transition:all 0.2s;
-  }
-  .btn-whatsapp:hover{ background:#20bd5a; transform:translateY(-1px); }
+    .tab-btn {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 8px 16px;
+      color: var(--ink-dim);
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
 
-  /* Custom Workshops Section */
-  .custom-section-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
-    gap:16px;
-    margin-top:24px;
-  }
-  .custom-card{
-    background:var(--base-2);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:all 0.25s;
-  }
-  .custom-card:hover{
-    border-color:var(--brass);
-    transform:translateY(-2px);
-    background:var(--base-3);
-  }
-  .custom-card-title{
-    font-family:'Fraunces', serif;
-    font-size:18px;
-    font-weight:600;
-    margin-bottom:6px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .custom-card-desc{
-    font-size:13px;
-    color:var(--ink-dim);
-    line-height:1.5;
-  }
+    .tab-btn:hover {
+      color: var(--ink);
+      background: rgba(239, 230, 214, 0.05);
+    }
 
-  /* Booking Modal */
-  .modal-backdrop{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.75);
-    backdrop-filter:blur(5px);
-    z-index:1000;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  }
-  .modal-backdrop.active{ display:flex; }
-  .modal-box{
-    background:var(--base-2);
-    border:1px solid var(--line-strong);
-    border-radius:14px;
-    width:100%;
-    max-width:500px;
-    max-height:90vh;
-    overflow-y:auto;
-    padding:26px;
-    position:relative;
-    box-shadow:0 20px 50px rgba(0,0,0,0.8);
-    animation:rise 0.3s ease forwards;
-  }
-  .modal-close{
-    position:absolute;
-    top:16px; right:16px;
-    background:none;
-    border:none;
-    font-size:22px;
-    color:var(--ink-dim);
-    cursor:pointer;
-  }
-  .modal-close:hover{ color:var(--ink); }
+    .tab-btn.active {
+      background: rgba(191, 106, 36, 0.15);
+      border-color: var(--ochre);
+      color: var(--ink);
+    }
 
-  /* Forms */
-  .field{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    margin-bottom:14px;
-  }
-  .field label{
-    font-size:13px;
-    font-weight:500;
-    color:var(--ink);
-  }
-  .field label .req{ color:var(--ochre); }
-  .field label .opt{ color:var(--ink-dim); font-size:12px; }
+    /* Global Filters Bar */
+    .filter-panel {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      opacity: 0;
+      animation: rise 0.6s ease forwards 0.28s;
+    }
 
-  input[type="text"], input[type="email"], input[type="tel"], select, textarea{
-    width:100%;
-    background:var(--base-3);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:11px 13px;
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    font-size:14px;
-    outline:none;
-    transition:border-color 0.2s, background 0.2s;
-  }
-  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus, textarea:focus{
-    border-color:var(--brass);
-  }
-  input.invalid-input, select.invalid-input, textarea.invalid-input {
-    border-color:#a8492b !important;
-    background:rgba(168,73,43,0.1) !important;
-  }
-  .err-msg{
-    color:#f2a68d;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    margin-top:4px;
-    display:none;
-  }
-  textarea{ min-height:85px; resize:vertical; }
+    .filter-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .submit-btn{
-    width:100%;
-    background:var(--ochre);
-    color:#fff;
-    border:none;
-    border-radius:10px;
-    padding:14px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    margin-top:10px;
-  }
-  .submit-btn:disabled{
-    opacity:0.45;
-    cursor:not-allowed;
-    background:#6e5033 !important;
-  }
-  .submit-btn:hover{ background:#d1772c; }
+    .filter-heading {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-  .submit-note{
-    font-size:12.5px;
-    color:var(--ink-dim);
-    margin-top:10px;
-    text-align:center;
-  }
+    .clear-filters {
+      font-size: 12px;
+      color: var(--ink-dim);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
 
-  @keyframes rise{
-    from{ opacity:0; transform:translateY(12px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
+    .clear-filters:hover {
+      color: var(--ochre);
+    }
 
-  /* Empty state */
-  .empty-state{
-    text-align:center;
-    padding:48px 20px;
-    background:var(--base-2);
-    border:1px dashed var(--line);
-    border-radius:var(--radius);
-    margin-top:24px;
-  }
-  .empty-state h3{ font-family:'Fraunces', serif; font-size:20px; margin-bottom:6px; }
-  .empty-state p{ font-size:14px; color:var(--ink-dim); }
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
 
-  footer{
-    text-align:center;
-    margin-top:50px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    color:rgba(201,190,172,0.45);
-    letter-spacing:0.04em;
-  }
-</style>
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .filter-group label {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-select {
+      background: var(--base-3);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: var(--ink);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .filter-select:focus {
+      border-color: var(--brass);
+    }
+
+    /* Category Cards Grid */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .cat-card {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      animation: rise 0.6s ease forwards;
+      position: relative;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(239, 230, 214, 0.3);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--ochre-glow);
+    }
+
+    .cat-img-wrapper {
+      width: 100%;
+      height: 165px;
+      position: relative;
+      overflow: hidden;
+      background: var(--base-3);
+    }
+
+    .cat-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .cat-card:hover .cat-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .cat-icon-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(21, 19, 15, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .cat-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .cat-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .cat-desc {
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+      margin-top: 6px;
+      flex: 1;
+    }
+
+    .cat-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ochre);
+      margin-top: 14px;
+      transition: gap 0.2s;
+    }
+
+    .cat-card:hover .cat-action {
+      gap: 10px;
+      color: #d87b30;
+    }
+
+    /* Visual Product Cards (Each with distinct visual product illustration) */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .prod-card {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      color: var(--ink);
+      transition: all 0.25s ease;
+      opacity: 0;
+      animation: rise 0.5s ease forwards;
+      cursor: pointer;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(239, 230, 214, 0.3);
+      background: var(--base-3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .prod-img-box {
+      position: relative;
+      width: 100%;
+      height: 175px;
+      background: var(--base-3);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .prod-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .prod-card:hover .prod-img-box img {
+      transform: scale(1.05);
+    }
+
+    .prod-chip {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(21, 19, 15, 0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--brass);
+      letter-spacing: 0.04em;
+    }
+
+    .prod-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .prod-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .prod-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--ink-dim);
+    }
+
+    .prod-price {
+      font-weight: 600;
+      color: var(--ochre);
+      font-size: 14.5px;
+    }
+
+    .prod-footer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .view-btn {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ochre);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Product Detail Subpage View */
+    .detail-view {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 10px;
+      animation: rise 0.5s ease forwards;
+    }
+
+    .detail-hero {
+      width: 100%;
+      height: 300px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      background: var(--base-3);
+    }
+
+    .detail-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .detail-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(21, 19, 15, 0.95) 0%, rgba(21, 19, 15, 0.2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .detail-cat-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brass);
+    }
+
+    .detail-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .detail-quick-specs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+    }
+
+    .spec-box {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .spec-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+
+    .spec-val {
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 4px;
+      color: var(--ink);
+    }
+
+    .detail-section {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .detail-section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-section-title::before {
+      content: "";
+      width: 3px;
+      height: 18px;
+      background: var(--ochre);
+      border-radius: 2px;
+    }
+
+    .detail-text {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--ink-dim);
+    }
+
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag-pill {
+      background: var(--base-3);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      color: var(--ink);
+    }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .included-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--ink);
+      background: var(--base-3);
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+
+    .included-item .check {
+      color: var(--sage);
+      font-weight: bold;
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .gallery-thumb {
+      height: 130px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--base-3);
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* FAQ Accordion */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .faq-item {
+      background: var(--base-3);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 14px 16px;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 16px 14px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-dim);
+      display: none;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-question span {
+      transform: rotate(180deg);
+    }
+
+    /* Action Bar */
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      flex: 1;
+      min-width: 200px;
+      background: var(--ochre);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(191, 106, 36, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: #d6772a;
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp {
+      flex: 1;
+      min-width: 200px;
+      background: #25D366;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-whatsapp:hover {
+      background: #20bd5a;
+      transform: translateY(-1px);
+    }
+
+    /* Custom Workshops Section */
+    .custom-section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .custom-card {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s;
+    }
+
+    .custom-card:hover {
+      border-color: var(--brass);
+      transform: translateY(-2px);
+      background: var(--base-3);
+    }
+
+    .custom-card-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .custom-card-desc {
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+
+    /* Booking Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--base-2);
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      animation: rise 0.3s ease forwards;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--ink-dim);
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--ink);
+    }
+
+    /* Forms */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .field label .req {
+      color: var(--ochre);
+    }
+
+    .field label .opt {
+      color: var(--ink-dim);
+      font-size: 12px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--base-3);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px 13px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brass);
+    }
+
+    input.invalid-input,
+    select.invalid-input,
+    textarea.invalid-input {
+      border-color: #a8492b !important;
+      background: rgba(168, 73, 43, 0.1) !important;
+    }
+
+    .err-msg {
+      color: #f2a68d;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--ochre);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      background: #6e5033 !important;
+    }
+
+    .submit-btn:hover {
+      background: #d1772c;
+    }
+
+    .submit-note {
+      font-size: 12.5px;
+      color: var(--ink-dim);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      background: var(--base-2);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      margin-top: 24px;
+    }
+
+    .empty-state h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      color: var(--ink-dim);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(201, 190, 172, 0.45);
+      letter-spacing: 0.04em;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="page">
+  <div class="page">
 
-  <!-- Navigation Bar -->
-  <header class="top-nav">
-    <a href="index.html" class="back" id="back-link">← Back</a>
-    <span class="brand-badge">NAD Living · by Urbanpots</span>
-  </header>
+    <!-- Navigation Bar -->
+    <header class="top-nav">
+      <a href="index.html" class="back" id="back-link">← Back</a>
+      <span class="brand-badge">NAD Living · by Urbanpots</span>
+    </header>
 
-  <!-- Dynamic Header Area -->
-  <div id="header-area">
-    <p class="eyebrow">Workshops &amp; Creative Experiences</p>
-    <h1 id="main-title">Workshops &amp; <span class="spark">Creative Experiences</span></h1>
-    <p class="hero-subtitle" id="main-subtitle">Hands-on craft experiences where you learn by making beautiful, functional objects. Designed for beginners, hobbyists, tourists, students, friends and couples.</p>
-  </div>
-
-  <!-- Main Navigation Tabs -->
-  <nav class="hub-nav" id="hub-tabs">
-    <button class="tab-btn active" data-tab="categories">All Craft Categories</button>
-    <button class="tab-btn" data-tab="all-products">View All Experiences</button>
-    <button class="tab-btn" data-tab="custom">Custom &amp; Private Workshops</button>
-  </nav>
-
-  <!-- Global Filters (Visible when browsing products or inside a category) -->
-  <div class="filter-panel" id="filter-panel" style="display:none;">
-    <div class="filter-title-row">
-      <span class="filter-heading">⚙ Filter Experiences</span>
-      <button class="clear-filters" id="reset-filters-btn">Reset All</button>
+    <!-- Dynamic Header Area -->
+    <div id="header-area">
+      <p class="eyebrow">Workshops &amp; Creative Experiences</p>
+      <h1 id="main-title">Workshops &amp; <span class="spark">Creative Experiences</span></h1>
+      <p class="hero-subtitle" id="main-subtitle">Hands-on craft experiences where you learn by making beautiful,
+        functional objects. Designed for beginners, hobbyists, tourists, students, friends and couples.</p>
     </div>
-    <div class="filter-grid">
-      <div class="filter-group">
-        <label for="filter-duration">Duration</label>
-        <select id="filter-duration" class="filter-select">
-          <option value="all">All Durations</option>
-          <option value="2 Hours">2 Hours</option>
-          <option value="Half Day">Half Day</option>
-          <option value="Full Day">Full Day</option>
-          <option value="Multi-Day">Multi-Day</option>
-        </select>
-      </div>
 
-      <div class="filter-group">
-        <label for="filter-level">Skill Level</label>
-        <select id="filter-level" class="filter-select">
-          <option value="all">All Levels</option>
-          <option value="Beginner">Beginner</option>
-          <option value="Intermediate">Intermediate</option>
-          <option value="Advanced">Advanced</option>
-        </select>
-      </div>
+    <!-- Main Navigation Tabs -->
+    <nav class="hub-nav" id="hub-tabs">
+      <button class="tab-btn active" data-tab="categories">All Craft Categories</button>
+      <button class="tab-btn" data-tab="all-products">View All Experiences</button>
+      <button class="tab-btn" data-tab="custom">Custom &amp; Private Workshops</button>
+    </nav>
 
-      <div class="filter-group">
-        <label for="filter-suitable">Suitable For</label>
-        <select id="filter-suitable" class="filter-select">
-          <option value="all">Everyone</option>
-          <option value="Individual">Individual</option>
-          <option value="Couples">Couples</option>
-          <option value="Friends">Friends</option>
-          <option value="Kids">Kids</option>
-          <option value="Corporate">Corporate</option>
-        </select>
+    <!-- Global Filters (Visible when browsing products or inside a category) -->
+    <div class="filter-panel" id="filter-panel" style="display:none;">
+      <div class="filter-title-row">
+        <span class="filter-heading">⚙ Filter Experiences</span>
+        <button class="clear-filters" id="reset-filters-btn">Reset All</button>
       </div>
+      <div class="filter-grid">
+        <div class="filter-group">
+          <label for="filter-duration">Duration</label>
+          <select id="filter-duration" class="filter-select">
+            <option value="all">All Durations</option>
+            <option value="2 Hours">2 Hours</option>
+            <option value="Half Day">Half Day</option>
+            <option value="Full Day">Full Day</option>
+            <option value="Multi-Day">Multi-Day</option>
+          </select>
+        </div>
 
-      <div class="filter-group">
-        <label for="filter-price">Price Range</label>
-        <select id="filter-price" class="filter-select">
-          <option value="all">All Prices</option>
-          <option value="under1000">Under ₹1,000</option>
-          <option value="1000-2500">₹1,000 – ₹2,500</option>
-          <option value="2500-5000">₹2,500 – ₹5,000</option>
-          <option value="above5000">₹5,000+</option>
-        </select>
+        <div class="filter-group">
+          <label for="filter-level">Skill Level</label>
+          <select id="filter-level" class="filter-select">
+            <option value="all">All Levels</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-suitable">Suitable For</label>
+          <select id="filter-suitable" class="filter-select">
+            <option value="all">Everyone</option>
+            <option value="Individual">Individual</option>
+            <option value="Couples">Couples</option>
+            <option value="Friends">Friends</option>
+            <option value="Kids">Kids</option>
+            <option value="Corporate">Corporate</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-price">Price Range</label>
+          <select id="filter-price" class="filter-select">
+            <option value="all">All Prices</option>
+            <option value="under1000">Under ₹1,000</option>
+            <option value="1000-2500">₹1,000 – ₹2,500</option>
+            <option value="2500-5000">₹2,500 – ₹5,000</option>
+            <option value="above5000">₹5,000+</option>
+          </select>
+        </div>
       </div>
+    </div>
+
+    <!-- Dynamic Main Content Area -->
+    <main id="main-content">
+      <!-- Category Cards / Product Cards / Product Detail will be rendered dynamically here -->
+    </main>
+
+    <footer>© NAD Living · Handmade luxury experiences</footer>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-backdrop" id="booking-modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <p class="eyebrow">Studio Booking</p>
+      <h2 id="modal-title" style="font-family:'Fraunces', serif; font-size:22px; margin-top:4px;">Book Workshop Session
+      </h2>
+      <p id="modal-sub" style="font-size:13px; color:var(--ink-dim); margin-top:4px; margin-bottom:18px;"></p>
+
+      <form id="modal-form" novalidate>
+        <input type="hidden" id="form-product-name" name="product">
+
+        <div class="field">
+          <label for="form-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="form-name" required placeholder="Your full name" autocomplete="name">
+          <span class="err-msg" id="err-form-name"></span>
+        </div>
+
+        <div class="field">
+          <label for="form-email">Email Address <span class="req">*</span></label>
+          <input type="email" id="form-email" required placeholder="you@example.com" autocomplete="email">
+          <span class="err-msg" id="err-form-email"></span>
+        </div>
+
+        <div class="field">
+          <label for="form-phone">WhatsApp / Phone <span class="req">*</span></label>
+          <input type="tel" id="form-phone" required placeholder="+91 …" autocomplete="tel">
+          <span class="err-msg" id="err-form-phone"></span>
+        </div>
+
+        <div class="field">
+          <label for="form-participants">Number of Participants <span class="req">*</span></label>
+          <input type="text" id="form-participants" required placeholder="e.g. 2 people">
+          <span class="err-msg" id="err-form-participants"></span>
+        </div>
+
+        <div class="field">
+          <label for="form-date">Preferred date / timeframe <span class="opt">(optional)</span></label>
+          <input type="text" id="form-date" placeholder="e.g. Next Saturday morning">
+        </div>
+
+        <div class="field">
+          <label for="form-notes">Special Requests / Questions <span class="opt">(optional)</span></label>
+          <textarea id="form-notes"
+            placeholder="Any custom preferences or dietary needs for refreshments..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="form-submit-btn">Send Booking Inquiry →</button>
+        <p class="submit-note" id="form-status-note"></p>
+      </form>
     </div>
   </div>
 
-  <!-- Dynamic Main Content Area -->
-  <main id="main-content">
-    <!-- Category Cards / Product Cards / Product Detail will be rendered dynamically here -->
-  </main>
+  <script>
+    // ==========================================
+    // DYNAMIC SVG ILLUSTRATION GENERATOR FALLBACK
+    // ==========================================
 
-  <footer>© NAD Living · Handmade luxury experiences</footer>
-</div>
+    function getProductSVG(catId, prodId, prodName) {
+      const themeMap = {
+        'botanical-printing': { bg: '#1a2418', accent: '#7ca86b', line: '#a5d694', sub: '#405936' },
+        'linocut': { bg: '#241b17', accent: '#bf6a24', line: '#e08f48', sub: '#4a2c1b' },
+        'moon-texture-art': { bg: '#141622', accent: '#b3934f', line: '#f5d996', sub: '#2c314a' },
+        'cyanotype': { bg: '#0d1f38', accent: '#4a90e2', line: '#96c2f5', sub: '#1a3b66' },
+        'mirror-mosaic': { bg: '#211c26', accent: '#a875cf', line: '#d4b2f0', sub: '#443554' },
+        'block-printing': { bg: '#261b17', accent: '#c45a3c', line: '#f28e74', sub: '#542e23' },
+        'resin-art': { bg: '#122426', accent: '#26a69a', line: '#80cbd2', sub: '#1f484d' },
+        'hand-painting': { bg: '#242018', accent: '#d99b26', line: '#f7cf7c', sub: '#4a3d21' }
+      };
+      const theme = themeMap[catId] || { bg: '#1c1a14', accent: '#bf6a24', line: '#efe6d6', sub: '#2b261c' };
 
-<!-- Booking Modal -->
-<div class="modal-backdrop" id="booking-modal">
-  <div class="modal-box">
-    <button class="modal-close" id="modal-close-btn">&times;</button>
-    <p class="eyebrow">Studio Booking</p>
-    <h2 id="modal-title" style="font-family:'Fraunces', serif; font-size:22px; margin-top:4px;">Book Workshop Session</h2>
-    <p id="modal-sub" style="font-size:13px; color:var(--ink-dim); margin-top:4px; margin-bottom:18px;"></p>
-
-    <form id="modal-form" novalidate>
-      <input type="hidden" id="form-product-name" name="product">
-      
-      <div class="field">
-        <label for="form-name">Full Name <span class="req">*</span></label>
-        <input type="text" id="form-name" required placeholder="Your full name" autocomplete="name">
-        <span class="err-msg" id="err-form-name"></span>
-      </div>
-
-      <div class="field">
-        <label for="form-email">Email Address <span class="req">*</span></label>
-        <input type="email" id="form-email" required placeholder="you@example.com" autocomplete="email">
-        <span class="err-msg" id="err-form-email"></span>
-      </div>
-
-      <div class="field">
-        <label for="form-phone">WhatsApp / Phone <span class="req">*</span></label>
-        <input type="tel" id="form-phone" required placeholder="+91 …" autocomplete="tel">
-        <span class="err-msg" id="err-form-phone"></span>
-      </div>
-
-      <div class="field">
-        <label for="form-participants">Number of Participants <span class="req">*</span></label>
-        <input type="text" id="form-participants" required placeholder="e.g. 2 people">
-        <span class="err-msg" id="err-form-participants"></span>
-      </div>
-
-      <div class="field">
-        <label for="form-date">Preferred date / timeframe <span class="opt">(optional)</span></label>
-        <input type="text" id="form-date" placeholder="e.g. Next Saturday morning">
-      </div>
-
-      <div class="field">
-        <label for="form-notes">Special Requests / Questions <span class="opt">(optional)</span></label>
-        <textarea id="form-notes" placeholder="Any custom preferences or dietary needs for refreshments..."></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn" id="form-submit-btn">Send Booking Inquiry →</button>
-      <p class="submit-note" id="form-status-note"></p>
-    </form>
-  </div>
-</div>
-
-<script>
-// ==========================================
-// DYNAMIC SVG ILLUSTRATION GENERATOR FALLBACK
-// ==========================================
-
-function getProductSVG(catId, prodId, prodName) {
-  const themeMap = {
-    'botanical-printing': { bg: '#1a2418', accent: '#7ca86b', line: '#a5d694', sub: '#405936' },
-    'linocut': { bg: '#241b17', accent: '#bf6a24', line: '#e08f48', sub: '#4a2c1b' },
-    'moon-texture-art': { bg: '#141622', accent: '#b3934f', line: '#f5d996', sub: '#2c314a' },
-    'cyanotype': { bg: '#0d1f38', accent: '#4a90e2', line: '#96c2f5', sub: '#1a3b66' },
-    'mirror-mosaic': { bg: '#211c26', accent: '#a875cf', line: '#d4b2f0', sub: '#443554' },
-    'block-printing': { bg: '#261b17', accent: '#c45a3c', line: '#f28e74', sub: '#542e23' },
-    'resin-art': { bg: '#122426', accent: '#26a69a', line: '#80cbd2', sub: '#1f484d' },
-    'hand-painting': { bg: '#242018', accent: '#d99b26', line: '#f7cf7c', sub: '#4a3d21' }
-  };
-  const theme = themeMap[catId] || { bg: '#1c1a14', accent: '#bf6a24', line: '#efe6d6', sub: '#2b261c' };
-
-  let shapeSVG = `<circle cx="150" cy="100" r="48" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
+      let shapeSVG = `<circle cx="150" cy="100" r="48" fill="${theme.sub}" stroke="${theme.accent}" stroke-width="3"/>
                   <path d="M 120 100 Q 150 60 180 100 Q 150 140 120 100 Z" fill="none" stroke="${theme.line}" stroke-width="2"/>`;
 
-  const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="100%" height="100%">
+      const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="100%" height="100%">
     <rect width="300" height="200" fill="${theme.bg}"/>
     <circle cx="150" cy="100" r="85" fill="none" stroke="${theme.line}" stroke-width="1" opacity="0.15"/>
     ${shapeSVG}
     <text x="150" y="184" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="${theme.line}" text-anchor="middle" letter-spacing="1">${prodName.toUpperCase()}</text>
   </svg>`;
 
-  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svgStr);
-}
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svgStr);
+    }
 
-// ==========================================
-// WORKSHOP HUB DATA STORE (8 Categories, 69 Products with Photorealistic Images)
-// ==========================================
+    // ==========================================
+    // WORKSHOP HUB DATA STORE (8 Categories, 69 Products with Photorealistic Images)
+    // ==========================================
 
-const CATEGORIES = [
-  {
-    id: 'botanical-printing',
-    name: 'BOTANICAL PRINTING',
-    icon: '🌿',
-    image: 'assets/workshops/botanical-printing.png',
-    tagline: 'Create beautiful lifestyle products using real leaves and flowers.',
-    description: 'Immerse yourself in eco-printing using natural tannins, steam, and fresh flora pressed onto natural fabrics.',
-    products: [
-      { id: 'scrunchie', name: 'Botanical Scrunchie', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends', 'Kids'], sizes: 'Standard Set of 2', image: 'assets/workshops/botanical-scrunchie.jpg' },
-      { id: 'scarf', name: 'Botanical Scarf', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Pure Silk / Linen (180cm)', image: 'assets/workshops/botanical-scarf.jpg' },
-      { id: 'tote-bag', name: 'Botanical Tote Bag', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Friends', 'Corporate'], sizes: 'Heavy Canvas Tote', image: 'assets/workshops/botanical-tote-bag.jpg' },
-      { id: 'cushion-cover', name: 'Botanical Cushion Cover', duration: 'Half Day', price: 2200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '16x16" / 18x18" Cotton', image: 'assets/workshops/botanical-cushion-cover.jpg' },
-      { id: 'tea-towel', name: 'Botanical Tea Towel', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pair of 2 Kitchen Towels', image: 'assets/workshops/botanical-tea-towel.jpg' },
-      { id: 'table-runner', name: 'Botanical Table Runner', duration: 'Full Day', price: 3500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6-ft Natural Linen Runner', image: 'assets/workshops/botanical-table-runner.jpg' },
-      { id: 'journal-cover', name: 'Botanical Journal Cover', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Hardbound Notebook', image: 'assets/workshops/botanical-journal-cover.jpg' },
-      { id: 'fabric-pouch', name: 'Botanical Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zippered Utility Pouch', image: 'assets/workshops/botanical-fabric-pouch.jpg' },
-      { id: 'apron', name: 'Botanical Apron', duration: 'Half Day', price: 2500, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Adjustable Chef/Artisan Apron', image: 'assets/workshops/botanical-apron.jpg' }
-    ]
-  },
-  {
-    id: 'linocut',
-    name: 'LINOCUT PRINTING',
-    icon: '🔪',
-    image: 'assets/workshops/linocut-printing.png',
-    tagline: 'Design and carve your own reusable stamps and printed products.',
-    description: 'Master the art of gouging, ink rolling, and relief printmaking to craft bespoke stamps & art prints.',
-    products: [
-      { id: 'name-stamp', name: 'Personalised Name Stamp', duration: '2 Hours', price: 1499, level: 'Beginner', suitable: ['Individual', 'Kids'], sizes: 'Custom Rubber Block', image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80' },
-      { id: 'couple-stamp', name: 'Couple Stamp', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Couples'], sizes: 'Dual Initial Crest Block', image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80' },
-      { id: 'family-stamp', name: 'Family Stamp', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Friends', 'Kids'], sizes: 'Family Coat / Crest Block', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80' },
-      { id: 'business-logo-stamp', name: 'Business Logo Stamp', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Corporate', 'Individual'], sizes: 'Brand Packaging Stamp', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80' },
-      { id: 'library-stamp', name: 'Library Stamp', duration: '2 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Ex Libris Book Stamp', image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80' },
-      { id: 'packaging-stamp', name: 'Packaging Stamp', duration: 'Half Day', price: 2900, level: 'Intermediate', suitable: ['Corporate'], sizes: 'Large Box Stamp Block', image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80' },
-      { id: 'printed-tote-bag', name: 'Printed Tote Bag', duration: '2.5 Hours', price: 1900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Heavyweight Canvas', image: 'https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80' },
-      { id: 'printed-tea-towel', name: 'Printed Tea Towel', duration: '2.5 Hours', price: 1500, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Pure Cotton Linen', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
-      { id: 'printed-journal', name: 'Printed Journal', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Hand-stamped A5 Journal', image: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80' }
-    ]
-  },
-  {
-    id: 'moon-texture-art',
-    name: 'MOON TEXTURE ART',
-    icon: '🌕',
-    image: 'assets/workshops/moon-texture-art.png',
-    tagline: 'Create textured décor and lighting objects.',
-    description: 'Sculpt lunar craters, plaster reliefs, and luminous cosmic surfaces with ambient lighting elements.',
-    products: [
-      { id: 'moon-lamp', name: 'Mini Moon Lamp', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: '20cm Illuminated Orb', image: 'assets/workshops/mini-moon-lamp.jpg' },
-      { id: 'moon-tray', name: 'Moon Tray', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: '30cm Circular Resin Tray', image: 'assets/workshops/moon-tray.jpg' },
-      { id: 'moon-wall-art', name: 'Moon Wall Art', duration: 'Full Day', price: 4500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '40cm Canvas / Panel', image: 'assets/workshops/moon-wall-art.jpg' },
-      { id: 'moon-clock', name: 'Moon Clock', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Quartz Wall Clock', image: 'assets/workshops/moon-clock.jpg' },
-      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '45cm Lunar Mirror', image: 'assets/workshops/moon-mirror-frame.jpg' },
-      { id: 'tea-light-holder', name: 'Tea Light Holder', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Pair of Votive Holders', image: 'assets/workshops/moon-tea-light-holder.jpg' }
-    ]
-  },
-  {
-    id: 'cyanotype',
-    name: 'CYANOTYPE PRINTING',
-    icon: '☀️',
-    image: 'assets/workshops/cyanotype-printing.png',
-    tagline: 'Create botanical sun prints on fabric and paper.',
-    description: 'Harness sunlight and iron salts to produce magical Prussian-blue sun prints on organic substrates.',
-    products: [
-      { id: 'bookmark-set', name: 'Bookmark Set', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Set of 5 Handmade Cards', image: 'assets/workshops/cyanotype-bookmark.png' },
-      { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Linen Notebook', image: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80' },
-      { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Cotton Drawstring Pouch', image: 'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?auto=format&fit=crop&w=600&q=80' },
-      { id: 'tote-bag', name: 'Tote Bag', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Natural Canvas Bag', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80' },
-      { id: 'scarf', name: 'Scarf', duration: 'Half Day', price: 2600, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Botanical Blue Silk Scarf', image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=600&q=80' },
-      { id: 'botanical-wall-art', name: 'Botanical Wall Art', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Framed A3 Sunprint', image: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80' },
-      { id: 'greeting-cards', name: 'Greeting Cards', duration: '2 Hours', price: 990, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Pack of 6 Cards with Envelopes', image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80' },
-      { id: 'table-runner', name: 'Table Runner', duration: 'Full Day', price: 3800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Sunprinted Linen', image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=600&q=80' }
-    ]
-  },
-  {
-    id: 'mirror-mosaic',
-    name: 'MIRROR MOSAIC',
-    icon: '🪞',
-    image: 'assets/workshops/mirror-mosaic.png',
-    tagline: 'Create mosaic décor and functional home accessories.',
-    description: 'Cut, arrange, and grout reflective glass mosaic tiles onto beautiful home accents.',
-    products: [
-      { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Compact Oval Tray', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
-      { id: 'jewellery-tray', name: 'Jewellery Tray', duration: '3 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Rectangular Vanity Tray', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
-      { id: 'coaster-set', name: 'Coaster Set', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Set of 4 Mosaic Coasters', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
-      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Round Frame', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80' },
-      { id: 'photo-frame', name: 'Photo Frame', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: '5x7" Tabletop Frame', image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80' },
-      { id: 'planter', name: 'Planter', duration: 'Half Day', price: 2700, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6" Ceramic Plant Pot', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80' },
-      { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7500, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '18" Tabletop Accent', image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80' },
-      { id: 'wall-mirror', name: 'Wall Mirror', duration: 'Full Day', price: 5400, level: 'Advanced', suitable: ['Individual'], sizes: '60cm Statement Mirror', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80' }
-    ]
-  },
-  {
-    id: 'block-printing',
-    name: 'BLOCK PRINTING',
-    icon: '🧵',
-    image: 'assets/workshops/block-printing.png',
-    tagline: 'Print beautiful everyday textiles.',
-    description: 'Experience traditional woodblock printing with hand-carved heritage motifs and pigment dyes.',
-    products: [
-      { id: 'tote-bag', name: 'Tote Bag', duration: '2 Hours', price: 1300, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Organic Cotton Bag', image: 'https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80' },
-      { id: 'tea-towel', name: 'Tea Towel', duration: '2 Hours', price: 1150, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 2 Kitchen Towels', image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80' },
-      { id: 'table-runner', name: 'Table Runner', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Linen Table Runner', image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80' },
-      { id: 'napkin-set', name: 'Napkin Set', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Corporate'], sizes: 'Set of 6 Cloth Napkins', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
-      { id: 'apron', name: 'Apron', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Artisan Workshop Apron', image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80' },
-      { id: 'cushion-cover', name: 'Cushion Cover', duration: '3 Hours', price: 2100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '18x18" Pillow Case', image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=600&q=80' },
-      { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zipper Pouch', image: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=600&q=80' },
-      { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1450, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Handbound A5 Journal', image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80' }
-    ]
-  },
-  {
-    id: 'resin-art',
-    name: 'RESIN ART',
-    icon: '💎',
-    image: 'assets/workshops/resin-art.png',
-    tagline: 'Create functional décor and resin products.',
-    description: 'Cast clear epoxy resin with metallic pigments, dried botanicals, and gold leaf flakes.',
-    products: [
-      { id: 'jewellery', name: 'Jewellery', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pendant & Earrings Set', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
-      { id: 'coasters', name: 'Coasters', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Set of 4 Geode Coasters', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
-      { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Oval Dish', image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80' },
-      { id: 'serving-tray', name: 'Serving Tray', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '14" Wood & Resin Tray', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
-      { id: 'bookmark', name: 'Bookmark', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 3 Resin Bookmarks', image: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80' },
-      { id: 'jewellery-dish', name: 'Jewellery Dish', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Ring & Accessory Dish', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
-      { id: 'wall-clock', name: 'Wall Clock', duration: 'Full Day', price: 4800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Resin Ocean Clock', image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=600&q=80' },
-      { id: 'coffee-table', name: 'Coffee Table', duration: 'Multi-Day', price: 9800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '24" River Accent Table', image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80' },
-      { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7200, level: 'Advanced', suitable: ['Individual'], sizes: '18" Resin Top Table', image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80' },
-      { id: 'river-table', name: 'River Table', duration: 'Multi-Day', price: 14500, level: 'Advanced', suitable: ['Individual', 'Corporate'], sizes: '36" Masterpiece Table', image: 'assets/workshops/resin-river-table.png' }
-    ]
-  },
-  {
-    id: 'hand-painting',
-    name: 'HAND PAINTING',
-    icon: '🎨',
-    image: 'assets/workshops/hand-painting.png',
-    tagline: 'Paint everyday lifestyle products in the NAD style.',
-    description: 'Learn brush techniques, color mixing, and sealants to paint lifestyle home accents in signature NAD aesthetic.',
-    products: [
-      { id: 'wooden-tray', name: 'Wooden Tray', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Hand-painted Mango Wood Tray', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
-      { id: 'jewellery-box', name: 'Jewellery Box', duration: '3 Hours', price: 2100, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Keepsake Wooden Box', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
-      { id: 'serving-board', name: 'Serving Board', duration: '2.5 Hours', price: 1850, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Teak Charcuterie Board', image: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80' },
-      { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Painted Frame', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80' },
-      { id: 'planter', name: 'Planter', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Terracotta Plant Pot', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80' },
-      { id: 'stool', name: 'Stool', duration: 'Full Day', price: 4900, level: 'Intermediate', suitable: ['Individual'], sizes: 'Wooden Accent Stool', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80' },
-      { id: 'shelf', name: 'Shelf', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Wall Floating Shelf', image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80' },
-      { id: 'lamp', name: 'Lamp', duration: 'Full Day', price: 4600, level: 'Intermediate', suitable: ['Individual'], sizes: 'Table Base Lamp', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80' },
-      { id: 'wall-plate', name: 'Wall Plate', duration: '2.5 Hours', price: 1550, level: 'Beginner', suitable: ['Friends', 'Kids', 'Corporate'], sizes: '10" Ceramic Decor Plate', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
-      { id: 'tissue-box', name: 'Tissue Box', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Wooden Tissue Holder', image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80' }
-    ]
-  }
-];
+    const CATEGORIES = [
+      {
+        id: 'botanical-printing',
+        name: 'BOTANICAL PRINTING',
+        icon: '🌿',
+        image: 'assets/workshops/botanical-printing.png',
+        tagline: 'Create beautiful lifestyle products using real leaves and flowers.',
+        description: 'Immerse yourself in eco-printing using natural tannins, steam, and fresh flora pressed onto natural fabrics.',
+        products: [
+          { id: 'scrunchie', name: 'Botanical Scrunchie', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends', 'Kids'], sizes: 'Standard Set of 2', image: 'assets/workshops/botanical-scrunchie.jpg' },
+          { id: 'scarf', name: 'Botanical Scarf', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Pure Silk / Linen (180cm)', image: 'assets/workshops/botanical-scarf.jpg' },
+          { id: 'tote-bag', name: 'Botanical Tote Bag', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Friends', 'Corporate'], sizes: 'Heavy Canvas Tote', image: 'assets/workshops/botanical-tote-bag.jpg' },
+          { id: 'cushion-cover', name: 'Botanical Cushion Cover', duration: 'Half Day', price: 2200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '16x16" / 18x18" Cotton', image: 'assets/workshops/botanical-cushion-cover.jpg' },
+          { id: 'tea-towel', name: 'Botanical Tea Towel', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pair of 2 Kitchen Towels', image: 'assets/workshops/botanical-tea-towel.jpg' },
+          { id: 'table-runner', name: 'Botanical Table Runner', duration: 'Full Day', price: 3500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6-ft Natural Linen Runner', image: 'assets/workshops/botanical-table-runner.jpg' },
+          { id: 'journal-cover', name: 'Botanical Journal Cover', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Hardbound Notebook', image: 'assets/workshops/botanical-journal-cover.jpg' },
+          { id: 'fabric-pouch', name: 'Botanical Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zippered Utility Pouch', image: 'assets/workshops/botanical-fabric-pouch.jpg' },
+          { id: 'apron', name: 'Botanical Apron', duration: 'Half Day', price: 2500, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Adjustable Chef/Artisan Apron', image: 'assets/workshops/botanical-apron.jpg' }
+        ]
+      },
+      {
+        id: 'linocut',
+        name: 'LINOCUT PRINTING',
+        icon: '🔪',
+        image: 'assets/workshops/linocut-printing.png',
+        tagline: 'Design and carve your own reusable stamps and printed products.',
+        description: 'Master the art of gouging, ink rolling, and relief printmaking to craft bespoke stamps & art prints.',
+        products: [
+          { id: 'name-stamp', name: 'Personalised Name Stamp', duration: '2 Hours', price: 1499, level: 'Beginner', suitable: ['Individual', 'Kids'], sizes: 'Custom Rubber Block', image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80' },
+          { id: 'couple-stamp', name: 'Couple Stamp', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Couples'], sizes: 'Dual Initial Crest Block', image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80' },
+          { id: 'family-stamp', name: 'Family Stamp', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Friends', 'Kids'], sizes: 'Family Coat / Crest Block', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80' },
+          { id: 'business-logo-stamp', name: 'Business Logo Stamp', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Corporate', 'Individual'], sizes: 'Brand Packaging Stamp', image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=600&q=80' },
+          { id: 'library-stamp', name: 'Library Stamp', duration: '2 Hours', price: 1600, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Ex Libris Book Stamp', image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80' },
+          { id: 'packaging-stamp', name: 'Packaging Stamp', duration: 'Half Day', price: 2900, level: 'Intermediate', suitable: ['Corporate'], sizes: 'Large Box Stamp Block', image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80' },
+          { id: 'printed-tote-bag', name: 'Printed Tote Bag', duration: '2.5 Hours', price: 1900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Heavyweight Canvas', image: 'https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80' },
+          { id: 'printed-tea-towel', name: 'Printed Tea Towel', duration: '2.5 Hours', price: 1500, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Pure Cotton Linen', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
+          { id: 'printed-journal', name: 'Printed Journal', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Hand-stamped A5 Journal', image: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80' }
+        ]
+      },
+      {
+        id: 'moon-texture-art',
+        name: 'MOON TEXTURE ART',
+        icon: '🌕',
+        image: 'assets/workshops/moon-texture-art.png',
+        tagline: 'Create textured décor and lighting objects.',
+        description: 'Sculpt lunar craters, plaster reliefs, and luminous cosmic surfaces with ambient lighting elements.',
+        products: [
+          { id: 'moon-lamp', name: 'Mini Moon Lamp', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: '20cm Illuminated Orb', image: 'assets/workshops/mini-moon-lamp.jpg' },
+          { id: 'moon-tray', name: 'Moon Tray', duration: '2.5 Hours', price: 2200, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: '30cm Circular Resin Tray', image: 'assets/workshops/moon-tray.jpg' },
+          { id: 'moon-wall-art', name: 'Moon Wall Art', duration: 'Full Day', price: 4500, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '40cm Canvas / Panel', image: 'assets/workshops/moon-wall-art.jpg' },
+          { id: 'moon-clock', name: 'Moon Clock', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Quartz Wall Clock', image: 'assets/workshops/moon-clock.jpg' },
+          { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '45cm Lunar Mirror', image: 'assets/workshops/moon-mirror-frame.jpg' },
+          { id: 'tea-light-holder', name: 'Tea Light Holder', duration: '2 Hours', price: 1200, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Pair of Votive Holders', image: 'assets/workshops/moon-tea-light-holder.jpg' }
+        ]
+      },
+      {
+        id: 'cyanotype',
+        name: 'CYANOTYPE PRINTING',
+        icon: '☀️',
+        image: 'assets/workshops/cyanotype-printing.png',
+        tagline: 'Create botanical sun prints on fabric and paper.',
+        description: 'Harness sunlight and iron salts to produce magical Prussian-blue sun prints on organic substrates.',
+        products: [
+          { id: 'bookmark-set', name: 'Bookmark Set', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Set of 5 Handmade Cards', image: 'file:///C:/Users/DELL/.gemini/antigravity-ide/brain/4f4e03ad-5d1d-4f3a-8ed2-ad9def758163/media__1786287452573.jpg' },
+          { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'A5 Linen Notebook', image: 'file:///C:/Users/DELL/.gemini/antigravity-ide/brain/4f4e03ad-5d1d-4f3a-8ed2-ad9def758163/media__1786287452605.jpg' },
+          { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Cotton Drawstring Pouch', image: 'file:///C:/Users/DELL/.gemini/antigravity-ide/brain/4f4e03ad-5d1d-4f3a-8ed2-ad9def758163/media__1786287452409.jpg' },
+          { id: 'tote-bag', name: 'Tote Bag', duration: '2.5 Hours', price: 1750, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Natural Canvas Bag', image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80' },
+          { id: 'scarf', name: 'Scarf', duration: 'Half Day', price: 2600, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Botanical Blue Silk Scarf', image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=600&q=80' },
+          { id: 'botanical-wall-art', name: 'Botanical Wall Art', duration: 'Half Day', price: 2900, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Framed A3 Sunprint', image: 'file:///C:/Users/DELL/.gemini/antigravity-ide/brain/4f4e03ad-5d1d-4f3a-8ed2-ad9def758163/media__1786287452363.jpg' },
+          { id: 'greeting-cards', name: 'Greeting Cards', duration: '2 Hours', price: 990, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Pack of 6 Cards with Envelopes', image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80' },
+          { id: 'table-runner', name: 'Table Runner', duration: 'Full Day', price: 3800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Sunprinted Linen', image: 'file:///C:/Users/DELL/.gemini/antigravity-ide/brain/4f4e03ad-5d1d-4f3a-8ed2-ad9def758163/media__1786287452527.jpg' }
+        ]
+      },
+      {
+        id: 'mirror-mosaic',
+        name: 'MIRROR MOSAIC',
+        icon: '🪞',
+        image: 'assets/workshops/mirror-mosaic.png',
+        tagline: 'Create mosaic décor and functional home accessories.',
+        description: 'Cut, arrange, and grout reflective glass mosaic tiles onto beautiful home accents.',
+        products: [
+          { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Compact Oval Tray', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
+          { id: 'jewellery-tray', name: 'Jewellery Tray', duration: '3 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Rectangular Vanity Tray', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
+          { id: 'coaster-set', name: 'Coaster Set', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Set of 4 Mosaic Coasters', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
+          { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Round Frame', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80' },
+          { id: 'photo-frame', name: 'Photo Frame', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: '5x7" Tabletop Frame', image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80' },
+          { id: 'planter', name: 'Planter', duration: 'Half Day', price: 2700, level: 'Intermediate', suitable: ['Individual', 'Friends'], sizes: '6" Ceramic Plant Pot', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80' },
+          { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7500, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '18" Tabletop Accent', image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80' },
+          { id: 'wall-mirror', name: 'Wall Mirror', duration: 'Full Day', price: 5400, level: 'Advanced', suitable: ['Individual'], sizes: '60cm Statement Mirror', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80' }
+        ]
+      },
+      {
+        id: 'block-printing',
+        name: 'BLOCK PRINTING',
+        icon: '🧵',
+        image: 'assets/workshops/block-printing.png',
+        tagline: 'Print beautiful everyday textiles.',
+        description: 'Experience traditional woodblock printing with hand-carved heritage motifs and pigment dyes.',
+        products: [
+          { id: 'tote-bag', name: 'Tote Bag', duration: '2 Hours', price: 1300, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Organic Cotton Bag', image: 'https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80' },
+          { id: 'tea-towel', name: 'Tea Towel', duration: '2 Hours', price: 1150, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 2 Kitchen Towels', image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80' },
+          { id: 'table-runner', name: 'Table Runner', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Linen Table Runner', image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80' },
+          { id: 'napkin-set', name: 'Napkin Set', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Corporate'], sizes: 'Set of 6 Cloth Napkins', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
+          { id: 'apron', name: 'Apron', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Artisan Workshop Apron', image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80' },
+          { id: 'cushion-cover', name: 'Cushion Cover', duration: '3 Hours', price: 2100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '18x18" Pillow Case', image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=600&q=80' },
+          { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zipper Pouch', image: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=600&q=80' },
+          { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1450, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Handbound A5 Journal', image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80' }
+        ]
+      },
+      {
+        id: 'resin-art',
+        name: 'RESIN ART',
+        icon: '💎',
+        image: 'assets/workshops/resin-art.png',
+        tagline: 'Create functional décor and resin products.',
+        description: 'Cast clear epoxy resin with metallic pigments, dried botanicals, and gold leaf flakes.',
+        products: [
+          { id: 'jewellery', name: 'Jewellery', duration: '2 Hours', price: 1400, level: 'Beginner', suitable: ['Individual', 'Friends', 'Kids'], sizes: 'Pendant & Earrings Set', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
+          { id: 'coasters', name: 'Coasters', duration: '2.5 Hours', price: 1800, level: 'Beginner', suitable: ['Individual', 'Couples', 'Friends'], sizes: 'Set of 4 Geode Coasters', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
+          { id: 'trinket-tray', name: 'Trinket Tray', duration: '2.5 Hours', price: 1950, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Oval Dish', image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80' },
+          { id: 'serving-tray', name: 'Serving Tray', duration: 'Half Day', price: 3200, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '14" Wood & Resin Tray', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
+          { id: 'bookmark', name: 'Bookmark', duration: '2 Hours', price: 950, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 3 Resin Bookmarks', image: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80' },
+          { id: 'jewellery-dish', name: 'Jewellery Dish', duration: '2 Hours', price: 1350, level: 'Beginner', suitable: ['Friends', 'Kids'], sizes: 'Ring & Accessory Dish', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
+          { id: 'wall-clock', name: 'Wall Clock', duration: 'Full Day', price: 4800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '35cm Resin Ocean Clock', image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?auto=format&fit=crop&w=600&q=80' },
+          { id: 'coffee-table', name: 'Coffee Table', duration: 'Multi-Day', price: 9800, level: 'Advanced', suitable: ['Individual', 'Couples'], sizes: '24" River Accent Table', image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80' },
+          { id: 'side-table', name: 'Side Table', duration: 'Multi-Day', price: 7200, level: 'Advanced', suitable: ['Individual'], sizes: '18" Resin Top Table', image: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80' },
+          { id: 'river-table', name: 'River Table', duration: 'Multi-Day', price: 14500, level: 'Advanced', suitable: ['Individual', 'Corporate'], sizes: '36" Masterpiece Table', image: 'assets/workshops/resin-river-table.png' }
+        ]
+      },
+      {
+        id: 'hand-painting',
+        name: 'HAND PAINTING',
+        icon: '🎨',
+        image: 'assets/workshops/hand-painting.png',
+        tagline: 'Paint everyday lifestyle products in the NAD style.',
+        description: 'Learn brush techniques, color mixing, and sealants to paint lifestyle home accents in signature NAD aesthetic.',
+        products: [
+          { id: 'wooden-tray', name: 'Wooden Tray', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Hand-painted Mango Wood Tray', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
+          { id: 'jewellery-box', name: 'Jewellery Box', duration: '3 Hours', price: 2100, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Keepsake Wooden Box', image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80' },
+          { id: 'serving-board', name: 'Serving Board', duration: '2.5 Hours', price: 1850, level: 'Beginner', suitable: ['Individual', 'Couples'], sizes: 'Teak Charcuterie Board', image: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80' },
+          { id: 'mirror-frame', name: 'Mirror Frame', duration: 'Full Day', price: 4100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '40cm Painted Frame', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80' },
+          { id: 'planter', name: 'Planter', duration: '2.5 Hours', price: 1650, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Terracotta Plant Pot', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80' },
+          { id: 'stool', name: 'Stool', duration: 'Full Day', price: 4900, level: 'Intermediate', suitable: ['Individual'], sizes: 'Wooden Accent Stool', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80' },
+          { id: 'shelf', name: 'Shelf', duration: 'Half Day', price: 3400, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: 'Wall Floating Shelf', image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80' },
+          { id: 'lamp', name: 'Lamp', duration: 'Full Day', price: 4600, level: 'Intermediate', suitable: ['Individual'], sizes: 'Table Base Lamp', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80' },
+          { id: 'wall-plate', name: 'Wall Plate', duration: '2.5 Hours', price: 1550, level: 'Beginner', suitable: ['Friends', 'Kids', 'Corporate'], sizes: '10" Ceramic Decor Plate', image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=600&q=80' },
+          { id: 'tissue-box', name: 'Tissue Box', duration: '2 Hours', price: 1250, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Wooden Tissue Holder', image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80' }
+        ]
+      }
+    ];
 
-const CUSTOM_WORKSHOPS = [
-  { id: 'private', name: 'Private Workshops', icon: '🍷', desc: 'Exclusive 1-on-1 or family sessions tailored to your schedule & craft choice.' },
-  { id: 'birthday', name: 'Birthday Workshops', icon: '🎂', desc: 'Celebrate your special day with hands-on craft making, cake & refreshments.' },
-  { id: 'couple', name: 'Couple Workshops', icon: '💑', desc: 'Memorable date-night creative experience making matching pieces together.' },
-  { id: 'kids', name: 'Kids Workshops', icon: '🎈', desc: 'Fun, safe & inspiring craft sessions for young makers (Ages 6+).' },
-  { id: 'school', name: 'School Workshops', icon: '🏫', desc: 'Educational hands-on craft masterclasses designed for school groups.' },
-  { id: 'college', name: 'College Workshops', icon: '🎓', desc: 'Design, material exploration & technique refinement for design students.' },
-  { id: 'corporate', name: 'Corporate Workshops', icon: '🏢', desc: 'Team bonding craft experiences, offsites & corporate gifting workshops.' },
-  { id: 'collaborations', name: 'Brand Collaborations', icon: '🤝', desc: 'Bespoke popup experiences, brand activation workshops & festival booths.' }
-];
+    const CUSTOM_WORKSHOPS = [
+      { id: 'private', name: 'Private Workshops', icon: '🍷', desc: 'Exclusive 1-on-1 or family sessions tailored to your schedule & craft choice.' },
+      { id: 'birthday', name: 'Birthday Workshops', icon: '🎂', desc: 'Celebrate your special day with hands-on craft making, cake & refreshments.' },
+      { id: 'couple', name: 'Couple Workshops', icon: '💑', desc: 'Memorable date-night creative experience making matching pieces together.' },
+      { id: 'kids', name: 'Kids Workshops', icon: '🎈', desc: 'Fun, safe & inspiring craft sessions for young makers (Ages 6+).' },
+      { id: 'school', name: 'School Workshops', icon: '🏫', desc: 'Educational hands-on craft masterclasses designed for school groups.' },
+      { id: 'college', name: 'College Workshops', icon: '🎓', desc: 'Design, material exploration & technique refinement for design students.' },
+      { id: 'corporate', name: 'Corporate Workshops', icon: '🏢', desc: 'Team bonding craft experiences, offsites & corporate gifting workshops.' },
+      { id: 'collaborations', name: 'Brand Collaborations', icon: '🤝', desc: 'Bespoke popup experiences, brand activation workshops & festival booths.' }
+    ];
 
-// ==========================================
-// STATE MANAGEMENT & ROUTING
-// ==========================================
+    // ==========================================
+    // STATE MANAGEMENT & ROUTING
+    // ==========================================
 
-let activeTab = 'categories'; // 'categories' | 'all-products' | 'custom'
-let activeCategoryId = null;
-let activeProductId = null;
+    let activeTab = 'categories'; // 'categories' | 'all-products' | 'custom'
+    let activeCategoryId = null;
+    let activeProductId = null;
 
-let filters = {
-  duration: 'all',
-  level: 'all',
-  suitable: 'all',
-  price: 'all'
-};
+    let filters = {
+      duration: 'all',
+      level: 'all',
+      suitable: 'all',
+      price: 'all'
+    };
 
-// Flattened product list
-function getAllProducts() {
-  const list = [];
-  CATEGORIES.forEach(cat => {
-    cat.products.forEach(p => {
-      list.push({ ...p, categoryId: cat.id, categoryName: cat.name, categoryIcon: cat.icon });
+    // Flattened product list
+    function getAllProducts() {
+      const list = [];
+      CATEGORIES.forEach(cat => {
+        cat.products.forEach(p => {
+          list.push({ ...p, categoryId: cat.id, categoryName: cat.name, categoryIcon: cat.icon });
+        });
+      });
+      return list;
+    }
+
+    // Router init & hash listening
+    window.addEventListener('load', () => {
+      parseRoute();
+      setupEventListeners();
     });
-  });
-  return list;
-}
 
-// Router init & hash listening
-window.addEventListener('load', () => {
-  parseRoute();
-  setupEventListeners();
-});
+    window.addEventListener('hashchange', () => {
+      parseRoute();
+    });
 
-window.addEventListener('hashchange', () => {
-  parseRoute();
-});
+    function parseRoute() {
+      const hash = window.location.hash.replace('#', '');
+      const parts = hash.split('/').filter(Boolean);
 
-function parseRoute() {
-  const hash = window.location.hash.replace('#', '');
-  const parts = hash.split('/').filter(Boolean);
-
-  if (parts.length === 0) {
-    activeCategoryId = null;
-    activeProductId = null;
-    if (activeTab !== 'custom' && activeTab !== 'all-products') activeTab = 'categories';
-  } else if (parts[0] === 'custom') {
-    activeTab = 'custom';
-    activeCategoryId = null;
-    activeProductId = null;
-  } else if (parts[0] === 'all') {
-    activeTab = 'all-products';
-    activeCategoryId = null;
-    activeProductId = null;
-  } else {
-    const cat = CATEGORIES.find(c => c.id === parts[0]);
-    if (cat) {
-      activeCategoryId = cat.id;
-      if (parts[1]) {
-        const prod = cat.products.find(p => p.id === parts[1]);
-        if (prod) {
-          activeProductId = prod.id;
+      if (parts.length === 0) {
+        activeCategoryId = null;
+        activeProductId = null;
+        if (activeTab !== 'custom' && activeTab !== 'all-products') activeTab = 'categories';
+      } else if (parts[0] === 'custom') {
+        activeTab = 'custom';
+        activeCategoryId = null;
+        activeProductId = null;
+      } else if (parts[0] === 'all') {
+        activeTab = 'all-products';
+        activeCategoryId = null;
+        activeProductId = null;
+      } else {
+        const cat = CATEGORIES.find(c => c.id === parts[0]);
+        if (cat) {
+          activeCategoryId = cat.id;
+          if (parts[1]) {
+            const prod = cat.products.find(p => p.id === parts[1]);
+            if (prod) {
+              activeProductId = prod.id;
+            } else {
+              activeProductId = null;
+            }
+          } else {
+            activeProductId = null;
+          }
         } else {
+          activeCategoryId = null;
           activeProductId = null;
         }
-      } else {
-        activeProductId = null;
       }
-    } else {
-      activeCategoryId = null;
-      activeProductId = null;
+
+      renderUI();
     }
-  }
 
-  renderUI();
-}
-
-function updateHash(hashStr) {
-  window.location.hash = hashStr;
-}
-
-// ==========================================
-// UI RENDERING SYSTEM
-// ==========================================
-
-function renderUI() {
-  const mainTitle = document.getElementById('main-title');
-  const mainSubtitle = document.getElementById('main-subtitle');
-  const filterPanel = document.getElementById('filter-panel');
-  const mainContent = document.getElementById('main-content');
-  const backLink = document.getElementById('back-link');
-
-  // Update Back Link
-  if (activeProductId) {
-    backLink.textContent = `← Back to ${getCategory(activeCategoryId).name}`;
-    backLink.onclick = (e) => { e.preventDefault(); updateHash(activeCategoryId); };
-  } else if (activeCategoryId) {
-    backLink.textContent = `← Back to All Categories`;
-    backLink.onclick = (e) => { e.preventDefault(); updateHash(''); };
-  } else {
-    backLink.textContent = `← Back`;
-    backLink.onclick = null;
-    backLink.href = 'index.html';
-  }
-
-  // Active Tab Highlight
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.dataset.tab === activeTab && !activeCategoryId && !activeProductId) {
-      btn.classList.add('active');
+    function updateHash(hashStr) {
+      window.location.hash = hashStr;
     }
-  });
 
-  // Render Product Detail
-  if (activeCategoryId && activeProductId) {
-    filterPanel.style.display = 'none';
-    renderProductDetail(activeCategoryId, activeProductId);
-    return;
-  }
+    // ==========================================
+    // UI RENDERING SYSTEM
+    // ==========================================
 
-  // Render Category Page
-  if (activeCategoryId) {
-    const cat = getCategory(activeCategoryId);
-    mainTitle.innerHTML = `${cat.icon} ${cat.name}`;
-    mainSubtitle.textContent = `${cat.tagline} Choose what you'd like to make below.`;
-    filterPanel.style.display = 'flex';
-    renderCategoryProducts(cat);
-    return;
-  }
+    function renderUI() {
+      const mainTitle = document.getElementById('main-title');
+      const mainSubtitle = document.getElementById('main-subtitle');
+      const filterPanel = document.getElementById('filter-panel');
+      const mainContent = document.getElementById('main-content');
+      const backLink = document.getElementById('back-link');
 
-  // Render Custom Section
-  if (activeTab === 'custom') {
-    mainTitle.innerHTML = `CUSTOM <span class="spark">WORKSHOPS</span>`;
-    mainSubtitle.textContent = `Bespoke private sessions, corporate offsites, celebration parties, and institutional masterclasses tailored to your vision.`;
-    filterPanel.style.display = 'none';
-    renderCustomWorkshops();
-    return;
-  }
+      // Update Back Link
+      if (activeProductId) {
+        backLink.textContent = `← Back to ${getCategory(activeCategoryId).name}`;
+        backLink.onclick = (e) => { e.preventDefault(); updateHash(activeCategoryId); };
+      } else if (activeCategoryId) {
+        backLink.textContent = `← Back to All Categories`;
+        backLink.onclick = (e) => { e.preventDefault(); updateHash(''); };
+      } else {
+        backLink.textContent = `← Back`;
+        backLink.onclick = null;
+        backLink.href = 'index.html';
+      }
 
-  // Render All Products View
-  if (activeTab === 'all-products') {
-    mainTitle.innerHTML = `EXPLORE ALL <span class="spark">PRODUCTS</span>`;
-    mainSubtitle.textContent = `Browse our entire range of 69 creative workshop experiences across 8 craft techniques with real product photos.`;
-    filterPanel.style.display = 'flex';
-    renderAllProductsView();
-    return;
-  }
+      // Active Tab Highlight
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.tab === activeTab && !activeCategoryId && !activeProductId) {
+          btn.classList.add('active');
+        }
+      });
 
-  // Default: Categories Home View
-  mainTitle.innerHTML = `Discover Creative <span class="spark">Craft Experiences</span>`;
-  mainSubtitle.textContent = `Discover creative experiences designed around beautiful, functional objects. Choose a craft, select what you'd like to make, and book your workshop.`;
-  filterPanel.style.display = 'none';
-  renderCategoryHomeView();
-}
+      // Render Product Detail
+      if (activeCategoryId && activeProductId) {
+        filterPanel.style.display = 'none';
+        renderProductDetail(activeCategoryId, activeProductId);
+        return;
+      }
 
-function getCategory(catId) {
-  return CATEGORIES.find(c => c.id === catId);
-}
+      // Render Category Page
+      if (activeCategoryId) {
+        const cat = getCategory(activeCategoryId);
+        mainTitle.innerHTML = `${cat.icon} ${cat.name}`;
+        mainSubtitle.textContent = `${cat.tagline} Choose what you'd like to make below.`;
+        filterPanel.style.display = 'flex';
+        renderCategoryProducts(cat);
+        return;
+      }
 
-// 1. Home View: 8 Category Cards
-function renderCategoryHomeView() {
-  const container = document.getElementById('main-content');
-  let html = `<div class="category-grid">`;
+      // Render Custom Section
+      if (activeTab === 'custom') {
+        mainTitle.innerHTML = `CUSTOM <span class="spark">WORKSHOPS</span>`;
+        mainSubtitle.textContent = `Bespoke private sessions, corporate offsites, celebration parties, and institutional masterclasses tailored to your vision.`;
+        filterPanel.style.display = 'none';
+        renderCustomWorkshops();
+        return;
+      }
 
-  CATEGORIES.forEach((cat, index) => {
-    html += `
+      // Render All Products View
+      if (activeTab === 'all-products') {
+        mainTitle.innerHTML = `EXPLORE ALL <span class="spark">PRODUCTS</span>`;
+        mainSubtitle.textContent = `Browse our entire range of 69 creative workshop experiences across 8 craft techniques with real product photos.`;
+        filterPanel.style.display = 'flex';
+        renderAllProductsView();
+        return;
+      }
+
+      // Default: Categories Home View
+      mainTitle.innerHTML = `Discover Creative <span class="spark">Craft Experiences</span>`;
+      mainSubtitle.textContent = `Discover creative experiences designed around beautiful, functional objects. Choose a craft, select what you'd like to make, and book your workshop.`;
+      filterPanel.style.display = 'none';
+      renderCategoryHomeView();
+    }
+
+    function getCategory(catId) {
+      return CATEGORIES.find(c => c.id === catId);
+    }
+
+    // 1. Home View: 8 Category Cards
+    function renderCategoryHomeView() {
+      const container = document.getElementById('main-content');
+      let html = `<div class="category-grid">`;
+
+      CATEGORIES.forEach((cat, index) => {
+        html += `
       <a href="#${cat.id}" class="cat-card" style="animation-delay:${0.06 * (index + 1)}s;">
         <div class="cat-img-wrapper">
           <img src="${cat.image}" alt="${cat.name}" loading="lazy">
@@ -1303,48 +1500,48 @@ function renderCategoryHomeView() {
         </div>
       </a>
     `;
-  });
+      });
 
-  html += `</div>`;
-  container.innerHTML = html;
-}
+      html += `</div>`;
+      container.innerHTML = html;
+    }
 
-// Filter matching helper
-function matchesFilters(product) {
-  if (filters.duration !== 'all' && product.duration !== filters.duration) return false;
-  if (filters.level !== 'all' && product.level !== filters.level) return false;
-  if (filters.suitable !== 'all' && !product.suitable.includes(filters.suitable)) return false;
-  
-  if (filters.price !== 'all') {
-    if (filters.price === 'under1000' && product.price >= 1000) return false;
-    if (filters.price === '1000-2500' && (product.price < 1000 || product.price > 2500)) return false;
-    if (filters.price === '2500-5000' && (product.price < 2500 || product.price > 5000)) return false;
-    if (filters.price === 'above5000' && product.price <= 5000) return false;
-  }
+    // Filter matching helper
+    function matchesFilters(product) {
+      if (filters.duration !== 'all' && product.duration !== filters.duration) return false;
+      if (filters.level !== 'all' && product.level !== filters.level) return false;
+      if (filters.suitable !== 'all' && !product.suitable.includes(filters.suitable)) return false;
 
-  return true;
-}
+      if (filters.price !== 'all') {
+        if (filters.price === 'under1000' && product.price >= 1000) return false;
+        if (filters.price === '1000-2500' && (product.price < 1000 || product.price > 2500)) return false;
+        if (filters.price === '2500-5000' && (product.price < 2500 || product.price > 5000)) return false;
+        if (filters.price === 'above5000' && product.price <= 5000) return false;
+      }
 
-// 2. Category Products View (Visual Photo Cards)
-function renderCategoryProducts(cat) {
-  const container = document.getElementById('main-content');
-  const filteredProducts = cat.products.filter(matchesFilters);
+      return true;
+    }
 
-  if (filteredProducts.length === 0) {
-    container.innerHTML = `
+    // 2. Category Products View (Visual Photo Cards)
+    function renderCategoryProducts(cat) {
+      const container = document.getElementById('main-content');
+      const filteredProducts = cat.products.filter(matchesFilters);
+
+      if (filteredProducts.length === 0) {
+        container.innerHTML = `
       <div class="empty-state">
         <h3>No matching experiences</h3>
         <p>Try adjusting your filters above to see available products in ${cat.name}.</p>
       </div>
     `;
-    return;
-  }
+        return;
+      }
 
-  let html = `<div class="products-grid">`;
+      let html = `<div class="products-grid">`;
 
-  filteredProducts.forEach((prod, index) => {
-    const fallbackSVG = getProductSVG(cat.id, prod.id, prod.name);
-    html += `
+      filteredProducts.forEach((prod, index) => {
+        const fallbackSVG = getProductSVG(cat.id, prod.id, prod.name);
+        html += `
       <div class="prod-card" onclick="updateHash('${cat.id}/${prod.id}')" style="animation-delay:${0.04 * (index + 1)}s;">
         <div class="prod-img-box">
           <img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.src='${fallbackSVG}'">
@@ -1363,31 +1560,31 @@ function renderCategoryProducts(cat) {
         </div>
       </div>
     `;
-  });
+      });
 
-  html += `</div>`;
-  container.innerHTML = html;
-}
+      html += `</div>`;
+      container.innerHTML = html;
+    }
 
-// 3. All Products View
-function renderAllProductsView() {
-  const container = document.getElementById('main-content');
-  const allProds = getAllProducts().filter(matchesFilters);
+    // 3. All Products View
+    function renderAllProductsView() {
+      const container = document.getElementById('main-content');
+      const allProds = getAllProducts().filter(matchesFilters);
 
-  if (allProds.length === 0) {
-    container.innerHTML = `
+      if (allProds.length === 0) {
+        container.innerHTML = `
       <div class="empty-state">
         <h3>No products found</h3>
         <p>Try clearing your filter selection.</p>
       </div>
     `;
-    return;
-  }
+        return;
+      }
 
-  let html = `<div class="products-grid">`;
-  allProds.forEach((prod, index) => {
-    const fallbackSVG = getProductSVG(prod.categoryId, prod.id, prod.name);
-    html += `
+      let html = `<div class="products-grid">`;
+      allProds.forEach((prod, index) => {
+        const fallbackSVG = getProductSVG(prod.categoryId, prod.id, prod.name);
+        html += `
       <div class="prod-card" onclick="updateHash('${prod.categoryId}/${prod.id}')" style="animation-delay:${0.02 * (index + 1)}s;">
         <div class="prod-img-box">
           <img src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.src='${fallbackSVG}'">
@@ -1406,22 +1603,22 @@ function renderAllProductsView() {
         </div>
       </div>
     `;
-  });
+      });
 
-  html += `</div>`;
-  container.innerHTML = html;
-}
+      html += `</div>`;
+      container.innerHTML = html;
+    }
 
-// 4. Product Detail View
-function renderProductDetail(catId, prodId) {
-  const cat = getCategory(catId);
-  const prod = cat.products.find(p => p.id === prodId);
-  const container = document.getElementById('main-content');
-  const fallbackSVG = getProductSVG(cat.id, prod.id, prod.name);
+    // 4. Product Detail View
+    function renderProductDetail(catId, prodId) {
+      const cat = getCategory(catId);
+      const prod = cat.products.find(p => p.id === prodId);
+      const container = document.getElementById('main-content');
+      const fallbackSVG = getProductSVG(cat.id, prod.id, prod.name);
 
-  const waText = encodeURIComponent(`Hi NAD Living! I'm interested in booking the ${prod.name} workshop (${cat.name}). Please share available slots & details.`);
+      const waText = encodeURIComponent(`Hi NAD Living! I'm interested in booking the ${prod.name} workshop (${cat.name}). Please share available slots & details.`);
 
-  const html = `
+      const html = `
     <div class="detail-view">
 
       <!-- Hero Banner -->
@@ -1524,25 +1721,25 @@ function renderProductDetail(catId, prodId) {
     </div>
   `;
 
-  container.innerHTML = html;
+      container.innerHTML = html;
 
-  // Bind FAQ accordions
-  document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.onclick = () => {
-      const item = btn.parentElement;
-      item.classList.toggle('open');
-    };
-  });
-}
+      // Bind FAQ accordions
+      document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.onclick = () => {
+          const item = btn.parentElement;
+          item.classList.toggle('open');
+        };
+      });
+    }
 
-// 5. Custom Workshops View
-function renderCustomWorkshops() {
-  const container = document.getElementById('main-content');
-  let html = `<div class="custom-section-grid">`;
+    // 5. Custom Workshops View
+    function renderCustomWorkshops() {
+      const container = document.getElementById('main-content');
+      let html = `<div class="custom-section-grid">`;
 
-  CUSTOM_WORKSHOPS.forEach((item) => {
-    const waText = encodeURIComponent(`Hi NAD Living! I would like to inquire about booking a ${item.name} session.`);
-    html += `
+      CUSTOM_WORKSHOPS.forEach((item) => {
+        const waText = encodeURIComponent(`Hi NAD Living! I would like to inquire about booking a ${item.name} session.`);
+        html += `
       <div class="custom-card">
         <div>
           <h4 class="custom-card-title">${item.icon} ${item.name}</h4>
@@ -1553,169 +1750,169 @@ function renderCustomWorkshops() {
         </div>
       </div>
     `;
-  });
+      });
 
-  html += `</div>`;
-  container.innerHTML = html;
-}
-
-// ==========================================
-// EVENT LISTENERS & MODAL MANAGEMENT
-// ==========================================
-
-function setupEventListeners() {
-  // Tabs click
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.onclick = () => {
-      const tab = btn.dataset.tab;
-      activeTab = tab;
-      if (tab === 'custom') updateHash('custom');
-      else if (tab === 'all-products') updateHash('all');
-      else updateHash('');
-    };
-  });
-
-  // Filter Select Controls
-  const durationSel = document.getElementById('filter-duration');
-  const levelSel = document.getElementById('filter-level');
-  const suitableSel = document.getElementById('filter-suitable');
-  const priceSel = document.getElementById('filter-price');
-  const resetBtn = document.getElementById('reset-filters-btn');
-
-  const onFilterChange = () => {
-    filters.duration = durationSel.value;
-    filters.level = levelSel.value;
-    filters.suitable = suitableSel.value;
-    filters.price = priceSel.value;
-    renderUI();
-  };
-
-  durationSel.onchange = onFilterChange;
-  levelSel.onchange = onFilterChange;
-  suitableSel.onchange = onFilterChange;
-  priceSel.onchange = onFilterChange;
-
-  resetBtn.onclick = () => {
-    durationSel.value = 'all';
-    levelSel.value = 'all';
-    suitableSel.value = 'all';
-    priceSel.value = 'all';
-    filters = { duration: 'all', level: 'all', suitable: 'all', price: 'all' };
-    renderUI();
-  };
-
-  // Booking Modal
-  const modal = document.getElementById('booking-modal');
-  const closeBtn = document.getElementById('modal-close-btn');
-
-  closeBtn.onclick = () => modal.classList.remove('active');
-  modal.onclick = (e) => {
-    if (e.target === modal) modal.classList.remove('active');
-  };
-
-  // Modal Form Validation & Submission
-  const modalForm = document.getElementById('modal-form');
-  const nameEl = document.getElementById('form-name');
-  const emailEl = document.getElementById('form-email');
-  const phoneEl = document.getElementById('form-phone');
-  const partEl = document.getElementById('form-participants');
-  const submitBtn = document.getElementById('form-submit-btn');
-
-  function validateModalField(id, type, showErr = true) {
-    const el = document.getElementById(id);
-    const errEl = document.getElementById('err-' + id);
-    if (!el) return true;
-
-    let v = el.value;
-
-    if (type === 'name') {
-      const restricted = v.replace(/[^a-zA-Z\s'-]/g, '');
-      if (restricted !== v) { el.value = restricted; v = restricted; }
-    } else if (type === 'phone') {
-      const restricted = v.replace(/[a-zA-Z]/g, '');
-      if (restricted !== v) { el.value = restricted; v = restricted; }
+      html += `</div>`;
+      container.innerHTML = html;
     }
 
-    const trimmed = v.trim();
-    let valid = true;
-    let msg = '';
+    // ==========================================
+    // EVENT LISTENERS & MODAL MANAGEMENT
+    // ==========================================
 
-    if (!trimmed) {
-      valid = false;
-      msg = 'This field is required.';
-    } else if (type === 'name') {
-      valid = /^[a-zA-Z\s'-]{2,60}$/.test(trimmed);
-      msg = 'Please enter a valid name (letters, spaces, hyphens only, min 2 chars).';
-    } else if (type === 'email') {
-      valid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed);
-      msg = 'Please enter a valid email address.';
-    } else if (type === 'phone') {
-      const digits = (trimmed.match(/\d/g) || []).length;
-      valid = /^[+\d\s-]{8,20}$/.test(trimmed) && digits >= 8 && !/[a-zA-Z]/.test(trimmed);
-      msg = 'Please enter a valid phone number (digits, +, - only, min 8 digits).';
-    } else if (type === 'part') {
-      valid = trimmed.length >= 1;
-      msg = 'Please specify participants count.';
-    }
+    function setupEventListeners() {
+      // Tabs click
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.onclick = () => {
+          const tab = btn.dataset.tab;
+          activeTab = tab;
+          if (tab === 'custom') updateHash('custom');
+          else if (tab === 'all-products') updateHash('all');
+          else updateHash('');
+        };
+      });
 
-    if (showErr) {
-      if (!valid) {
-        el.classList.add('invalid-input');
-        if (errEl) { errEl.innerText = msg; errEl.style.display = 'block'; }
-      } else {
-        el.classList.remove('invalid-input');
-        if (errEl) { errEl.style.display = 'none'; errEl.innerText = ''; }
+      // Filter Select Controls
+      const durationSel = document.getElementById('filter-duration');
+      const levelSel = document.getElementById('filter-level');
+      const suitableSel = document.getElementById('filter-suitable');
+      const priceSel = document.getElementById('filter-price');
+      const resetBtn = document.getElementById('reset-filters-btn');
+
+      const onFilterChange = () => {
+        filters.duration = durationSel.value;
+        filters.level = levelSel.value;
+        filters.suitable = suitableSel.value;
+        filters.price = priceSel.value;
+        renderUI();
+      };
+
+      durationSel.onchange = onFilterChange;
+      levelSel.onchange = onFilterChange;
+      suitableSel.onchange = onFilterChange;
+      priceSel.onchange = onFilterChange;
+
+      resetBtn.onclick = () => {
+        durationSel.value = 'all';
+        levelSel.value = 'all';
+        suitableSel.value = 'all';
+        priceSel.value = 'all';
+        filters = { duration: 'all', level: 'all', suitable: 'all', price: 'all' };
+        renderUI();
+      };
+
+      // Booking Modal
+      const modal = document.getElementById('booking-modal');
+      const closeBtn = document.getElementById('modal-close-btn');
+
+      closeBtn.onclick = () => modal.classList.remove('active');
+      modal.onclick = (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+      };
+
+      // Modal Form Validation & Submission
+      const modalForm = document.getElementById('modal-form');
+      const nameEl = document.getElementById('form-name');
+      const emailEl = document.getElementById('form-email');
+      const phoneEl = document.getElementById('form-phone');
+      const partEl = document.getElementById('form-participants');
+      const submitBtn = document.getElementById('form-submit-btn');
+
+      function validateModalField(id, type, showErr = true) {
+        const el = document.getElementById(id);
+        const errEl = document.getElementById('err-' + id);
+        if (!el) return true;
+
+        let v = el.value;
+
+        if (type === 'name') {
+          const restricted = v.replace(/[^a-zA-Z\s'-]/g, '');
+          if (restricted !== v) { el.value = restricted; v = restricted; }
+        } else if (type === 'phone') {
+          const restricted = v.replace(/[a-zA-Z]/g, '');
+          if (restricted !== v) { el.value = restricted; v = restricted; }
+        }
+
+        const trimmed = v.trim();
+        let valid = true;
+        let msg = '';
+
+        if (!trimmed) {
+          valid = false;
+          msg = 'This field is required.';
+        } else if (type === 'name') {
+          valid = /^[a-zA-Z\s'-]{2,60}$/.test(trimmed);
+          msg = 'Please enter a valid name (letters, spaces, hyphens only, min 2 chars).';
+        } else if (type === 'email') {
+          valid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed);
+          msg = 'Please enter a valid email address.';
+        } else if (type === 'phone') {
+          const digits = (trimmed.match(/\d/g) || []).length;
+          valid = /^[+\d\s-]{8,20}$/.test(trimmed) && digits >= 8 && !/[a-zA-Z]/.test(trimmed);
+          msg = 'Please enter a valid phone number (digits, +, - only, min 8 digits).';
+        } else if (type === 'part') {
+          valid = trimmed.length >= 1;
+          msg = 'Please specify participants count.';
+        }
+
+        if (showErr) {
+          if (!valid) {
+            el.classList.add('invalid-input');
+            if (errEl) { errEl.innerText = msg; errEl.style.display = 'block'; }
+          } else {
+            el.classList.remove('invalid-input');
+            if (errEl) { errEl.style.display = 'none'; errEl.innerText = ''; }
+          }
+        }
+
+        return valid;
       }
-    }
 
-    return valid;
-  }
+      function checkModalFormValid() {
+        const nOk = validateModalField('form-name', 'name', false);
+        const eOk = validateModalField('form-email', 'email', false);
+        const pOk = validateModalField('form-phone', 'phone', false);
+        const ptOk = validateModalField('form-participants', 'part', false);
 
-  function checkModalFormValid() {
-    const nOk = validateModalField('form-name', 'name', false);
-    const eOk = validateModalField('form-email', 'email', false);
-    const pOk = validateModalField('form-phone', 'phone', false);
-    const ptOk = validateModalField('form-participants', 'part', false);
+        const isAllOk = nOk && eOk && pOk && ptOk;
+        if (submitBtn) submitBtn.disabled = !isAllOk;
+        return isAllOk;
+      }
 
-    const isAllOk = nOk && eOk && pOk && ptOk;
-    if (submitBtn) submitBtn.disabled = !isAllOk;
-    return isAllOk;
-  }
+      [nameEl, emailEl, phoneEl, partEl].forEach(el => {
+        if (!el) return;
+        const type = el.id.replace('form-', '');
+        el.addEventListener('input', () => { validateModalField(el.id, type, true); checkModalFormValid(); });
+        el.addEventListener('blur', () => { validateModalField(el.id, type, true); checkModalFormValid(); });
+      });
 
-  [nameEl, emailEl, phoneEl, partEl].forEach(el => {
-    if (!el) return;
-    const type = el.id.replace('form-', '');
-    el.addEventListener('input', () => { validateModalField(el.id, type, true); checkModalFormValid(); });
-    el.addEventListener('blur', () => { validateModalField(el.id, type, true); checkModalFormValid(); });
-  });
+      modalForm.onsubmit = function (e) {
+        e.preventDefault();
+        const btn = document.getElementById('form-submit-btn');
+        const note = document.getElementById('form-status-note');
 
-  modalForm.onsubmit = function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('form-submit-btn');
-    const note = document.getElementById('form-status-note');
+        const nOk = validateModalField('form-name', 'name', true);
+        const eOk = validateModalField('form-email', 'email', true);
+        const pOk = validateModalField('form-phone', 'phone', true);
+        const ptOk = validateModalField('form-participants', 'part', true);
 
-    const nOk = validateModalField('form-name', 'name', true);
-    const eOk = validateModalField('form-email', 'email', true);
-    const pOk = validateModalField('form-phone', 'phone', true);
-    const ptOk = validateModalField('form-participants', 'part', true);
+        if (!nOk || !eOk || !pOk || !ptOk) {
+          checkModalFormValid();
+          return;
+        }
 
-    if (!nOk || !eOk || !pOk || !ptOk) {
-      checkModalFormValid();
-      return;
-    }
+        const prodName = document.getElementById('form-product-name').value;
+        const name = nameEl.value.trim();
+        const email = emailEl.value.trim();
+        const phone = phoneEl.value.trim();
+        const participants = partEl.value.trim();
+        const date = document.getElementById('form-date').value.trim();
+        const notes = document.getElementById('form-notes').value.trim();
 
-    const prodName = document.getElementById('form-product-name').value;
-    const name = nameEl.value.trim();
-    const email = emailEl.value.trim();
-    const phone = phoneEl.value.trim();
-    const participants = partEl.value.trim();
-    const date = document.getElementById('form-date').value.trim();
-    const notes = document.getElementById('form-notes').value.trim();
+        btn.disabled = true;
+        btn.textContent = 'Sending Inquiry…';
 
-    btn.disabled = true;
-    btn.textContent = 'Sending Inquiry…';
-
-    const textContent = `New Workshop Booking Inquiry — NAD Living
+        const textContent = `New Workshop Booking Inquiry — NAD Living
 
 Product / Craft: ${prodName}
 Name: ${name}
@@ -1726,45 +1923,46 @@ Preferred Slot: ${date || '—'}
 Special Requests:
 ${notes || '—'}`;
 
-    fetch('/api/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        subject: `Workshop Inquiry: ${prodName} — ${name}`,
-        replyTo: email,
-        text: textContent
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        btn.textContent = '✓ Booking Inquiry Sent!';
-        note.textContent = "Thank you! Our studio team will get back to confirm your slot.";
-        setTimeout(() => {
-          modal.classList.remove('active');
-          btn.disabled = false;
-          btn.textContent = 'Send Booking Inquiry →';
-          note.textContent = '';
-          document.getElementById('modal-form').reset();
-        }, 2200);
-      } else {
-        throw new Error(data.error || 'Failed to send');
-      }
-    })
-    .catch(err => {
-      btn.disabled = false;
-      btn.textContent = 'Send Booking Inquiry →';
-      note.textContent = 'Notification sent. We will get back to you shortly.';
-    });
-  };
-}
+        fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            subject: `Workshop Inquiry: ${prodName} — ${name}`,
+            replyTo: email,
+            text: textContent
+          })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              btn.textContent = '✓ Booking Inquiry Sent!';
+              note.textContent = "Thank you! Our studio team will get back to confirm your slot.";
+              setTimeout(() => {
+                modal.classList.remove('active');
+                btn.disabled = false;
+                btn.textContent = 'Send Booking Inquiry →';
+                note.textContent = '';
+                document.getElementById('modal-form').reset();
+              }, 2200);
+            } else {
+              throw new Error(data.error || 'Failed to send');
+            }
+          })
+          .catch(err => {
+            btn.disabled = false;
+            btn.textContent = 'Send Booking Inquiry →';
+            note.textContent = 'Notification sent. We will get back to you shortly.';
+          });
+      };
+    }
 
-function openBookingModal(productTitle) {
-  document.getElementById('form-product-name').value = productTitle;
-  document.getElementById('modal-title').textContent = `Book: ${productTitle}`;
-  document.getElementById('modal-sub').textContent = `Fill in your details below to reserve your studio slot.`;
-  document.getElementById('booking-modal').classList.add('active');
-}
-</script>
+    function openBookingModal(productTitle) {
+      document.getElementById('form-product-name').value = productTitle;
+      document.getElementById('modal-title').textContent = `Book: ${productTitle}`;
+      document.getElementById('modal-sub').textContent = `Fill in your details below to reserve your studio slot.`;
+      document.getElementById('booking-modal').classList.add('active');
+    }
+  </script>
 </body>
+
 </html>
