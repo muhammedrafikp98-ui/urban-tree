@@ -218,12 +218,25 @@
     font-family:'Inter', sans-serif;
     font-size:14px;
     outline:none;
-    transition:border-color 0.2s;
+    transition:border-color 0.2s, background 0.2s;
   }
   input:focus, select:focus, textarea:focus{
     border-color:var(--brass);
   }
   textarea{ min-height:95px; resize:vertical; }
+
+  /* Error state styling */
+  input.invalid-input, select.invalid-input, textarea.invalid-input {
+    border-color:#a8492b !important;
+    background:rgba(168,73,43,0.1) !important;
+  }
+  .err-msg{
+    color:#f2a68d;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    margin-top:4px;
+    display:none;
+  }
 
   /* Checkbox & Radio cards */
   .option-group{
@@ -284,6 +297,11 @@
     transition:all 0.2s;
   }
   .btn-pri:hover{ background:#d1772c; }
+  .btn-pri:disabled{
+    opacity:0.45;
+    cursor:not-allowed;
+    background:#6e5033 !important;
+  }
 
   /* API Status Alert */
   .status-box{
@@ -349,7 +367,7 @@
       </div>
     </div>
 
-    <form id="franchise-form">
+    <form id="franchise-form" novalidate>
       <!-- STEP 1: General Info -->
       <div class="form-section active" id="sec-1">
         <h2 class="section-heading">Step 1: General Partner Profile</h2>
@@ -358,29 +376,34 @@
         <div class="field-grid">
           <div class="field">
             <label for="fn">Full Name <span class="req">*</span></label>
-            <input type="text" id="fn" required placeholder="e.g. Ananya Sharma">
+            <input type="text" id="fn" required placeholder="e.g. Ananya Sharma" autocomplete="name">
+            <span class="err-msg" id="err-fn"></span>
           </div>
           <div class="field">
             <label for="em">Email Address <span class="req">*</span></label>
-            <input type="email" id="em" required placeholder="you@domain.com">
+            <input type="email" id="em" required placeholder="you@domain.com" autocomplete="email">
+            <span class="err-msg" id="err-em"></span>
           </div>
           <div class="field">
             <label for="ph">WhatsApp / Phone Number <span class="req">*</span></label>
-            <input type="tel" id="ph" required placeholder="+91 98765 43210">
+            <input type="tel" id="ph" required placeholder="+91 98765 43210" autocomplete="tel">
+            <span class="err-msg" id="err-ph"></span>
           </div>
           <div class="field">
             <label for="org">Current Business / Organization</label>
             <input type="text" id="org" placeholder="e.g. Apex Retail Group / Independent">
+            <span class="err-msg" id="err-org"></span>
           </div>
           <div class="field full">
             <label for="loc">Target City / State / Region for Franchise <span class="req">*</span></label>
-            <input type="text" id="loc" required placeholder="e.g. Bengaluru / Hyderabad / Kochi / Dubai">
+            <input type="text" id="loc" required placeholder="e.g. Bengaluru, Karnataka">
+            <span class="err-msg" id="err-loc"></span>
           </div>
         </div>
 
         <div class="btn-row">
           <div></div>
-          <button type="button" class="btn-pri" onclick="nextStep(2)">Continue to Step 2 →</button>
+          <button type="button" class="btn-pri" id="btn-step-1" onclick="nextStep(2)">Continue to Step 2 →</button>
         </div>
       </div>
 
@@ -420,6 +443,7 @@
           <div class="field">
             <label for="area">Proposed Space Area (sq. ft.)</label>
             <input type="text" id="area" placeholder="e.g. 2,000 sq ft or Seeking space">
+            <span class="err-msg" id="err-area"></span>
           </div>
           <div class="field">
             <label for="cap">Expected Capital Investment Range <span class="req">*</span></label>
@@ -430,6 +454,7 @@
               <option value="₹1 Crore - ₹2.5 Crore">₹1 Crore – ₹2.5 Crore</option>
               <option value="Above ₹2.5 Crore">Above ₹2.5 Crore</option>
             </select>
+            <span class="err-msg" id="err-cap"></span>
           </div>
           <div class="field">
             <label for="exp">Experience in Retail / Design / Hospitality</label>
@@ -453,7 +478,7 @@
 
         <div class="btn-row">
           <button type="button" class="btn-sec" onclick="nextStep(1)">← Back</button>
-          <button type="button" class="btn-pri" onclick="nextStep(3)">Continue to Final Step →</button>
+          <button type="button" class="btn-pri" id="btn-step-2" onclick="nextStep(3)">Continue to Final Step →</button>
         </div>
       </div>
 
@@ -465,11 +490,13 @@
         <div class="field">
           <label for="notes">Proposed Location Details or Strategy Notes</label>
           <textarea id="notes" placeholder="Tell us about your proposed site (commercial street, luxury mall, heritage bungalow), catchment audience, or specific market vision..."></textarea>
+          <span class="err-msg" id="err-notes"></span>
         </div>
 
         <div class="field">
           <label for="deck">Link to Portfolio / Company Profile / Presentation <span class="req" style="font-weight:normal; text-transform:none;">(optional)</span></label>
           <input type="text" id="deck" placeholder="e.g. Google Drive / Dropbox / Website link">
+          <span class="err-msg" id="err-deck"></span>
         </div>
 
         <div class="status-box" id="status-alert"></div>
@@ -487,23 +514,163 @@
 
 <script>
 // ==========================================
-// EMAIL API CONFIGURATION & SUBMISSION ENGINE
+// VALIDATION & SPAM PREVENTION ENGINE
 // ==========================================
 
 const API_CONFIG = {
-  endpoint: 'https://formspree.io/f/xknlqpye', // Replace with your backend webhook/Formspree/EmailJS endpoint
+  endpoint: 'https://formspree.io/f/xknlqpye',
   fallbackEmail: 'partner@nadliving.com'
 };
 
+// Strict Validation Patterns & Error Messages
+const RULES = {
+  fn: {
+    // Letters, spaces, apostrophes, hyphens only. Min 2 chars. No numbers/symbols.
+    validate: (v) => /^[a-zA-Z\s'-]{2,60}$/.test(v),
+    restrict: (v) => v.replace(/[^a-zA-Z\s'-]/g, ''),
+    message: 'Please enter a valid full name (letters, spaces, hyphens & apostrophes only, min 2 characters).'
+  },
+  em: {
+    // Valid email format
+    validate: (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
+    message: 'Please enter a valid email address (e.g. name@domain.com).'
+  },
+  ph: {
+    // Digits, spaces, +, - only. Reject letters. Min 8 digits.
+    validate: (v) => {
+      if (/[a-zA-Z]/.test(v)) return false;
+      const digits = (v.match(/\d/g) || []).length;
+      return /^[+\d\s-]{8,20}$/.test(v) && digits >= 8;
+    },
+    restrict: (v) => v.replace(/[a-zA-Z]/g, ''),
+    message: 'Please enter a valid phone number (digits, +, - only, min 8 digits).'
+  },
+  org: {
+    validate: (v) => !v || /^[^<>{}]{2,100}$/.test(v),
+    message: 'Please enter a valid organization name (no HTML tags/symbols).'
+  },
+  loc: {
+    // Letters, spaces, commas, hyphens only. No pure numbers.
+    validate: (v) => /^[a-zA-Z\s,-]{2,60}$/.test(v) && !/^\d+$/.test(v),
+    restrict: (v) => v.replace(/[0-9]/g, ''),
+    message: 'Please enter a valid location (letters, spaces, commas, hyphens only, min 2 characters).'
+  },
+  cap: {
+    validate: (v) => v !== '',
+    message: 'Please select an expected capital investment range.'
+  }
+};
+
+function validateSingleField(fieldId, showInline = true) {
+  const inputEl = document.getElementById(fieldId);
+  const errEl = document.getElementById('err-' + fieldId);
+  if (!inputEl) return true;
+
+  let val = inputEl.value;
+
+  // Real-time character restriction if defined
+  if (RULES[fieldId] && RULES[fieldId].restrict) {
+    const restrictedVal = RULES[fieldId].restrict(val);
+    if (restrictedVal !== val) {
+      inputEl.value = restrictedVal;
+      val = restrictedVal;
+    }
+  }
+
+  const trimmedVal = val.trim();
+  const rule = RULES[fieldId];
+  let isValid = true;
+
+  if (inputEl.hasAttribute('required') && !trimmedVal) {
+    isValid = false;
+  } else if (rule && trimmedVal) {
+    isValid = rule.validate(trimmedVal);
+  }
+
+  if (showInline) {
+    if (!isValid) {
+      inputEl.classList.add('invalid-input');
+      if (errEl) {
+        errEl.innerText = (!trimmedVal && inputEl.hasAttribute('required'))
+          ? 'This field is required.'
+          : (rule ? rule.message : 'Invalid input.');
+        errEl.style.display = 'block';
+      }
+    } else {
+      inputEl.classList.remove('invalid-input');
+      if (errEl) {
+        errEl.style.display = 'none';
+        errEl.innerText = '';
+      }
+    }
+  }
+
+  return isValid;
+}
+
+function checkStepValidity(stepNum) {
+  let isStepValid = true;
+  if (stepNum === 1) {
+    const fnOk = validateSingleField('fn', false);
+    const emOk = validateSingleField('em', false);
+    const phOk = validateSingleField('ph', false);
+    const locOk = validateSingleField('loc', false);
+    const orgOk = validateSingleField('org', false);
+
+    isStepValid = fnOk && emOk && phOk && locOk && orgOk;
+    const btn1 = document.getElementById('btn-step-1');
+    if (btn1) btn1.disabled = !isStepValid;
+  } else if (stepNum === 2) {
+    const capOk = validateSingleField('cap', false);
+    isStepValid = capOk;
+    const btn2 = document.getElementById('btn-step-2');
+    if (btn2) btn2.disabled = !isStepValid;
+  }
+  return isStepValid;
+}
+
+// Attach real-time input & blur listeners
+document.addEventListener('DOMContentLoaded', () => {
+  const fields = ['fn', 'em', 'ph', 'org', 'loc', 'cap'];
+
+  fields.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.addEventListener('input', () => {
+      validateSingleField(id, true);
+      checkStepValidity(1);
+      checkStepValidity(2);
+    });
+
+    el.addEventListener('blur', () => {
+      validateSingleField(id, true);
+      checkStepValidity(1);
+      checkStepValidity(2);
+    });
+  });
+
+  checkStepValidity(1);
+});
+
 function nextStep(stepNum) {
   if (stepNum === 2) {
-    const fn = document.getElementById('fn').value.trim();
-    const em = document.getElementById('em').value.trim();
-    const ph = document.getElementById('ph').value.trim();
-    const loc = document.getElementById('loc').value.trim();
+    const fnOk = validateSingleField('fn', true);
+    const emOk = validateSingleField('em', true);
+    const phOk = validateSingleField('ph', true);
+    const locOk = validateSingleField('loc', true);
+    const orgOk = validateSingleField('org', true);
 
-    if (!fn || !em || !ph || !loc) {
-      alert('Please complete all required fields in Step 1 before proceeding.');
+    if (!fnOk || !emOk || !phOk || !locOk || !orgOk) {
+      checkStepValidity(1);
+      return;
+    }
+  }
+
+  if (stepNum === 3) {
+    const capOk = validateSingleField('cap', true);
+    if (!capOk) {
+      checkStepValidity(2);
       return;
     }
   }
@@ -519,6 +686,17 @@ function nextStep(stepNum) {
 
 document.getElementById('franchise-form').addEventListener('submit', async function(e) {
   e.preventDefault();
+
+  const fnOk = validateSingleField('fn', true);
+  const emOk = validateSingleField('em', true);
+  const phOk = validateSingleField('ph', true);
+  const locOk = validateSingleField('loc', true);
+  const capOk = validateSingleField('cap', true);
+
+  if (!fnOk || !emOk || !phOk || !locOk || !capOk) {
+    alert('Please correct the errors in the form before submitting.');
+    return;
+  }
 
   const submitBtn = document.getElementById('submit-btn');
   const statusAlert = document.getElementById('status-alert');

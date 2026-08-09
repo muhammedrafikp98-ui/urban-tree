@@ -217,12 +217,24 @@
     font-family:'Inter', sans-serif;
     font-size:14px;
     outline:none;
-    transition:border-color 0.2s;
+    transition:border-color 0.2s, background 0.2s;
   }
   input:focus, select:focus, textarea:focus{
     border-color:var(--sage);
   }
   textarea{ min-height:95px; resize:vertical; }
+
+  input.invalid-input, select.invalid-input, textarea.invalid-input {
+    border-color:#a8492b !important;
+    background:rgba(168,73,43,0.1) !important;
+  }
+  .err-msg{
+    color:#f2a68d;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    margin-top:4px;
+    display:none;
+  }
 
   .option-group{
     display:grid;
@@ -281,6 +293,11 @@
     transition:all 0.2s;
   }
   .btn-pri:hover{ background:#4e5a3c; }
+  .btn-pri:disabled{
+    opacity:0.45;
+    cursor:not-allowed;
+    background:#3f4932 !important;
+  }
 
   .status-box{
     display:none;
@@ -344,7 +361,7 @@
       </div>
     </div>
 
-    <form id="mentor-form">
+    <form id="mentor-form" novalidate>
       <!-- STEP 1: Profile -->
       <div class="form-section active" id="sec-1">
         <h2 class="section-heading">Step 1: General Advisor Profile</h2>
@@ -353,29 +370,34 @@
         <div class="field-grid">
           <div class="field">
             <label for="fn">Full Name <span class="req">*</span></label>
-            <input type="text" id="fn" required placeholder="e.g. Dr. Rajesh Nambiar">
+            <input type="text" id="fn" required placeholder="e.g. Dr. Rajesh Nambiar" autocomplete="name">
+            <span class="err-msg" id="err-fn"></span>
           </div>
           <div class="field">
             <label for="em">Email Address <span class="req">*</span></label>
-            <input type="email" id="em" required placeholder="you@domain.com">
+            <input type="email" id="em" required placeholder="you@domain.com" autocomplete="email">
+            <span class="err-msg" id="err-em"></span>
           </div>
           <div class="field">
             <label for="ph">WhatsApp / Phone Number <span class="req">*</span></label>
-            <input type="tel" id="ph" required placeholder="+91 98765 43210">
+            <input type="tel" id="ph" required placeholder="+91 98765 43210" autocomplete="tel">
+            <span class="err-msg" id="err-ph"></span>
           </div>
           <div class="field">
             <label for="role">Current Leadership Role &amp; Organization</label>
             <input type="text" id="role" placeholder="e.g. Former VP of Supply Chain / Brand Strategist">
+            <span class="err-msg" id="err-role"></span>
           </div>
           <div class="field full">
             <label for="link">LinkedIn Profile or Professional Bio Link <span class="req">*</span></label>
             <input type="text" id="link" required placeholder="e.g. https://linkedin.com/in/yourprofile">
+            <span class="err-msg" id="err-link"></span>
           </div>
         </div>
 
         <div class="btn-row">
           <div></div>
-          <button type="button" class="btn-pri" onclick="nextStep(2)">Continue to Step 2 →</button>
+          <button type="button" class="btn-pri" id="btn-step-1" onclick="nextStep(2)">Continue to Step 2 →</button>
         </div>
       </div>
 
@@ -441,7 +463,7 @@
 
         <div class="btn-row">
           <button type="button" class="btn-sec" onclick="nextStep(1)">← Back</button>
-          <button type="button" class="btn-pri" onclick="nextStep(3)">Continue to Final Step →</button>
+          <button type="button" class="btn-pri" id="btn-step-2" onclick="nextStep(3)">Continue to Final Step →</button>
         </div>
       </div>
 
@@ -474,15 +496,127 @@ const API_CONFIG = {
   fallbackEmail: 'advisory@nadliving.com'
 };
 
+const RULES = {
+  fn: {
+    validate: (v) => /^[a-zA-Z\s'-]{2,60}$/.test(v),
+    restrict: (v) => v.replace(/[^a-zA-Z\s'-]/g, ''),
+    message: 'Please enter a valid full name (letters, spaces, hyphens & apostrophes only, min 2 characters).'
+  },
+  em: {
+    validate: (v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v),
+    message: 'Please enter a valid email address (e.g. name@domain.com).'
+  },
+  ph: {
+    validate: (v) => {
+      if (/[a-zA-Z]/.test(v)) return false;
+      const digits = (v.match(/\d/g) || []).length;
+      return /^[+\d\s-]{8,20}$/.test(v) && digits >= 8;
+    },
+    restrict: (v) => v.replace(/[a-zA-Z]/g, ''),
+    message: 'Please enter a valid phone number (digits, +, - only, min 8 digits).'
+  },
+  role: {
+    validate: (v) => !v || /^[^<>{}]{2,100}$/.test(v),
+    message: 'Please enter a valid leadership role description.'
+  },
+  link: {
+    validate: (v) => /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/.test(v),
+    message: 'Please enter a valid website / LinkedIn URL.'
+  }
+};
+
+function validateSingleField(fieldId, showInline = true) {
+  const inputEl = document.getElementById(fieldId);
+  const errEl = document.getElementById('err-' + fieldId);
+  if (!inputEl) return true;
+
+  let val = inputEl.value;
+
+  if (RULES[fieldId] && RULES[fieldId].restrict) {
+    const restrictedVal = RULES[fieldId].restrict(val);
+    if (restrictedVal !== val) {
+      inputEl.value = restrictedVal;
+      val = restrictedVal;
+    }
+  }
+
+  const trimmedVal = val.trim();
+  const rule = RULES[fieldId];
+  let isValid = true;
+
+  if (inputEl.hasAttribute('required') && !trimmedVal) {
+    isValid = false;
+  } else if (rule && trimmedVal) {
+    isValid = rule.validate(trimmedVal);
+  }
+
+  if (showInline) {
+    if (!isValid) {
+      inputEl.classList.add('invalid-input');
+      if (errEl) {
+        errEl.innerText = (!trimmedVal && inputEl.hasAttribute('required'))
+          ? 'This field is required.'
+          : (rule ? rule.message : 'Invalid input.');
+        errEl.style.display = 'block';
+      }
+    } else {
+      inputEl.classList.remove('invalid-input');
+      if (errEl) {
+        errEl.style.display = 'none';
+        errEl.innerText = '';
+      }
+    }
+  }
+
+  return isValid;
+}
+
+function checkStepValidity(stepNum) {
+  let isStepValid = true;
+  if (stepNum === 1) {
+    const fnOk = validateSingleField('fn', false);
+    const emOk = validateSingleField('em', false);
+    const phOk = validateSingleField('ph', false);
+    const linkOk = validateSingleField('link', false);
+    const roleOk = validateSingleField('role', false);
+
+    isStepValid = fnOk && emOk && phOk && linkOk && roleOk;
+    const btn1 = document.getElementById('btn-step-1');
+    if (btn1) btn1.disabled = !isStepValid;
+  }
+  return isStepValid;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const fields = ['fn', 'em', 'ph', 'role', 'link'];
+
+  fields.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.addEventListener('input', () => {
+      validateSingleField(id, true);
+      checkStepValidity(1);
+    });
+
+    el.addEventListener('blur', () => {
+      validateSingleField(id, true);
+      checkStepValidity(1);
+    });
+  });
+
+  checkStepValidity(1);
+});
+
 function nextStep(stepNum) {
   if (stepNum === 2) {
-    const fn = document.getElementById('fn').value.trim();
-    const em = document.getElementById('em').value.trim();
-    const ph = document.getElementById('ph').value.trim();
-    const link = document.getElementById('link').value.trim();
+    const fnOk = validateSingleField('fn', true);
+    const emOk = validateSingleField('em', true);
+    const phOk = validateSingleField('ph', true);
+    const linkOk = validateSingleField('link', true);
 
-    if (!fn || !em || !ph || !link) {
-      alert('Please complete all required fields in Step 1 before proceeding.');
+    if (!fnOk || !emOk || !phOk || !linkOk) {
+      checkStepValidity(1);
       return;
     }
   }
@@ -498,6 +632,16 @@ function nextStep(stepNum) {
 
 document.getElementById('mentor-form').addEventListener('submit', async function(e) {
   e.preventDefault();
+
+  const fnOk = validateSingleField('fn', true);
+  const emOk = validateSingleField('em', true);
+  const phOk = validateSingleField('ph', true);
+  const linkOk = validateSingleField('link', true);
+
+  if (!fnOk || !emOk || !phOk || !linkOk) {
+    alert('Please correct the errors in the form before submitting.');
+    return;
+  }
 
   const submitBtn = document.getElementById('submit-btn');
   const statusAlert = document.getElementById('status-alert');

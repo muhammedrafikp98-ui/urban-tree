@@ -723,10 +723,21 @@
     font-family:'Inter', sans-serif;
     font-size:14px;
     outline:none;
-    transition:border-color 0.2s;
+    transition:border-color 0.2s, background 0.2s;
   }
   input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus, textarea:focus{
     border-color:var(--brass);
+  }
+  input.invalid-input, select.invalid-input, textarea.invalid-input {
+    border-color:#a8492b !important;
+    background:rgba(168,73,43,0.1) !important;
+  }
+  .err-msg{
+    color:#f2a68d;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    margin-top:4px;
+    display:none;
   }
   textarea{ min-height:85px; resize:vertical; }
 
@@ -741,6 +752,11 @@
     font-weight:600;
     cursor:pointer;
     margin-top:10px;
+  }
+  .submit-btn:disabled{
+    opacity:0.45;
+    cursor:not-allowed;
+    background:#6e5033 !important;
   }
   .submit-btn:hover{ background:#d1772c; }
 
@@ -871,27 +887,31 @@
     <h2 id="modal-title" style="font-family:'Fraunces', serif; font-size:22px; margin-top:4px;">Book Workshop Session</h2>
     <p id="modal-sub" style="font-size:13px; color:var(--ink-dim); margin-top:4px; margin-bottom:18px;"></p>
 
-    <form id="modal-form">
+    <form id="modal-form" novalidate>
       <input type="hidden" id="form-product-name" name="product">
       
       <div class="field">
         <label for="form-name">Full Name <span class="req">*</span></label>
-        <input type="text" id="form-name" required placeholder="Your full name">
+        <input type="text" id="form-name" required placeholder="Your full name" autocomplete="name">
+        <span class="err-msg" id="err-form-name"></span>
       </div>
 
       <div class="field">
         <label for="form-email">Email Address <span class="req">*</span></label>
-        <input type="email" id="form-email" required placeholder="you@example.com">
+        <input type="email" id="form-email" required placeholder="you@example.com" autocomplete="email">
+        <span class="err-msg" id="err-form-email"></span>
       </div>
 
       <div class="field">
         <label for="form-phone">WhatsApp / Phone <span class="req">*</span></label>
-        <input type="tel" id="form-phone" required placeholder="+91 …">
+        <input type="tel" id="form-phone" required placeholder="+91 …" autocomplete="tel">
+        <span class="err-msg" id="err-form-phone"></span>
       </div>
 
       <div class="field">
         <label for="form-participants">Number of Participants <span class="req">*</span></label>
         <input type="text" id="form-participants" required placeholder="e.g. 2 people">
+        <span class="err-msg" id="err-form-participants"></span>
       </div>
 
       <div class="field">
@@ -1593,17 +1613,102 @@ function setupEventListeners() {
     if (e.target === modal) modal.classList.remove('active');
   };
 
-  // Form Submission
-  document.getElementById('modal-form').onsubmit = function(e) {
+  // Modal Form Validation & Submission
+  const modalForm = document.getElementById('modal-form');
+  const nameEl = document.getElementById('form-name');
+  const emailEl = document.getElementById('form-email');
+  const phoneEl = document.getElementById('form-phone');
+  const partEl = document.getElementById('form-participants');
+  const submitBtn = document.getElementById('form-submit-btn');
+
+  function validateModalField(id, type, showErr = true) {
+    const el = document.getElementById(id);
+    const errEl = document.getElementById('err-' + id);
+    if (!el) return true;
+
+    let v = el.value;
+
+    if (type === 'name') {
+      const restricted = v.replace(/[^a-zA-Z\s'-]/g, '');
+      if (restricted !== v) { el.value = restricted; v = restricted; }
+    } else if (type === 'phone') {
+      const restricted = v.replace(/[a-zA-Z]/g, '');
+      if (restricted !== v) { el.value = restricted; v = restricted; }
+    }
+
+    const trimmed = v.trim();
+    let valid = true;
+    let msg = '';
+
+    if (!trimmed) {
+      valid = false;
+      msg = 'This field is required.';
+    } else if (type === 'name') {
+      valid = /^[a-zA-Z\s'-]{2,60}$/.test(trimmed);
+      msg = 'Please enter a valid name (letters, spaces, hyphens only, min 2 chars).';
+    } else if (type === 'email') {
+      valid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed);
+      msg = 'Please enter a valid email address.';
+    } else if (type === 'phone') {
+      const digits = (trimmed.match(/\d/g) || []).length;
+      valid = /^[+\d\s-]{8,20}$/.test(trimmed) && digits >= 8 && !/[a-zA-Z]/.test(trimmed);
+      msg = 'Please enter a valid phone number (digits, +, - only, min 8 digits).';
+    } else if (type === 'part') {
+      valid = trimmed.length >= 1;
+      msg = 'Please specify participants count.';
+    }
+
+    if (showErr) {
+      if (!valid) {
+        el.classList.add('invalid-input');
+        if (errEl) { errEl.innerText = msg; errEl.style.display = 'block'; }
+      } else {
+        el.classList.remove('invalid-input');
+        if (errEl) { errEl.style.display = 'none'; errEl.innerText = ''; }
+      }
+    }
+
+    return valid;
+  }
+
+  function checkModalFormValid() {
+    const nOk = validateModalField('form-name', 'name', false);
+    const eOk = validateModalField('form-email', 'email', false);
+    const pOk = validateModalField('form-phone', 'phone', false);
+    const ptOk = validateModalField('form-participants', 'part', false);
+
+    const isAllOk = nOk && eOk && pOk && ptOk;
+    if (submitBtn) submitBtn.disabled = !isAllOk;
+    return isAllOk;
+  }
+
+  [nameEl, emailEl, phoneEl, partEl].forEach(el => {
+    if (!el) return;
+    const type = el.id.replace('form-', '');
+    el.addEventListener('input', () => { validateModalField(el.id, type, true); checkModalFormValid(); });
+    el.addEventListener('blur', () => { validateModalField(el.id, type, true); checkModalFormValid(); });
+  });
+
+  modalForm.onsubmit = function(e) {
     e.preventDefault();
     const btn = document.getElementById('form-submit-btn');
     const note = document.getElementById('form-status-note');
 
+    const nOk = validateModalField('form-name', 'name', true);
+    const eOk = validateModalField('form-email', 'email', true);
+    const pOk = validateModalField('form-phone', 'phone', true);
+    const ptOk = validateModalField('form-participants', 'part', true);
+
+    if (!nOk || !eOk || !pOk || !ptOk) {
+      checkModalFormValid();
+      return;
+    }
+
     const prodName = document.getElementById('form-product-name').value;
-    const name = document.getElementById('form-name').value.trim();
-    const email = document.getElementById('form-email').value.trim();
-    const phone = document.getElementById('form-phone').value.trim();
-    const participants = document.getElementById('form-participants').value.trim();
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const participants = partEl.value.trim();
     const date = document.getElementById('form-date').value.trim();
     const notes = document.getElementById('form-notes').value.trim();
 

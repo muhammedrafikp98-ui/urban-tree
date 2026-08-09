@@ -129,6 +129,17 @@
     border-color:var(--gold);
     background:var(--panel-hi);
   }
+  input.invalid-input, select.invalid-input, textarea.invalid-input {
+    border-color:var(--clay) !important;
+    background:rgba(181,69,29,0.12) !important;
+  }
+  .err-msg {
+    color:#f2a68d;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    margin-top:4px;
+    display:none;
+  }
   textarea{resize:vertical;min-height:92px;line-height:1.5;}
   select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239A8C77'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:34px;}
 
@@ -224,26 +235,30 @@
     <div class="tab" data-cat="educator" role="tab">🎓 Workshop Facilitator</div>
   </div>
 
-  <form id="inquiryForm">
+  <form id="inquiryForm" novalidate>
     <!-- General fields -->
     <div class="field-group field-row">
       <div>
         <label for="name">Full name *</label>
-        <input type="text" id="name" placeholder="Your name" required>
+        <input type="text" id="name" placeholder="Your name" required autocomplete="name">
+        <span class="err-msg" id="err-name"></span>
       </div>
       <div>
         <label for="email">Email *</label>
-        <input type="email" id="email" placeholder="you@domain.com" required>
+        <input type="email" id="email" placeholder="you@domain.com" required autocomplete="email">
+        <span class="err-msg" id="err-email"></span>
       </div>
     </div>
     <div class="field-group field-row">
       <div>
         <label for="org">Studio / Brand / Outlet <span class="opt">(optional)</span></label>
         <input type="text" id="org" placeholder="Organisation or Instagram handle">
+        <span class="err-msg" id="err-org"></span>
       </div>
       <div>
         <label for="location">Location *</label>
         <input type="text" id="location" placeholder="City, country" required>
+        <span class="err-msg" id="err-location"></span>
       </div>
     </div>
 
@@ -463,14 +478,71 @@
     return lines.join('\n');
   }
 
+  function validatePartnerField(id, type, showErr = true) {
+    const el = document.getElementById(id);
+    const errEl = document.getElementById('err-' + id);
+    if (!el) return true;
+
+    let v = el.value;
+
+    if (type === 'name') {
+      const restricted = v.replace(/[^a-zA-Z\s'-]/g, '');
+      if (restricted !== v) { el.value = restricted; v = restricted; }
+    } else if (type === 'location') {
+      const restricted = v.replace(/[0-9]/g, '');
+      if (restricted !== v) { el.value = restricted; v = restricted; }
+    }
+
+    const trimmed = v.trim();
+    let valid = true;
+    let msg = '';
+
+    if (!trimmed && el.hasAttribute('required')) {
+      valid = false;
+      msg = 'This field is required.';
+    } else if (trimmed && type === 'name') {
+      valid = /^[a-zA-Z\s'-]{2,60}$/.test(trimmed);
+      msg = 'Please enter a valid name (letters, spaces, hyphens only, min 2 chars).';
+    } else if (trimmed && type === 'email') {
+      valid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmed);
+      msg = 'Please enter a valid email address.';
+    } else if (trimmed && type === 'location') {
+      valid = /^[a-zA-Z\s,-]{2,60}$/.test(trimmed);
+      msg = 'Please enter a valid location (letters, spaces, commas, hyphens only).';
+    }
+
+    if (showErr) {
+      if (!valid) {
+        el.classList.add('invalid-input');
+        if (errEl) { errEl.innerText = msg; errEl.style.display = 'block'; }
+      } else {
+        el.classList.remove('invalid-input');
+        if (errEl) { errEl.style.display = 'none'; errEl.innerText = ''; }
+      }
+    }
+
+    return valid;
+  }
+
+  ['name', 'email', 'location'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', () => validatePartnerField(id, id, true));
+    el.addEventListener('blur', () => validatePartnerField(id, id, true));
+  });
+
   document.getElementById('inquiryForm').addEventListener('submit', function(e){
     e.preventDefault();
-    const email = val('email');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!val('name') || !emailRegex.test(email)) {
-      document.getElementById('status').textContent = 'Please enter a valid name and email address.';
+
+    const nOk = validatePartnerField('name', 'name', true);
+    const eOk = validatePartnerField('email', 'email', true);
+    const lOk = validatePartnerField('location', 'location', true);
+
+    if (!nOk || !eOk || !lOk) {
+      document.getElementById('status').textContent = 'Please correct the highlighted errors in the form.';
       return;
     }
+
     const statusEl = document.getElementById('status');
     const submitBtn = e.target.querySelector('button[type=submit]');
     if(submitBtn) submitBtn.disabled = true;
