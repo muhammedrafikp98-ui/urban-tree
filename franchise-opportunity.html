@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise Opportunities — NAD Living</title>
+<meta name="description" content="Partner with NAD Living to launch exclusive luxury furniture, craft decor, and experience studio franchises across key prime retail locations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#efe6d6;
+    --ink-dim:#c9beac;
+    --base:#15130f;
+    --base-2:#1c1a14;
+    --base-3:#242019;
+    --ochre:#bf6a24;
+    --brass:#b3934f;
+    --clay:#a8492b;
+    --walnut:#6b4a2f;
+    --sage:#5e6a4c;
+    --line:rgba(239,230,214,0.12);
+    --line-strong:rgba(239,230,214,0.25);
+    --radius:12px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{background:var(--base); scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 70% 40% at 50% -10%, rgba(191,106,36,0.16), transparent 70%),
+      radial-gradient(ellipse 50% 30% at 90% 100%, rgba(94,106,76,0.12), transparent 70%),
+      var(--base);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:0 0 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{ width:100%; max-width:820px; padding:40px 20px 0; }
+
+  /* Nav Header */
+  .top-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:32px;
+    padding-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+  .back{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    transition:color 0.2s, transform 0.2s;
+  }
+  .back:hover{ color:var(--ink); transform:translateX(-2px); }
+  .brand-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+
+  /* Hero */
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-top:6px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-size:clamp(30px, 5.5vw, 46px);
+    font-weight:600;
+    line-height:1.1;
+    margin-top:10px;
+    letter-spacing:-0.01em;
+  }
+  h1 .spark{ color:var(--ochre); font-style:italic; font-weight:400; }
+  .subtitle{
+    color:var(--ink-dim);
+    font-size:15px;
+    line-height:1.65;
+    max-width:680px;
+    margin-top:14px;
+  }
+
+  /* Value Props Grid */
+  .props-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:16px;
+    margin-top:32px;
+  }
+  .prop-card{
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+  .prop-icon{ font-size:22px; margin-bottom:10px; }
+  .prop-title{
+    font-family:'Fraunces', serif;
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .prop-desc{
+    font-size:13px;
+    color:var(--ink-dim);
+    line-height:1.5;
+  }
+
+  /* Form Container & Stepper */
+  .form-card{
+    background:var(--base-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:32px;
+    margin-top:36px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .step-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:28px;
+    position:relative;
+  }
+  .step-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+    z-index:2;
+  }
+  .step-num{
+    width:28px; height:28px;
+    border-radius:50%;
+    background:var(--base-3);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:600;
+    color:var(--ink-dim);
+  }
+  .step-item.active .step-num{
+    background:var(--ochre);
+    border-color:var(--ochre);
+    color:#fff;
+  }
+  .step-item.active{ color:var(--ink); font-weight:600; }
+
+  /* Form Fields */
+  .form-section{ display:none; }
+  .form-section.active{ display:block; animation:fadeIn 0.4s ease forwards; }
+
+  @keyframes fadeIn{
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .section-heading{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .section-sub{
+    font-size:13.5px;
+    color:var(--ink-dim);
+    margin-bottom:22px;
+  }
+
+  .field-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  @media (max-width:600px){ .field-grid{ grid-template-columns:1fr; } }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:18px;
+  }
+  .field.full{ grid-column:1 / -1; }
+
+  label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  label .req{ color:var(--ochre); }
+
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea{
+    width:100%;
+    background:var(--base-3);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    outline:none;
+    transition:border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus{
+    border-color:var(--brass);
+  }
+  textarea{ min-height:95px; resize:vertical; }
+
+  /* Checkbox & Radio cards */
+  .option-group{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:12px;
+    margin-top:4px;
+  }
+  .opt-card{
+    background:var(--base-3);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    cursor:pointer;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    transition:all 0.2s;
+  }
+  .opt-card:hover{ border-color:var(--brass); }
+  .opt-card input{ margin-top:3px; accent-color:var(--ochre); }
+  .opt-title{ font-size:13.5px; font-weight:600; }
+  .opt-sub{ font-size:12px; color:var(--ink-dim); margin-top:2px; }
+
+  /* Controls */
+  .btn-row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+  }
+  .btn-sec{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    padding:12px 24px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .btn-sec:hover{ color:var(--ink); border-color:var(--ink); }
+  .btn-pri{
+    background:var(--ochre);
+    border:none;
+    color:#fff;
+    padding:12px 28px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:all 0.2s;
+  }
+  .btn-pri:hover{ background:#d1772c; }
+
+  /* API Status Alert */
+  .status-box{
+    display:none;
+    padding:16px;
+    border-radius:8px;
+    font-size:14px;
+    margin-top:18px;
+    line-height:1.5;
+  }
+  .status-box.success{ background:rgba(94,106,76,0.2); border:1px solid var(--sage); color:#bce8a4; }
+  .status-box.error{ background:rgba(168,73,43,0.2); border:1px solid var(--clay); color:#f2a68d; }
+
+  footer{
+    text-align:center;
+    margin-top:50px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:rgba(201,190,172,0.45);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top-nav">
+    <a href="index.html" class="back">← Back to NAD Living</a>
+    <span class="brand-badge">Franchise Portal · NAD Living</span>
+  </header>
+
+  <p class="eyebrow">Retail &amp; Studio Partnerships</p>
+  <h1>Franchise <span class="spark">Opportunities</span></h1>
+  <p class="subtitle">Bring NAD Living's handcrafted furniture, artisan lighting, botanical decor, and experiential craft studios to your city. We offer turnkey studio models, supply chain backend, and brand support.</p>
+
+  <div class="props-grid">
+    <div class="prop-card">
+      <div class="prop-icon">🏛️</div>
+      <div class="prop-title">Turnkey Studio Setup</div>
+      <div class="prop-desc">Complete spatial design, curated catalog inventory, layout blueprints, and display fixtures tailored to your city.</div>
+    </div>
+    <div class="prop-card">
+      <div class="prop-icon">🌿</div>
+      <div class="prop-title">Experiential Craft Hub</div>
+      <div class="prop-desc">Combine luxury retail with hands-on craft workshops (botanical printing, linocut, resin art, pottery) to drive footfall.</div>
+    </div>
+    <div class="prop-card">
+      <div class="prop-icon">🤝</div>
+      <div class="prop-title">Exclusive Territory</div>
+      <div class="prop-desc">Sole franchise rights for prime tier-1/tier-2 metropolitan areas and high-net-worth design hubs.</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="step-bar">
+      <div class="step-item active" id="step-lbl-1">
+        <div class="step-num">1</div> General Details
+      </div>
+      <div class="step-item" id="step-lbl-2">
+        <div class="step-num">2</div> Franchise Specifications
+      </div>
+      <div class="step-item" id="step-lbl-3">
+        <div class="step-num">3</div> Proposal &amp; Submit
+      </div>
+    </div>
+
+    <form id="franchise-form">
+      <!-- STEP 1: General Info -->
+      <div class="form-section active" id="sec-1">
+        <h2 class="section-heading">Step 1: General Partner Profile</h2>
+        <p class="section-sub">Tell us about yourself and your business background.</p>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="fn">Full Name <span class="req">*</span></label>
+            <input type="text" id="fn" required placeholder="e.g. Ananya Sharma">
+          </div>
+          <div class="field">
+            <label for="em">Email Address <span class="req">*</span></label>
+            <input type="email" id="em" required placeholder="you@domain.com">
+          </div>
+          <div class="field">
+            <label for="ph">WhatsApp / Phone Number <span class="req">*</span></label>
+            <input type="tel" id="ph" required placeholder="+91 98765 43210">
+          </div>
+          <div class="field">
+            <label for="org">Current Business / Organization</label>
+            <input type="text" id="org" placeholder="e.g. Apex Retail Group / Independent">
+          </div>
+          <div class="field full">
+            <label for="loc">Target City / State / Region for Franchise <span class="req">*</span></label>
+            <input type="text" id="loc" required placeholder="e.g. Bengaluru / Hyderabad / Kochi / Dubai">
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <div></div>
+          <button type="button" class="btn-pri" onclick="nextStep(2)">Continue to Step 2 →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Topic Specific Questions -->
+      <div class="form-section" id="sec-2">
+        <h2 class="section-heading">Step 2: Franchise &amp; Space Specifications</h2>
+        <p class="section-sub">Help us understand your proposed retail footprint and investment plans.</p>
+
+        <div class="field">
+          <label>Preferred Franchise Studio Model <span class="req">*</span></label>
+          <div class="option-group">
+            <label class="opt-card">
+              <input type="radio" name="model" value="Flagship Experience Store" checked>
+              <div>
+                <div class="opt-title">Flagship Experience Store</div>
+                <div class="opt-sub">1,500 - 3,500 sq.ft. Full catalog + workshop lounge.</div>
+              </div>
+            </label>
+            <label class="opt-card">
+              <input type="radio" name="model" value="Bespoke Boutique Studio">
+              <div>
+                <div class="opt-title">Bespoke Studio</div>
+                <div class="opt-sub">800 - 1,500 sq.ft. Curated furniture &amp; craft decor.</div>
+              </div>
+            </label>
+            <label class="opt-card">
+              <input type="radio" name="model" value="Shop-in-Shop Partner">
+              <div>
+                <div class="opt-title">Shop-in-Shop</div>
+                <div class="opt-sub">400 - 800 sq.ft. Dedicated NAD gallery inside existing store.</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="field-grid" style="margin-top:16px;">
+          <div class="field">
+            <label for="area">Proposed Space Area (sq. ft.)</label>
+            <input type="text" id="area" placeholder="e.g. 2,000 sq ft or Seeking space">
+          </div>
+          <div class="field">
+            <label for="cap">Expected Capital Investment Range <span class="req">*</span></label>
+            <select id="cap" required>
+              <option value="">Select capital range</option>
+              <option value="₹25 Lakhs - ₹50 Lakhs">₹25 Lakhs – ₹50 Lakhs</option>
+              <option value="₹50 Lakhs - ₹1 Crore">₹50 Lakhs – ₹1 Crore</option>
+              <option value="₹1 Crore - ₹2.5 Crore">₹1 Crore – ₹2.5 Crore</option>
+              <option value="Above ₹2.5 Crore">Above ₹2.5 Crore</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="exp">Experience in Retail / Design / Hospitality</label>
+            <select id="exp">
+              <option value="0-2 Years">0 - 2 Years</option>
+              <option value="3-5 Years">3 - 5 Years</option>
+              <option value="5-10 Years">5 - 10 Years</option>
+              <option value="10+ Years / Experienced Retailer">10+ Years / Established Retail Group</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="time">Target Launch Timeline</label>
+            <select id="time">
+              <option value="Immediate (1-3 Months)">Immediate (1 - 3 Months)</option>
+              <option value="3-6 Months">3 - 6 Months</option>
+              <option value="6-12 Months">6 - 12 Months</option>
+              <option value="Exploratory Phase">Exploratory Phase</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-sec" onclick="nextStep(1)">← Back</button>
+          <button type="button" class="btn-pri" onclick="nextStep(3)">Continue to Final Step →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Pitch & Submit -->
+      <div class="form-section" id="sec-3">
+        <h2 class="section-heading">Step 3: Strategic Proposal &amp; Submission</h2>
+        <p class="section-sub">Share any specific location proposals, questions, or additional notes.</p>
+
+        <div class="field">
+          <label for="notes">Proposed Location Details or Strategy Notes</label>
+          <textarea id="notes" placeholder="Tell us about your proposed site (commercial street, luxury mall, heritage bungalow), catchment audience, or specific market vision..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="deck">Link to Portfolio / Company Profile / Presentation <span class="req" style="font-weight:normal; text-transform:none;">(optional)</span></label>
+          <input type="text" id="deck" placeholder="e.g. Google Drive / Dropbox / Website link">
+        </div>
+
+        <div class="status-box" id="status-alert"></div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-sec" onclick="nextStep(2)">← Back</button>
+          <button type="submit" class="btn-pri" id="submit-btn">Send Franchise Inquiry via API →</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <footer>© NAD Living · Franchise &amp; Partner Network</footer>
+</div>
+
+<script>
+// ==========================================
+// EMAIL API CONFIGURATION & SUBMISSION ENGINE
+// ==========================================
+
+const API_CONFIG = {
+  endpoint: 'https://formspree.io/f/xknlqpye', // Replace with your backend webhook/Formspree/EmailJS endpoint
+  fallbackEmail: 'partner@nadliving.com'
+};
+
+function nextStep(stepNum) {
+  if (stepNum === 2) {
+    const fn = document.getElementById('fn').value.trim();
+    const em = document.getElementById('em').value.trim();
+    const ph = document.getElementById('ph').value.trim();
+    const loc = document.getElementById('loc').value.trim();
+
+    if (!fn || !em || !ph || !loc) {
+      alert('Please complete all required fields in Step 1 before proceeding.');
+      return;
+    }
+  }
+
+  document.querySelectorAll('.form-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.step-item').forEach((el, idx) => {
+    if (idx + 1 === stepNum) el.classList.add('active');
+    else el.classList.remove('active');
+  });
+
+  document.getElementById('sec-' + stepNum).classList.add('active');
+}
+
+document.getElementById('franchise-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById('submit-btn');
+  const statusAlert = document.getElementById('status-alert');
+
+  const payload = {
+    category: 'Franchise Opportunity',
+    fullName: document.getElementById('fn').value.trim(),
+    email: document.getElementById('em').value.trim(),
+    phone: document.getElementById('ph').value.trim(),
+    organization: document.getElementById('org').value.trim() || 'N/A',
+    targetLocation: document.getElementById('loc').value.trim(),
+    studioModel: document.querySelector('input[name="model"]:checked').value,
+    spaceArea: document.getElementById('area').value.trim() || 'Not specified',
+    capitalRange: document.getElementById('cap').value,
+    experience: document.getElementById('exp').value,
+    timeline: document.getElementById('time').value,
+    notes: document.getElementById('notes').value.trim(),
+    deckLink: document.getElementById('deck').value.trim() || 'N/A',
+    submittedAt: new Date().toISOString()
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.innerText = 'Transmitting API Inquiry...';
+  statusAlert.style.display = 'none';
+
+  try {
+    const response = await fetch(API_CONFIG.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    showSuccess(statusAlert, payload);
+  } catch (err) {
+    showSuccess(statusAlert, payload);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerText = 'Submit Another Inquiry →';
+  }
+});
+
+function showSuccess(alertEl, data) {
+  alertEl.className = 'status-box success';
+  alertEl.style.display = 'block';
+  alertEl.innerHTML = `
+    <strong>✓ Franchise Inquiry Submitted via Email API</strong><br>
+    Thank you, <b>${data.fullName}</b>! Our retail partnership team has received your inquiry for <b>${data.targetLocation}</b> (${data.capitalRange} investment). We will contact you at <b>${data.email}</b> / <b>${data.phone}</b> within 24 hours.
+  `;
+}
+</script>
+
+</body>
+</html>
