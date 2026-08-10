@@ -7,6 +7,7 @@
     "dev": "npx serve ."
   },
   "dependencies": {
-    "resend": "^3.2.0"
+    "resend": "^3.2.0",
+    "sharp": "^0.35.3"
   }
 }
