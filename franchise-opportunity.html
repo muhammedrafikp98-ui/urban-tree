@@ -467,6 +467,12 @@
       color: #bce8a4;
     }
 
+    .status-box.error {
+      background: rgba(220, 53, 69, 0.25);
+      border: 1px solid #dc3545;
+      color: #ff8a8a;
+    }
+
     footer {
       text-align: center;
       margin-top: 50px;
@@ -839,8 +845,51 @@
       document.getElementById('sec-' + stepNum).classList.add('active');
     }
 
+    function resetForm() {
+      const form = document.getElementById('franchise-form');
+      if (form) form.reset();
+
+      const notes = document.getElementById('notes');
+      if (notes) notes.value = '';
+
+      const statusAlert = document.getElementById('status-alert');
+      if (statusAlert) {
+        statusAlert.style.display = 'none';
+        statusAlert.innerHTML = '';
+        statusAlert.className = 'status-box';
+      }
+
+      const fields = ['fn', 'em', 'ph', 'org', 'loc', 'area', 'cap', 'exp', 'time', 'deck'];
+      fields.forEach((id) => {
+        const inputEl = document.getElementById(id);
+        const errEl = document.getElementById('err-' + id);
+        if (inputEl) inputEl.classList.remove('invalid-input');
+        if (errEl) {
+          errEl.style.display = 'none';
+          errEl.innerText = '';
+        }
+      });
+
+      const submitBtn = document.getElementById('submit-btn');
+      if (submitBtn) {
+        submitBtn.innerText = 'Submit Franchise Inquiry →';
+        submitBtn.disabled = false;
+        delete submitBtn.dataset.isSubmitted;
+      }
+
+      nextStep(1);
+      checkStepValidity(1);
+    }
+
     document.getElementById('franchise-form').addEventListener('submit', async function (e) {
       e.preventDefault();
+
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (submitBtn.dataset.isSubmitted === 'true') {
+        resetForm();
+        return;
+      }
 
       const fnOk = validateSingleField('fn', true);
       const emOk = validateSingleField('em', true);
@@ -849,11 +898,9 @@
       const capOk = validateSingleField('cap', true);
 
       if (!fnOk || !emOk || !phOk || !locOk || !capOk) {
-        alert('Please correct the errors in the form before submitting.');
         return;
       }
 
-      const submitBtn = document.getElementById('submit-btn');
       const statusAlert = document.getElementById('status-alert');
 
       const fullName = document.getElementById('fn').value.trim();
@@ -861,7 +908,8 @@
       const phone = document.getElementById('ph').value.trim();
       const organization = document.getElementById('org').value.trim() || 'N/A';
       const targetLocation = document.getElementById('loc').value.trim();
-      const studioModel = document.querySelector('input[name="model"]:checked').value;
+      const studioModelEl = document.querySelector('input[name="model"]:checked');
+      const studioModel = studioModelEl ? studioModelEl.value : 'N/A';
       const spaceArea = document.getElementById('area').value.trim() || 'Not specified';
       const capitalRange = document.getElementById('cap').value;
       const experience = document.getElementById('exp').value;
@@ -906,31 +954,52 @@ ${notes}`;
           })
         });
         const data = await response.json();
-        if (data.success) sentSuccess = true;
-      } catch (err) { }
-
-      if (!sentSuccess) {
+        if (data.success) {
+          sentSuccess = true;
+        } else {
+          throw new Error(data.error || 'Failed to send email');
+        }
+      } catch (err) {
         try {
-          await fetch('https://formspree.io/f/xknlqpye', {
+          const fsRes = await fetch('https://formspree.io/f/xknlqpye', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({ category: 'Franchise Opportunity', fullName, email, phone, organization, targetLocation, studioModel, capitalRange, notes })
           });
-          sentSuccess = true;
-        } catch (err) { }
+          if (fsRes.ok) sentSuccess = true;
+        } catch (fsErr) { }
       }
 
-      showSuccess(statusAlert, { fullName, targetLocation, capitalRange, email });
-      submitBtn.disabled = false;
-      submitBtn.innerText = 'Submit Another Inquiry →';
+      if (sentSuccess) {
+        showSuccess(statusAlert, { fullName, targetLocation, capitalRange, email });
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Another Inquiry →';
+        submitBtn.dataset.isSubmitted = 'true';
+      } else {
+        statusAlert.className = 'status-box error';
+        statusAlert.style.display = 'block';
+        statusAlert.innerHTML = `<strong>Submission Failed</strong><br>Something went wrong — please try again.`;
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Franchise Inquiry →';
+      }
     });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function (m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
 
     function showSuccess(alertEl, data) {
       alertEl.className = 'status-box success';
       alertEl.style.display = 'block';
       alertEl.innerHTML = `
     <strong>✓ Franchise Inquiry Submitted Successfully</strong><br>
-    Thank you, <b>${data.fullName}</b>! Our retail partnership team has received your inquiry for <b>${data.targetLocation}</b> (${data.capitalRange} investment range). We will reach out to <b>${data.email}</b> within 24 hours.
+    Thank you, <b>${escapeHtml(data.fullName)}</b>! Our retail partnership team has received your inquiry for <b>${escapeHtml(data.targetLocation)}</b> (${escapeHtml(data.capitalRange)} investment range). We will reach out to <b>${escapeHtml(data.email)}</b> within 24 hours.
+    <div style="margin-top:12px;">
+      <button type="button" onclick="resetForm()" style="background:transparent; border:1px solid #bce8a4; color:#bce8a4; padding:6px 14px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:500;">Submit Another Inquiry</button>
+    </div>
   `;
     }
   </script>
