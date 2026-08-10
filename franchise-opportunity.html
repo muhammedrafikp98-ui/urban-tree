@@ -971,10 +971,11 @@ ${notes}`;
       }
 
       if (sentSuccess) {
-        showSuccess(statusAlert, { fullName, targetLocation, capitalRange, email });
-        submitBtn.disabled = false;
-        submitBtn.innerText = 'Submit Another Inquiry →';
-        submitBtn.dataset.isSubmitted = 'true';
+        resetForm();
+        submitBtn.innerText = '✓ Submitted Successfully!';
+        setTimeout(() => {
+          if (submitBtn) submitBtn.innerText = 'Submit Franchise Inquiry →';
+        }, 3500);
       } else {
         statusAlert.className = 'status-box error';
         statusAlert.style.display = 'block';
@@ -983,25 +984,6 @@ ${notes}`;
         submitBtn.innerText = 'Submit Franchise Inquiry →';
       }
     });
-
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/[&<>"']/g, function (m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-      });
-    }
-
-    function showSuccess(alertEl, data) {
-      alertEl.className = 'status-box success';
-      alertEl.style.display = 'block';
-      alertEl.innerHTML = `
-    <strong>✓ Franchise Inquiry Submitted Successfully</strong><br>
-    Thank you, <b>${escapeHtml(data.fullName)}</b>! Our retail partnership team has received your inquiry for <b>${escapeHtml(data.targetLocation)}</b> (${escapeHtml(data.capitalRange)} investment range). We will reach out to <b>${escapeHtml(data.email)}</b> within 24 hours.
-    <div style="margin-top:12px;">
-      <button type="button" onclick="resetForm()" style="background:transparent; border:1px solid #bce8a4; color:#bce8a4; padding:6px 14px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:500;">Submit Another Inquiry</button>
-    </div>
-  `;
-    }
   </script>
 
 </body>

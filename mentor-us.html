@@ -876,10 +876,11 @@ ${mentorshipVision}`;
       }
 
       if (sentSuccess) {
-        showSuccess(statusAlert, { fullName, domain, engagementModel, email });
-        submitBtn.disabled = false;
-        submitBtn.innerText = 'Submit Another Offer →';
-        submitBtn.dataset.isSubmitted = 'true';
+        resetForm();
+        submitBtn.innerText = '✓ Submitted Successfully!';
+        setTimeout(() => {
+          if (submitBtn) submitBtn.innerText = 'Submit Mentorship Inquiry →';
+        }, 3500);
       } else {
         statusAlert.className = 'status-box error';
         statusAlert.style.display = 'block';
@@ -888,25 +889,6 @@ ${mentorshipVision}`;
         submitBtn.innerText = 'Submit Mentorship Inquiry →';
       }
     });
-
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/[&<>"']/g, function (m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-      });
-    }
-
-    function showSuccess(alertEl, data) {
-      alertEl.className = 'status-box success';
-      alertEl.style.display = 'block';
-      alertEl.innerHTML = `
-    <strong>✓ Mentorship Offer Received Successfully</strong><br>
-    Thank you, <b>${escapeHtml(data.fullName)}</b>! Our founders &amp; executive board are honored by your interest to mentor NAD Living in <b>${escapeHtml(data.domain)}</b> as an <b>${escapeHtml(data.engagementModel)}</b>. We will reach out to <b>${escapeHtml(data.email)}</b> shortly.
-    <div style="margin-top:12px;">
-      <button type="button" onclick="resetForm()" style="background:transparent; border:1px solid #bce8a4; color:#bce8a4; padding:6px 14px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:500;">Submit Another Offer</button>
-    </div>
-  `;
-    }
   </script>
 
 </body>

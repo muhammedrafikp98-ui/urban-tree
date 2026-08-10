@@ -1146,10 +1146,11 @@ ${strategicThesis}`;
       }
 
       if (sentSuccess) {
-        showSuccess(statusAlert, { fullName, ticketSize, investorCategory, email });
-        submitBtn.disabled = false;
-        submitBtn.innerText = 'Submit Another Inquiry →';
-        submitBtn.dataset.isSubmitted = 'true';
+        resetForm();
+        submitBtn.innerText = '✓ Submitted Successfully!';
+        setTimeout(() => {
+          if (submitBtn) submitBtn.innerText = 'Submit Investor Inquiry →';
+        }, 3500);
       } else {
         statusAlert.className = 'status-box error';
         statusAlert.style.display = 'block';
@@ -1158,25 +1159,6 @@ ${strategicThesis}`;
         submitBtn.innerText = 'Submit Investor Inquiry →';
       }
     });
-
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/[&<>"']/g, function (m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-      });
-    }
-
-    function showSuccess(alertEl, data) {
-      alertEl.className = 'status-box success';
-      alertEl.style.display = 'block';
-      alertEl.innerHTML = `
-    <strong>✓ Investor Inquiry Submitted Successfully</strong><br>
-    Thank you, <b>${escapeHtml(data.fullName)}</b>! Our investor relations team has received your inquiry (${escapeHtml(data.ticketSize)} bracket as <b>${escapeHtml(data.investorCategory)}</b>). Confidential pitch deck &amp; financials will be shared at <b>${escapeHtml(data.email)}</b> within 24 hours.
-    <div style="margin-top:12px;">
-      <button type="button" onclick="resetForm()" style="background:transparent; border:1px solid #bce8a4; color:#bce8a4; padding:6px 14px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:500;">Submit Another Inquiry</button>
-    </div>
-  `;
-    }
   </script>
 
 </body>
