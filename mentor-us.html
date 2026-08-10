@@ -428,6 +428,12 @@
       color: #bce8a4;
     }
 
+    .status-box.error {
+      background: rgba(220, 53, 69, 0.25);
+      border: 1px solid #dc3545;
+      color: #ff8a8a;
+    }
+
     footer {
       text-align: center;
       margin-top: 50px;
@@ -751,8 +757,51 @@
       document.getElementById('sec-' + stepNum).classList.add('active');
     }
 
+    function resetForm() {
+      const form = document.getElementById('mentor-form');
+      if (form) form.reset();
+
+      const vision = document.getElementById('vision');
+      if (vision) vision.value = '';
+
+      const statusAlert = document.getElementById('status-alert');
+      if (statusAlert) {
+        statusAlert.style.display = 'none';
+        statusAlert.innerHTML = '';
+        statusAlert.className = 'status-box';
+      }
+
+      const fields = ['fn', 'em', 'ph', 'role', 'link'];
+      fields.forEach((id) => {
+        const inputEl = document.getElementById(id);
+        const errEl = document.getElementById('err-' + id);
+        if (inputEl) inputEl.classList.remove('invalid-input');
+        if (errEl) {
+          errEl.style.display = 'none';
+          errEl.innerText = '';
+        }
+      });
+
+      const submitBtn = document.getElementById('submit-btn');
+      if (submitBtn) {
+        submitBtn.innerText = 'Submit Mentorship Inquiry →';
+        submitBtn.disabled = false;
+        delete submitBtn.dataset.isSubmitted;
+      }
+
+      nextStep(1);
+      checkStepValidity(1);
+    }
+
     document.getElementById('mentor-form').addEventListener('submit', async function (e) {
       e.preventDefault();
+
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (submitBtn.dataset.isSubmitted === 'true') {
+        resetForm();
+        return;
+      }
 
       const fnOk = validateSingleField('fn', true);
       const emOk = validateSingleField('em', true);
@@ -764,7 +813,6 @@
         return;
       }
 
-      const submitBtn = document.getElementById('submit-btn');
       const statusAlert = document.getElementById('status-alert');
 
       const fullName = document.getElementById('fn').value.trim();
@@ -772,7 +820,8 @@
       const phone = document.getElementById('ph').value.trim();
       const currentRole = document.getElementById('role').value.trim() || 'N/A';
       const bioLink = document.getElementById('link').value.trim();
-      const domain = document.querySelector('input[name="domain"]:checked').value;
+      const domainEl = document.querySelector('input[name="domain"]:checked');
+      const domain = domainEl ? domainEl.value : 'N/A';
       const experienceYears = document.getElementById('exp-yrs').value;
       const engagementModel = document.getElementById('model').value;
       const mentorshipVision = document.getElementById('vision').value.trim() || 'None';
@@ -811,31 +860,52 @@ ${mentorshipVision}`;
           })
         });
         const data = await response.json();
-        if (data.success) sentSuccess = true;
-      } catch (err) { }
-
-      if (!sentSuccess) {
+        if (data.success) {
+          sentSuccess = true;
+        } else {
+          throw new Error(data.error || 'Failed to send email');
+        }
+      } catch (err) {
         try {
-          await fetch('https://formspree.io/f/xknlqpye', {
+          const fsRes = await fetch('https://formspree.io/f/xknlqpye', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ category: 'Mentor Us', fullName, email, phone, currentRole, bioLink, domain, engagementModel })
+            body: JSON.stringify({ category: 'Mentor Us', fullName, email, phone, currentRole, bioLink, domain, engagementModel, mentorshipVision })
           });
-          sentSuccess = true;
-        } catch (err) { }
+          if (fsRes.ok) sentSuccess = true;
+        } catch (fsErr) { }
       }
 
-      showSuccess(statusAlert, { fullName, domain, engagementModel, email });
-      submitBtn.disabled = false;
-      submitBtn.innerText = 'Submit Another Offer →';
+      if (sentSuccess) {
+        showSuccess(statusAlert, { fullName, domain, engagementModel, email });
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Another Offer →';
+        submitBtn.dataset.isSubmitted = 'true';
+      } else {
+        statusAlert.className = 'status-box error';
+        statusAlert.style.display = 'block';
+        statusAlert.innerHTML = `<strong>Submission Failed</strong><br>Something went wrong — please try again.`;
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Mentorship Inquiry →';
+      }
     });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function (m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
 
     function showSuccess(alertEl, data) {
       alertEl.className = 'status-box success';
       alertEl.style.display = 'block';
       alertEl.innerHTML = `
     <strong>✓ Mentorship Offer Received Successfully</strong><br>
-    Thank you, <b>${data.fullName}</b>! Our founders &amp; executive board are honored by your interest to mentor NAD Living in <b>${data.domain}</b> as an <b>${data.engagementModel}</b>. We will reach out to <b>${data.email}</b> shortly.
+    Thank you, <b>${escapeHtml(data.fullName)}</b>! Our founders &amp; executive board are honored by your interest to mentor NAD Living in <b>${escapeHtml(data.domain)}</b> as an <b>${escapeHtml(data.engagementModel)}</b>. We will reach out to <b>${escapeHtml(data.email)}</b> shortly.
+    <div style="margin-top:12px;">
+      <button type="button" onclick="resetForm()" style="background:transparent; border:1px solid #bce8a4; color:#bce8a4; padding:6px 14px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:500;">Submit Another Offer</button>
+    </div>
   `;
     }
   </script>
