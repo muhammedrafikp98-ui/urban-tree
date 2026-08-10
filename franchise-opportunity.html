@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Franchise Opportunities — Experience Centre Network | NAD Living</title>
+  <title>Franchise & Retail Opportunities — NAD Living</title>
   <meta name="description"
-    content="Partner with NAD Living to launch exclusive luxury furniture, craft decor, and experience studio franchises across Mumbai, Chennai, Bengaluru, Hyderabad, and Coimbatore.">
+    content="Bring NAD’s contemporary Indian design experience to your city. Explore retail, studio, and space partnership opportunities across select Indian markets.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -119,14 +119,23 @@
     }
 
     .subtitle {
-      color: var(--ink-dim);
-      font-size: 15px;
-      line-height: 1.65;
-      max-width: 720px;
+      color: var(--ochre);
+      font-family: 'Fraunces', serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      line-height: 1.4;
+      max-width: 760px;
       margin-top: 14px;
     }
 
-    /* Key Metrics Grid */
+    .body-copy {
+      font-size: 14.5px;
+      color: var(--ink-dim);
+      line-height: 1.65;
+      margin-top: 14px;
+      max-width: 760px;
+    }
+
+    /* Credibility Cards Grid */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -143,17 +152,18 @@
 
     .metric-val {
       font-family: 'Fraunces', serif;
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 700;
       color: var(--ochre);
       margin-bottom: 4px;
+      line-height: 1.2;
     }
 
     .metric-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       text-transform: uppercase;
-      color: var(--ink-dim);
+      color: var(--brass);
       letter-spacing: 0.06em;
     }
 
@@ -164,37 +174,89 @@
       line-height: 1.45;
     }
 
-    /* 5 City Target Banner */
+    /* General Card Sections */
+    .content-section {
+      background: var(--base-2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 32px;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 13.5px;
+      color: var(--ink-dim);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    /* Markets We Are Exploring */
     .cities-box {
       background: linear-gradient(135deg, rgba(191, 106, 36, 0.12), rgba(179, 147, 79, 0.08));
       border: 1px solid var(--ochre);
       border-radius: 16px;
-      padding: 24px;
+      padding: 28px;
       margin-top: 32px;
     }
 
     .cities-title {
       font-family: 'Fraunces', serif;
-      font-size: 20px;
+      font-size: 22px;
       color: var(--ink);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .cities-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 12px;
+      margin-top: 16px;
     }
 
     .city-chip {
       background: var(--base-3);
       border: 1px solid var(--line);
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 20px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--brass);
+    }
+
+    /* Partner Cards Grid */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .partner-card {
+      background: var(--base-3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .partner-title {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--brass);
+      margin-bottom: 6px;
+    }
+
+    .partner-desc {
+      font-size: 12.5px;
+      color: var(--ink-dim);
+      line-height: 1.45;
     }
 
     /* Form Container & Stepper */
@@ -249,7 +311,6 @@
       font-weight: 600;
     }
 
-    /* Form Fields */
     .form-section {
       display: none;
     }
@@ -269,19 +330,6 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
-
-    .section-heading {
-      font-family: 'Fraunces', serif;
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .section-sub {
-      font-size: 13.5px;
-      color: var(--ink-dim);
-      margin-bottom: 22px;
     }
 
     .field-grid {
@@ -339,7 +387,7 @@
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: var(--brass);
+      border-color: var(--ochre);
     }
 
     textarea {
@@ -360,45 +408,6 @@
       font-size: 11.5px;
       margin-top: 4px;
       display: none;
-    }
-
-    .option-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-top: 4px;
-    }
-
-    .opt-card {
-      background: var(--base-3);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      transition: all 0.2s;
-    }
-
-    .opt-card:hover {
-      border-color: var(--ochre);
-    }
-
-    .opt-card input {
-      margin-top: 3px;
-      accent-color: var(--ochre);
-    }
-
-    .opt-title {
-      font-size: 13.5px;
-      font-weight: 600;
-    }
-
-    .opt-sub {
-      font-size: 12px;
-      color: var(--ink-dim);
-      margin-top: 2px;
     }
 
     .btn-row {
@@ -452,8 +461,6 @@
       background: #6e5033 !important;
     }
 
-
-
     footer {
       text-align: center;
       margin-top: 50px;
@@ -467,72 +474,99 @@
 <body>
 
   <div class="wrap">
+    <!-- 1. HERO SECTION -->
     <header class="top-nav">
       <a href="index.html" class="back">← Back</a>
-      <span class="brand-badge">Franchise &amp; Retail Network</span>
+      <span class="brand-badge">FRANCHISE &amp; RETAIL NETWORK</span>
     </header>
 
     <p class="eyebrow">EXPERIENCE-LED RETAIL DESTINATIONS</p>
     <h1>Franchise <span class="spark">Opportunity</span></h1>
-    <p class="subtitle">Bring NAD Living's contemporary Indian design experience to your city. Following our 13,500 sq.ft. Pondicherry flagship, we are expanding our physical studio &amp; experience centre footprint across key metro &amp; tier-1 markets.</p>
+    <p class="subtitle">Bring NAD’s contemporary Indian design experience to your city.</p>
+    <p class="body-copy">NAD is building a distinctive retail and experience network around contemporary Indian furniture, lighting, décor, craft and cultural experiences. We are inviting aligned entrepreneurs, retail partners and space owners to explore opportunities to bring the NAD experience to select Indian markets.</p>
 
-    <!-- Key Metrics Grid -->
+    <!-- 3. NON-FINANCIAL CREDIBILITY CARDS -->
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-val">91%</div>
-        <div class="metric-label">YoY Growth Momentum</div>
-        <div class="metric-desc">Strong demand expansion driven by flagship experience centres and organic brand reach.</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">13,500 SQ.FT.</div>
-        <div class="metric-label">Flagship Benchmark</div>
-        <div class="metric-desc">Pondicherry experience centre bringing furniture, lighting, workshops &amp; cafe together.</div>
-      </div>
-      <div class="metric-card">
         <div class="metric-val">800+</div>
-        <div class="metric-label">Products Developed</div>
-        <div class="metric-desc">Established catalog across Furniture, Décor, Lighting, Reclaimed Architecture &amp; Art.</div>
+        <div class="metric-label">PRODUCTS DEVELOPED</div>
+        <div class="metric-desc">A growing design universe spanning furniture, lighting, décor, reclaimed architectural elements, art and textiles.</div>
       </div>
       <div class="metric-card">
-        <div class="metric-val">700+</div>
-        <div class="metric-label">Organic Enquiries</div>
-        <div class="metric-desc">High inbound demand from homeowners, architects, stylists &amp; hospitality buyers.</div>
+        <div class="metric-val">13,500 SQ. FT.</div>
+        <div class="metric-label">PONDICHERRY EXPERIENCE DESTINATION</div>
+        <div class="metric-desc">NAD’s destination-format space bringing together design, retail, workshops and cultural experiences.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">MULTI-CATEGORY</div>
+        <div class="metric-label">DESIGN ECOSYSTEM</div>
+        <div class="metric-desc">Furniture · Lighting · Décor · Art · Textiles · Workshops · Bespoke Projects</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">EXPERIENCE-LED</div>
+        <div class="metric-label">RETAIL FORMAT</div>
+        <div class="metric-desc">A retail concept designed around discovery, storytelling, Indian material culture and immersive brand experiences.</div>
       </div>
     </div>
 
-    <!-- 5 City Expansion Banner -->
+    <!-- 4. MARKETS WE ARE EXPLORING -->
     <div class="cities-box">
-      <h2 class="cities-title">Priority Cities for Physical Store Expansion</h2>
-      <p style="font-size:13.5px; color:var(--ink-dim);">We are actively seeking franchise partners and space owners in the following priority expansion hubs:</p>
+      <h2 class="cities-title">Markets We Are Exploring</h2>
+      <p style="font-size:13.5px; color:var(--ink-dim); margin-top:4px;">We are currently exploring retail and experience-centre opportunities across select metro and Tier-1 Indian markets.</p>
       <div class="cities-list">
         <span class="city-chip">📍 Mumbai</span>
         <span class="city-chip">📍 Bengaluru</span>
         <span class="city-chip">📍 Chennai</span>
         <span class="city-chip">📍 Hyderabad</span>
         <span class="city-chip">📍 Coimbatore</span>
-        <span class="city-chip">✨ Select Tier-1 Luxury Markets</span>
+        <span class="city-chip">📍 Other Select Markets</span>
       </div>
     </div>
 
-    <!-- Form Card -->
-    <div class="form-card">
+    <!-- 5. WHO WE WOULD LIKE TO PARTNER WITH -->
+    <div class="content-section">
+      <h2 class="section-heading">Who We Would Like to Partner With</h2>
+      <p class="section-sub">We are looking for partners who understand that NAD is more than conventional home décor retail. The ideal partner shares our belief in Indian design, craft, storytelling and experience-led retail, while bringing strong local market understanding and execution capability.</p>
+      
+      <div class="partners-grid">
+        <div class="partner-card">
+          <div class="partner-title">ENTREPRENEURS</div>
+          <div class="partner-desc">With strong local market understanding and execution capability.</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-title">RETAIL OPERATORS</div>
+          <div class="partner-desc">With experience in premium retail, lifestyle, furniture or design.</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-title">SPACE OWNERS</div>
+          <div class="partner-desc">With distinctive properties suitable for an immersive NAD experience.</div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-title">STRATEGIC PARTNERS</div>
+          <div class="partner-desc">With complementary networks across design, hospitality, architecture or luxury.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7, 8, 9. PARTNERSHIP ENQUIRY FORM -->
+    <div class="form-card" id="enquiry-form-card">
       <div class="step-bar">
         <div class="step-item active" id="step-lbl-1">
           <div class="step-num">1</div> Partner Profile
         </div>
         <div class="step-item" id="step-lbl-2">
-          <div class="step-num">2</div> Location &amp; Space
+          <div class="step-num">2</div> Location &amp; Partnership
         </div>
         <div class="step-item" id="step-lbl-3">
-          <div class="step-num">3</div> Investment &amp; Submit
+          <div class="step-num">3</div> Partnership Readiness
         </div>
       </div>
 
       <form id="franchise-form" novalidate>
-        <!-- STEP 1: Profile -->
+        <!-- STEP 1: PARTNER PROFILE -->
         <div class="form-section active" id="sec-1">
-          <h2 class="section-heading">Step 1: Applicant &amp; Business Profile</h2>
-          <p class="section-sub">Tell us about yourself and your experience in retail or business management.</p>
+          <h2 class="section-heading">Step 1 — Partner Profile</h2>
+          <p class="section-sub">Introduce yourself and your background.</p>
 
           <div class="field-grid">
             <div class="field">
@@ -551,7 +585,7 @@
               <span class="err-msg" id="err-ph"></span>
             </div>
             <div class="field">
-              <label for="org">Current Business / Organization</label>
+              <label for="org">Current Business / Organisation</label>
               <input type="text" id="org" placeholder="Company or studio name (if applicable)">
               <span class="err-msg" id="err-org"></span>
             </div>
@@ -568,50 +602,47 @@
           </div>
         </div>
 
-        <!-- STEP 2: Location & Space -->
+        <!-- STEP 2: LOCATION & PARTNERSHIP -->
         <div class="form-section" id="sec-2">
-          <h2 class="section-heading">Step 2: Franchise Format &amp; Space Details</h2>
-          <p class="section-sub">Choose your preferred experience centre format and space availability.</p>
+          <h2 class="section-heading">Step 2 — Location &amp; Partnership</h2>
+          <p class="section-sub">Select your format preferences, property status, and business background.</p>
 
-          <div class="field">
-            <label>Franchise Model Interest <span class="req">*</span></label>
-            <div class="option-group">
-              <label class="opt-card">
-                <input type="radio" name="model" value="Flagship Experience Centre (5,000-13,500 sq.ft)" checked>
-                <div>
-                  <div class="opt-title">Flagship Experience Centre</div>
-                  <div class="opt-sub">5,000 – 13,500 sq.ft standalone destination with retail, workshops &amp; lounge.</div>
-                </div>
-              </label>
-              <label class="opt-card">
-                <input type="radio" name="model" value="Boutique Studio / Store-in-Store (1,500-3,500 sq.ft)">
-                <div>
-                  <div class="opt-title">Boutique Studio</div>
-                  <div class="opt-sub">1,500 – 3,500 sq.ft prime high-street or luxury mall experience.</div>
-                </div>
-              </label>
-              <label class="opt-card">
-                <input type="radio" name="model" value="Architectural & B2B Gallery">
-                <div>
-                  <div class="opt-title">B2B &amp; Trade Gallery</div>
-                  <div class="opt-sub">Dedicated trade gallery serving architects &amp; hospitality projects.</div>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <div class="field-grid" style="margin-top:16px;">
+          <div class="field-grid">
             <div class="field">
-              <label for="area">Available Commercial Carpet Area (sq.ft)</label>
-              <input type="text" id="area" placeholder="e.g. 3,500 sq.ft / Space under negotiation">
+              <label for="format">Preferred Partnership Format <span class="req">*</span></label>
+              <select id="format" required>
+                <option value="">Select Format</option>
+                <option value="Experience Centre">Experience Centre</option>
+                <option value="Boutique / Design Studio">Boutique / Design Studio</option>
+                <option value="B2B & Trade Gallery">B2B &amp; Trade Gallery</option>
+                <option value="Space / Property Partnership">Space / Property Partnership</option>
+                <option value="Open to Discuss">Open to Discuss</option>
+              </select>
+              <span class="err-msg" id="err-format"></span>
+            </div>
+            <div class="field">
+              <label for="area">Available Commercial Area (Approx. Sq. Ft.)</label>
+              <input type="text" id="area" placeholder="e.g. 2,500 sq. ft. / Space searching">
+            </div>
+            <div class="field">
+              <label for="status">Property Status</label>
+              <select id="status">
+                <option value="Already Own / Lease a Suitable Space">Already Own / Lease a Suitable Space</option>
+                <option value="Space Identified / Under Negotiation">Space Identified / Under Negotiation</option>
+                <option value="Currently Searching">Currently Searching</option>
+                <option value="Would Like NAD’s Guidance">Would Like NAD’s Guidance</option>
+              </select>
             </div>
             <div class="field">
               <label for="exp">Prior Retail / Business Experience</label>
               <select id="exp">
-                <option value="Luxury / Home Décor Retail">Luxury / Home Décor Retail</option>
-                <option value="Hospitality & F&B">Hospitality, F&amp;B or Cafes</option>
-                <option value="Architecture & Interior Studio">Architecture &amp; Interior Design Studio</option>
-                <option value="First-Time Franchise Partner">First-Time Entrepreneur / Investor</option>
+                <option value="Furniture / Home & Living">Furniture / Home &amp; Living</option>
+                <option value="Luxury / Lifestyle Retail">Luxury / Lifestyle Retail</option>
+                <option value="Hospitality">Hospitality</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Architecture / Design">Architecture / Design</option>
+                <option value="Other Retail / Business">Other Retail / Business</option>
+                <option value="First-time Entrepreneur">First-time Entrepreneur</option>
               </select>
             </div>
           </div>
@@ -622,53 +653,62 @@
           </div>
         </div>
 
-        <!-- STEP 3: Investment & Submit -->
+        <!-- STEP 3: PARTNERSHIP READINESS & SUBMIT -->
         <div class="form-section" id="sec-3">
-          <h2 class="section-heading">Step 3: Investment Outlay &amp; Submission</h2>
-          <p class="section-sub">Select your capital readiness and estimated rollout timeframe.</p>
+          <h2 class="section-heading">Step 3: Partnership Readiness</h2>
+          <p class="section-sub">Share your investment readiness and target launch timeframe.</p>
 
           <div class="field-grid">
             <div class="field">
-              <label for="cap">Capital Investment Capacity <span class="req">*</span></label>
-              <select id="cap" required>
-                <option value="">Select Capital Outlay</option>
-                <option value="₹40 Lakhs - ₹75 Lakhs">₹40 Lakhs – ₹75 Lakhs (Boutique Studio)</option>
-                <option value="₹75 Lakhs - ₹1.5 Crore">₹75 Lakhs – ₹1.5 Crore (Standard Experience Centre)</option>
-                <option value="₹1.5 Crore - ₹3 Crore+">₹1.5 Crore – ₹3 Crore+ (Full Flagship Destination)</option>
+              <label for="readiness">Indicative Investment Readiness</label>
+              <select id="readiness">
+                <option value="Exploring the Opportunity">Exploring the Opportunity</option>
+                <option value="Ready to Evaluate Commercials">Ready to Evaluate Commercials</option>
+                <option value="Capital Identified">Capital Identified</option>
+                <option value="Existing Business / Infrastructure Available">Existing Business / Infrastructure Available</option>
+                <option value="Would Prefer to Discuss">Would Prefer to Discuss</option>
               </select>
-              <span class="err-msg" id="err-cap"></span>
             </div>
             <div class="field">
               <label for="time">Target Launch Timeline</label>
               <select id="time">
-                <option value="Immediate (1-3 Months)">Immediate (1 – 3 Months)</option>
-                <option value="3-6 Months">3 – 6 Months</option>
-                <option value="6-12 Months">6 – 12 Months</option>
+                <option value="Immediate — 1–3 Months">Immediate — 1–3 Months</option>
+                <option value="3–6 Months">3–6 Months</option>
+                <option value="6–12 Months">6–12 Months</option>
+                <option value="12+ Months">12+ Months</option>
+                <option value="Exploring / Flexible">Exploring / Flexible</option>
               </select>
             </div>
           </div>
 
           <div class="field">
-            <label for="notes">Additional Comments / Site Proposals</label>
+            <label for="notes">Tell Us About Your Proposal</label>
             <textarea id="notes"
-              placeholder="Tell us about your proposed site location, commercial catchment, or team background..."></textarea>
+              placeholder="Tell us about your city, proposed location or property, business background, local market understanding and why you would like to partner with NAD."></textarea>
           </div>
 
           <div class="field">
-            <label for="deck">Website or Pitch Deck Link (Optional)</label>
-            <input type="text" id="deck" placeholder="e.g. https://yourcompany.com or Drive link">
+            <label for="deck">Website / Business Profile / Professional Link — Optional</label>
+            <input type="text" id="deck" placeholder="e.g. https://yourcompany.com or LinkedIn link">
           </div>
-
 
           <div class="btn-row">
             <button type="button" class="btn-sec" onclick="nextStep(2)">← Back</button>
-            <button type="submit" class="btn-pri" id="submit-btn">Submit Franchise Inquiry →</button>
+            <button type="submit" class="btn-pri" id="submit-btn">SUBMIT PARTNERSHIP ENQUIRY →</button>
           </div>
         </div>
       </form>
+
+      <!-- 10. CONFIRMATION SCREEN -->
+      <div id="confirmation-screen" style="display:none; text-align:center; padding:24px 12px;">
+        <div style="font-size:36px; margin-bottom:12px;">✨</div>
+        <h2 style="font-family:'Fraunces', serif; font-size:24px; color:var(--ochre); margin-bottom:12px;">Thank You for Your Interest in Partnering with NAD</h2>
+        <p style="font-size:14px; color:var(--ink-dim); max-width:560px; margin:0 auto 24px; line-height:1.6;">Our team will review your profile, proposed market and partnership requirements. Relevant applicants will be contacted for a detailed discussion on format, location, commercial structure and next steps.</p>
+        <a href="index.html" class="btn-pri" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">RETURN TO NAD →</a>
+      </div>
     </div>
 
-    <footer>© NAD Living · Nature • Art • Design · Franchise &amp; Experience Centre Network</footer>
+    <footer>© NAD Living · Nature • Art • Design · Franchise &amp; Retail Network</footer>
   </div>
 
   <script>
@@ -705,9 +745,9 @@
         restrict: (v) => v.replace(/[0-9]/g, ''),
         message: 'Please enter a valid location (letters, spaces, commas, hyphens only, min 2 characters).'
       },
-      cap: {
+      format: {
         validate: (v) => v !== '',
-        message: 'Please select an expected capital investment range.'
+        message: 'Please select a preferred partnership format.'
       }
     };
 
@@ -774,7 +814,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const fields = ['fn', 'em', 'ph', 'loc', 'org', 'cap'];
+      const fields = ['fn', 'em', 'ph', 'loc', 'org', 'format'];
 
       fields.forEach((id) => {
         const el = document.getElementById(id);
@@ -817,34 +857,6 @@
       document.getElementById('sec-' + stepNum).classList.add('active');
     }
 
-    function resetForm() {
-      const form = document.getElementById('franchise-form');
-      if (form) form.reset();
-
-      const notes = document.getElementById('notes');
-      if (notes) notes.value = '';
-
-      const fields = ['fn', 'em', 'ph', 'org', 'loc', 'area', 'cap', 'exp', 'time', 'deck'];
-      fields.forEach((id) => {
-        const inputEl = document.getElementById(id);
-        const errEl = document.getElementById('err-' + id);
-        if (inputEl) inputEl.classList.remove('invalid-input');
-        if (errEl) {
-          errEl.style.display = 'none';
-          errEl.innerText = '';
-        }
-      });
-
-      const submitBtn = document.getElementById('submit-btn');
-      if (submitBtn) {
-        submitBtn.innerText = 'Submit Franchise Inquiry →';
-        submitBtn.disabled = false;
-      }
-
-      nextStep(1);
-      checkStepValidity(1);
-    }
-
     document.getElementById('franchise-form').addEventListener('submit', async function (e) {
       e.preventDefault();
 
@@ -854,9 +866,9 @@
       const emOk = validateSingleField('em', true);
       const phOk = validateSingleField('ph', true);
       const locOk = validateSingleField('loc', true);
-      const capOk = validateSingleField('cap', true);
+      const formatOk = validateSingleField('format', true);
 
-      if (!fnOk || !emOk || !phOk || !locOk || !capOk) {
+      if (!fnOk || !emOk || !phOk || !locOk || !formatOk) {
         return;
       }
 
@@ -865,44 +877,45 @@
       const phone = document.getElementById('ph').value.trim();
       const organization = document.getElementById('org').value.trim() || 'N/A';
       const targetLocation = document.getElementById('loc').value.trim();
-      const studioModelEl = document.querySelector('input[name="model"]:checked');
-      const studioModel = studioModelEl ? studioModelEl.value : 'N/A';
+      const format = document.getElementById('format').value;
       const spaceArea = document.getElementById('area').value.trim() || 'Not specified';
-      const capitalRange = document.getElementById('cap').value;
+      const propertyStatus = document.getElementById('status').value;
       const experience = document.getElementById('exp').value;
+      const readiness = document.getElementById('readiness').value;
       const timeline = document.getElementById('time').value;
       const notes = document.getElementById('notes').value.trim() || 'None';
       const deckLink = document.getElementById('deck').value.trim() || 'N/A';
 
-      const textContent = `New Franchise Opportunity Inquiry — NAD Living
+      const textContent = `New Partnership Enquiry — NAD Living
 
 Applicant Details:
 Name: ${fullName}
 Email: ${email}
 Phone / WhatsApp: ${phone}
 Organization: ${organization}
+Target City / State / Region: ${targetLocation}
 
-Franchise Specifications:
-Target Location: ${targetLocation}
-Studio Model: ${studioModel}
-Proposed Space: ${spaceArea}
-Capital Investment Range: ${capitalRange}
-Retail Experience: ${experience}
-Launch Timeline: ${timeline}
-Deck / Website: ${deckLink}
+Partnership Specifications:
+Preferred Format: ${format}
+Commercial Area: ${spaceArea}
+Property Status: ${propertyStatus}
+Retail / Business Experience: ${experience}
+Investment Readiness: ${readiness}
+Target Launch Timeline: ${timeline}
+Website / Profile Link: ${deckLink}
 
-Additional Notes:
+Proposal & Notes:
 ${notes}`;
 
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Submitting Inquiry…';
+      submitBtn.innerText = 'Submitting Enquiry…';
 
       try {
         await fetch('/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            subject: `Franchise Opportunity Inquiry — ${fullName} (${targetLocation})`,
+            subject: `Partnership Enquiry — ${fullName} (${targetLocation})`,
             replyTo: email,
             text: textContent
           })
@@ -912,16 +925,14 @@ ${notes}`;
           await fetch('https://formspree.io/f/xknlqpye', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ category: 'Franchise Opportunity', fullName, email, phone, organization, targetLocation, studioModel, capitalRange, notes })
+            body: JSON.stringify({ category: 'Partnership Enquiry', fullName, email, phone, organization, targetLocation, format, readiness, notes })
           });
         } catch (fsErr) { }
       }
 
-      resetForm();
-      submitBtn.innerText = '✓ Submitted Successfully!';
-      setTimeout(() => {
-        if (submitBtn) submitBtn.innerText = 'Submit Franchise Inquiry →';
-      }, 3500);
+      // Show confirmation screen
+      document.getElementById('franchise-form').style.display = 'none';
+      document.getElementById('confirmation-screen').style.display = 'block';
     });
   </script>
 
