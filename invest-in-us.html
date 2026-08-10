@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invest in Us — Pitch Deck & Growth Equity | NAD Living</title>
+  <title>Invest in Us — Growth & Investment Opportunities | NAD Living</title>
   <meta name="description"
-    content="NAD Living Pitch Deck & Equity Opportunity. Invest ₹1 Crore for 12% equity in India's leading contemporary luxury craft design house.">
+    content="Building a contemporary Indian design house rooted in India’s cultural capital. Explore investment opportunities with NAD Living.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -119,25 +119,12 @@
     }
 
     .subtitle {
-      color: var(--ink-dim);
-      font-size: 15px;
-      line-height: 1.65;
-      max-width: 720px;
-      margin-top: 14px;
-    }
-
-    .pitch-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(179, 147, 79, 0.15);
-      border: 1px solid rgba(179, 147, 79, 0.3);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
       color: var(--brass);
-      margin-top: 16px;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      line-height: 1.4;
+      max-width: 760px;
+      margin-top: 14px;
     }
 
     /* Key Metrics Grid */
@@ -145,7 +132,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 16px;
-      margin-top: 32px;
+      margin-top: 36px;
     }
 
     .metric-card {
@@ -158,10 +145,11 @@
 
     .metric-val {
       font-family: 'Fraunces', serif;
-      font-size: 30px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--brass);
       margin-bottom: 4px;
+      line-height: 1.2;
     }
 
     .metric-label {
@@ -179,61 +167,7 @@
       line-height: 1.45;
     }
 
-    /* Investment Raise Highlights Box */
-    .raise-box {
-      background: linear-gradient(135deg, rgba(179, 147, 79, 0.12), rgba(191, 106, 36, 0.08));
-      border: 1px solid var(--brass);
-      border-radius: 16px;
-      padding: 28px;
-      margin-top: 36px;
-    }
-
-    .raise-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .raise-title {
-      font-family: 'Fraunces', serif;
-      font-size: 24px;
-      color: var(--ink);
-    }
-
-    .raise-terms {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--brass);
-      background: var(--base-3);
-      padding: 6px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--line);
-    }
-
-    .raise-pillars {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .raise-pillar-item {
-      font-size: 13.5px;
-      line-height: 1.55;
-    }
-
-    .raise-pillar-item strong {
-      color: var(--brass);
-      display: block;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    /* Financial Table */
+    /* General Card Sections */
     .financials-section {
       background: var(--base-2);
       border: 1px solid var(--line);
@@ -242,31 +176,17 @@
       margin-top: 32px;
     }
 
-    .fin-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 16px;
-      font-size: 14px;
-    }
-
-    .fin-table th,
-    .fin-table td {
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .fin-table th {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--brass);
-      letter-spacing: 0.08em;
-    }
-
-    .fin-table td.growth {
-      color: #bce8a4;
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
       font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 13.5px;
+      color: var(--ink-dim);
+      margin-bottom: 22px;
     }
 
     /* Founders Section */
@@ -311,7 +231,7 @@
       line-height: 1.5;
     }
 
-    /* Form Container & Stepper */
+    /* Form Container */
     .form-card {
       background: var(--base-2);
       border: 1px solid var(--line);
@@ -319,82 +239,6 @@
       padding: 32px;
       margin-top: 36px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .step-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      position: relative;
-    }
-
-    .step-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-dim);
-      z-index: 2;
-    }
-
-    .step-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--base-3);
-      border: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      color: var(--ink-dim);
-    }
-
-    .step-item.active .step-num {
-      background: var(--brass);
-      border-color: var(--brass);
-      color: #15130f;
-    }
-
-    .step-item.active {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .form-section {
-      display: none;
-    }
-
-    .form-section.active {
-      display: block;
-      animation: fadeIn 0.4s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .section-heading {
-      font-family: 'Fraunces', serif;
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .section-sub {
-      font-size: 13.5px;
-      color: var(--ink-dim);
-      margin-bottom: 22px;
     }
 
     .field-grid {
@@ -475,69 +319,13 @@
       display: none;
     }
 
-    .option-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-top: 4px;
-    }
-
-    .opt-card {
-      background: var(--base-3);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      transition: all 0.2s;
-    }
-
-    .opt-card:hover {
-      border-color: var(--brass);
-    }
-
-    .opt-card input {
-      margin-top: 3px;
-      accent-color: var(--brass);
-    }
-
-    .opt-title {
-      font-size: 13.5px;
-      font-weight: 600;
-    }
-
-    .opt-sub {
-      font-size: 12px;
-      color: var(--ink-dim);
-      margin-top: 2px;
-    }
-
     .btn-row {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 12px;
       margin-top: 28px;
       padding-top: 20px;
       border-top: 1px solid var(--line);
-    }
-
-    .btn-sec {
-      background: none;
-      border: 1px solid var(--line);
-      color: var(--ink-dim);
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-sec:hover {
-      color: var(--ink);
-      border-color: var(--ink);
     }
 
     .btn-pri {
@@ -565,8 +353,6 @@
       background: #6e5c33 !important;
     }
 
-
-
     footer {
       text-align: center;
       margin-top: 50px;
@@ -580,306 +366,179 @@
 <body>
 
   <div class="wrap">
+    <!-- 1. HEADER -->
     <header class="top-nav">
       <a href="index.html" class="back">← Back</a>
-      <span class="brand-badge">Investor Relations · NAD Pitch Deck</span>
+      <span class="brand-badge">INVESTOR RELATIONS · NAD</span>
     </header>
 
+    <!-- 1. MAIN INTRODUCTION -->
     <p class="eyebrow">NATURE · ART · DESIGN — AN URBANPOTS VENTURE</p>
     <h1>Invest <span class="spark">in Us</span></h1>
-    <p class="subtitle">Building a contemporary Indian design house rooted in India’s cultural capital. From a 100
-      sq.ft. setup to a ₹2.20 Cr revenue business, we are raising capital to scale our physical flagship, inventory
-      depth, and 5-city expansion.</p>
+    <p class="subtitle">Building a contemporary Indian design house rooted in India’s cultural capital.</p>
 
-    <div class="pitch-badge">
-      <span>📄 Verified Investor Pitch Deck Summary · FY 2025–26</span>
+    <div style="font-size:14.5px; color:var(--ink-dim); line-height:1.65; margin-top:16px; display:flex; flex-direction:column; gap:12px; max-width:760px;">
+      <p>NAD is building a distinctive design ecosystem across furniture, lighting, décor, spaces and experiences — bringing Indian craft, material culture and architectural heritage into contemporary living.</p>
+      <p>From a 100 sq. ft. beginning, we have grown into a revenue-generating, EBITDA-positive business with 800+ products developed, an organically growing community and a 13,500 sq. ft. destination experience centre under development in Pondicherry.</p>
+      <p>We are now preparing NAD for its next phase of growth across retail, digital commerce, projects and key Indian markets.</p>
+      <p>We are currently open to conversations with aligned strategic investors, family offices and value-add capital partners.</p>
     </div>
 
-    <!-- Verified Metrics Grid -->
+    <!-- 2. CTA BUTTON -->
+    <div style="margin-top:24px;">
+      <a href="#investor-form-section" class="btn-pri" style="text-decoration:none;">REQUEST INVESTOR DECK →</a>
+    </div>
+
+    <!-- 3. PUBLIC TRACTION SECTION (4 KEY CREDIBILITY CARDS) -->
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-val">₹2.20 Cr</div>
-        <div class="metric-label">FY 2025–26 Revenue</div>
-        <div class="metric-desc">~91% YoY Revenue Growth (up from ₹1.15 Cr in FY25 &amp; ₹1.02 Cr in FY24).</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val">~55%</div>
-        <div class="metric-label">Gross Margin</div>
-        <div class="metric-desc">EBITDA Positive with ~₹15 Lakhs current monthly revenue &amp; ₹10,000 AOV.</div>
-      </div>
-      <div class="metric-card">
         <div class="metric-val">800+</div>
-        <div class="metric-label">Products Developed</div>
-        <div class="metric-desc">Across Furniture, Lighting, Décor, Reclaimed Architecture &amp; Textiles.</div>
+        <div class="metric-label">PRODUCTS DEVELOPED</div>
+        <div class="metric-desc">Across furniture, lighting, décor, reclaimed architecture, textiles and contemporary Indian design.</div>
       </div>
       <div class="metric-card">
-        <div class="metric-val">13,500 SQ.FT.</div>
-        <div class="metric-label">Flagship Destination</div>
-        <div class="metric-desc">Experience Centre under activation in Pondicherry for immersive retail &amp; workshops.
+        <div class="metric-val">13,500 SQ. FT.</div>
+        <div class="metric-label">PONDICHERRY EXPERIENCE DESTINATION</div>
+        <div class="metric-desc">A destination-format experience centre being developed for retail, design, workshops and cultural experiences.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">EBITDA POSITIVE</div>
+        <div class="metric-label">REVENUE-GENERATING BUSINESS</div>
+        <div class="metric-desc">A commercially operating design business moving from validation into structured scale.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">PAN-INDIA AMBITION</div>
+        <div class="metric-label">RETAIL · DIGITAL · PROJECTS · EXPERIENCES</div>
+        <div class="metric-desc">Building toward a multi-city contemporary Indian design ecosystem.</div>
+      </div>
+    </div>
+
+    <!-- 4. SHORT "WHY NAD / THE OPPORTUNITY" SECTION -->
+    <div class="financials-section" style="margin-top:32px;">
+      <h2 class="section-heading">Building the Next Contemporary Indian Design House</h2>
+      <div style="font-size:14px; color:var(--ink-dim); line-height:1.65; margin-top:12px; display:flex; flex-direction:column; gap:12px;">
+        <p>India possesses extraordinary depth in craft, architecture, materials, making traditions and cultural narratives, yet much of this remains disconnected from contemporary homes and modern lifestyles. NAD exists at this intersection — translating cultural capital into relevant, functional and collectible design.</p>
+        <p>Our opportunity is to build a recognisable Indian design house with multiple commercial engines spanning products, spaces, projects, experiences and digital commerce.</p>
+      </div>
+    </div>
+
+    <!-- 5. WHAT WE ARE BUILDING SECTION -->
+    <div class="financials-section" style="margin-top:24px;">
+      <h2 class="section-heading">What We Are Building</h2>
+      <p class="section-sub">A multi-faceted commercial ecosystem celebrating craft and contemporary living.</p>
+      <div class="pillars-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-top:16px;">
+        <div class="founder-card">
+          <div class="founder-name" style="font-size:16px;">PRODUCTS</div>
+          <div class="founder-bio" style="margin-top:4px;">Furniture · Lighting · Décor · Collectibles</div>
+        </div>
+        <div class="founder-card">
+          <div class="founder-name" style="font-size:16px;">SPACES</div>
+          <div class="founder-bio" style="margin-top:4px;">Bespoke residential, hospitality and commercial design interventions</div>
+        </div>
+        <div class="founder-card">
+          <div class="founder-name" style="font-size:16px;">EXPERIENCES</div>
+          <div class="founder-bio" style="margin-top:4px;">Workshops · Craft · Making · Cultural Experiences</div>
+        </div>
+        <div class="founder-card">
+          <div class="founder-name" style="font-size:16px;">COMMERCE</div>
+          <div class="founder-bio" style="margin-top:4px;">Flagship Retail · E-commerce · Projects · Multi-city Expansion</div>
         </div>
       </div>
     </div>
 
-    <!-- The Raise Summary Card -->
-    <div class="raise-box">
-      <div class="raise-header">
-        <div>
-          <h2 class="raise-title">Current Investment Round — Equity Raise</h2>
-          <p style="font-size: 13.5px; color: var(--ink-dim); margin-top:4px;">Deploying capital into two immediate
-            growth levers: Flagship Completion &amp; Inventory Depth.</p>
-        </div>
-        <div class="raise-terms">
-          Raising ₹1 Crore for 12% Equity
-        </div>
-      </div>
-
-      <div class="raise-pillars">
-        <div class="raise-pillar-item">
-          <strong>Valuation Parameters</strong>
-          Implied Pre-Money: ~₹7.33 Crore<br>
-          Implied Post-Money: ~₹8.33 Crore
-        </div>
-        <div class="raise-pillar-item">
-          <strong>01 · Flagship Completion</strong>
-          Complete &amp; activate the 13,500 sq.ft. Pondicherry experience centre as the primary revenue &amp; content
-          engine.
-        </div>
-        <div class="raise-pillar-item">
-          <strong>02 · Inventory &amp; Omni-Channel</strong>
-          Build depth across high-converting categories to serve D2C, e-commerce, and 500+ inbound trade projects.
-        </div>
-      </div>
-    </div>
-
-    <!-- Financial Performance & Growth Track Record -->
-    <div class="financials-section">
-      <h2 class="section-heading">Financial Trajectory &amp; Unit Economics</h2>
-      <p class="section-sub">NAD has moved beyond concept validation into predictable growth and cash generation.</p>
-
-      <table class="fin-table">
-        <thead>
-          <tr>
-            <th>Financial Year</th>
-            <th>Revenue</th>
-            <th>YoY Growth</th>
-            <th>EBITDA Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>FY 2023–24</td>
-            <td>₹1.02 Crore</td>
-            <td>Base Year</td>
-            <td>Profitable</td>
-          </tr>
-          <tr>
-            <td>FY 2024–25</td>
-            <td>₹1.15 Crore</td>
-            <td>+12.7%</td>
-            <td>Profitable</td>
-          </tr>
-          <tr>
-            <td>FY 2025–26</td>
-            <td>₹2.20 Crore</td>
-            <td class="growth">~91% YoY</td>
-            <td class="growth">EBITDA Positive</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div
-        style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:20px;">
-        <div style="background:var(--base-3); padding:14px; border-radius:8px; border:1px solid var(--line);">
-          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--brass);">COMMUNITY</div>
-          <div style="font-size:18px; font-weight:600; margin-top:2px;">26K+ Organic</div>
-        </div>
-        <div style="background:var(--base-3); padding:14px; border-radius:8px; border:1px solid var(--line);">
-          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--brass);">INBOUND ENQUIRIES
-          </div>
-          <div style="font-size:18px; font-weight:600; margin-top:2px;">700+ Organic</div>
-        </div>
-        <div style="background:var(--base-3); padding:14px; border-radius:8px; border:1px solid var(--line);">
-          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--brass);">SKIN IN THE GAME
-          </div>
-          <div style="font-size:18px; font-weight:600; margin-top:2px;">₹1.8 Cr Founder Equity</div>
-        </div>
-        <div style="background:var(--base-3); padding:14px; border-radius:8px; border:1px solid var(--line);">
-          <div style="font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--brass);">3-YEAR AMBITION
-          </div>
-          <div style="font-size:18px; font-weight:600; margin-top:2px;">₹50 Crore Target</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Founders & Leadership -->
+    <!-- 8. FOUNDERS SECTION -->
     <div class="financials-section" style="margin-top:24px;">
       <h2 class="section-heading">Founders &amp; Execution Leadership</h2>
-      <p class="section-sub">Creative vision paired with rigorous operational discipline.</p>
+      <p class="section-sub">Creative vision paired with operational execution.</p>
 
       <div class="founders-grid">
         <div class="founder-card">
           <div class="founder-name">Jayasri Priyadharshini</div>
           <div class="founder-role">Founder &amp; Creative Head</div>
-          <div class="founder-bio">Engineer turned entrepreneur and designer. Built Urbanpots from a 100 sq.ft. home
-            setup with ₹10,000 into a ₹2.20 Cr revenue business with 800+ products developed and ₹1.8 Cr personal
-            capital invested.</div>
+          <div class="founder-bio">Engineer turned entrepreneur and designer. Jayasri founded Urbanpots from a 100 sq. ft. home setup and ₹10,000 in initial capital, building it into the foundation for NAD — a contemporary Indian design house rooted in craft, culture, material and making.</div>
         </div>
         <div class="founder-card">
           <div class="founder-name">Saravanan</div>
           <div class="founder-role">Co-Founder — Operations &amp; Execution</div>
-          <div class="founder-bio">Leads artisan supply chain logistics, 13,500 sq.ft. flagship infrastructure
-            development, and workshop operations to turn cultural capital into contemporary commercial scale.</div>
+          <div class="founder-bio">Leads operations, artisan coordination, sourcing, production, logistics and infrastructure execution, including the development of NAD’s 13,500 sq. ft. Pondicherry experience destination.</div>
         </div>
       </div>
     </div>
 
-    <!-- 3-Step Investor Form -->
-    <div class="form-card">
-      <div class="step-bar">
-        <div class="step-item active" id="step-lbl-1">
-          <div class="step-num">1</div> Investor Profile
-        </div>
-        <div class="step-item" id="step-lbl-2">
-          <div class="step-num">2</div> Investment Strategy
-        </div>
-        <div class="step-item" id="step-lbl-3">
-          <div class="step-num">3</div> Thesis &amp; Submit
-        </div>
-      </div>
+    <!-- 9 & 10. INVESTOR ENQUIRY SECTION & FORM -->
+    <div class="form-card" id="investor-form-section">
+      <h2 class="section-heading">Interested in Investing in NAD?</h2>
+      <p class="section-sub" style="line-height:1.55;">We are currently speaking with aligned investors, family offices and strategic partners who believe in the opportunity to build a globally relevant contemporary Indian design house.<br><br>Tell us a little about yourself and your investment thesis. Relevant investors will receive access to our detailed investor presentation and further information.</p>
 
-      <form id="investor-form" novalidate>
-        <!-- STEP 1: Investor Profile -->
-        <div class="form-section active" id="sec-1">
-          <h2 class="section-heading">Step 1: General Investor Profile</h2>
-          <p class="section-sub">Please introduce yourself and your investment background.</p>
-
-          <div class="field-grid">
-            <div class="field">
-              <label for="fn">Full Name <span class="req">*</span></label>
-              <input type="text" id="fn" required placeholder="e.g. Vikram Mehta" autocomplete="name">
-              <span class="err-msg" id="err-fn"></span>
-            </div>
-            <div class="field">
-              <label for="em">Email Address <span class="req">*</span></label>
-              <input type="email" id="em" required placeholder="you@firm.com" autocomplete="email">
-              <span class="err-msg" id="err-em"></span>
-            </div>
-            <div class="field">
-              <label for="ph">WhatsApp / Phone Number <span class="req">*</span></label>
-              <input type="tel" id="ph" required placeholder="+91 98765 43210" autocomplete="tel">
-              <span class="err-msg" id="err-ph"></span>
-            </div>
-            <div class="field">
-              <label for="fund">Fund / Firm / Organization Name</label>
-              <input type="text" id="fund" placeholder="e.g. NextGen Ventures / Family Office">
-              <span class="err-msg" id="err-fund"></span>
-            </div>
-            <div class="field full">
-              <label for="inv-type">Investor Category <span class="req">*</span></label>
-              <select id="inv-type" required>
-                <option value="">Select Category</option>
-                <option value="Angel Investor">Angel Investor (Individual / Syndicate)</option>
-                <option value="Venture Capital Fund">Venture Capital / Growth Equity</option>
-                <option value="Family Office">Family Office / HNW Individual</option>
-                <option value="Strategic Industry Partner">Strategic Retail / Design Industry Partner</option>
-              </select>
-              <span class="err-msg" id="err-inv-type"></span>
-            </div>
-          </div>
-
-          <div class="btn-row">
-            <div></div>
-            <button type="button" class="btn-pri" id="btn-step-1" onclick="nextStep(2)">Continue to Step 2 →</button>
-          </div>
-        </div>
-
-        <!-- STEP 2: Investment Strategy -->
-        <div class="form-section" id="sec-2">
-          <h2 class="section-heading">Step 2: Investment Scope &amp; Focus</h2>
-          <p class="section-sub">Specify your intended ticket size for our ₹1 Cr seed equity round.</p>
-
+      <form id="investor-form" novalidate style="margin-top:24px;">
+        <div class="field-grid">
           <div class="field">
-            <label>Intended Investment Ticket Size <span class="req">*</span></label>
-            <div class="option-group">
-              <label class="opt-card">
-                <input type="radio" name="ticket" value="₹25 Lakhs - ₹50 Lakhs (Angel Tranche)" checked>
-                <div>
-                  <div class="opt-title">₹25L – ₹50L</div>
-                  <div class="opt-sub">Angel Seed Tranche</div>
-                </div>
-              </label>
-              <label class="opt-card">
-                <input type="radio" name="ticket" value="₹50 Lakhs - ₹1 Crore (Co-Lead)">
-                <div>
-                  <div class="opt-title">₹50L – ₹1Cr</div>
-                  <div class="opt-sub">Co-Lead Round Participation</div>
-                </div>
-              </label>
-              <label class="opt-card">
-                <input type="radio" name="ticket" value="₹1 Crore (Entire Round Lead)">
-                <div>
-                  <div class="opt-title">₹1 Crore</div>
-                  <div class="opt-sub">Lead Round Investor (12% Equity)</div>
-                </div>
-              </label>
-            </div>
+            <label for="fn">Full Name <span class="req">*</span></label>
+            <input type="text" id="fn" required placeholder="e.g. Vikram Mehta" autocomplete="name">
+            <span class="err-msg" id="err-fn"></span>
           </div>
-
-          <div class="field-grid" style="margin-top:16px;">
-            <div class="field">
-              <label for="pillar">Primary Growth Interest</label>
-              <select id="pillar">
-                <option value="13,500 sq.ft Flagship Activation">13,500 sq.ft Flagship Activation (Pondicherry)</option>
-                <option value="5-City Experience Centre Scale">5-City Expansion (Mumbai, Blr, Chennai, Hyd, Cbe)
-                </option>
-                <option value="D2C E-Commerce & Inventory Depth">D2C E-Commerce &amp; Inventory Depth Scale</option>
-                <option value="Artisan Supply Chain & Brand IP">Artisan Supply Chain &amp; Global Brand IP</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="horizon">Target Investment Horizon</label>
-              <select id="horizon">
-                <option value="3-5 Years">3 - 5 Years (Target ₹50 Cr Revenue)</option>
-                <option value="5-7 Years">5 - 7 Years (Global Luxury Scaling)</option>
-                <option value="Long Term Strategic">Long Term Strategic Growth Partner</option>
-              </select>
-            </div>
+          <div class="field">
+            <label for="em">Email Address <span class="req">*</span></label>
+            <input type="email" id="em" required placeholder="you@firm.com" autocomplete="email">
+            <span class="err-msg" id="err-em"></span>
           </div>
-
-          <div class="btn-row">
-            <button type="button" class="btn-sec" onclick="nextStep(1)">← Back</button>
-            <button type="button" class="btn-pri" id="btn-step-2" onclick="nextStep(3)">Continue to Final Step
-              →</button>
+          <div class="field">
+            <label for="ph">WhatsApp / Phone Number <span class="req">*</span></label>
+            <input type="tel" id="ph" required placeholder="+91 98765 43210" autocomplete="tel">
+            <span class="err-msg" id="err-ph"></span>
+          </div>
+          <div class="field">
+            <label for="fund">Fund / Firm / Family Office / Organisation</label>
+            <input type="text" id="fund" placeholder="e.g. NextGen Ventures / Family Office">
+            <span class="err-msg" id="err-fund"></span>
+          </div>
+          <div class="field">
+            <label for="inv-type">Investor Category <span class="req">*</span></label>
+            <select id="inv-type" required>
+              <option value="">Select Category</option>
+              <option value="Angel Investor">Angel Investor</option>
+              <option value="Family Office">Family Office</option>
+              <option value="Venture Capital / Investment Fund">Venture Capital / Investment Fund</option>
+              <option value="Strategic Investor">Strategic Investor</option>
+              <option value="HNI">HNI</option>
+              <option value="Corporate / Institutional Investor">Corporate / Institutional Investor</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="err-msg" id="err-inv-type"></span>
+          </div>
+          <div class="field">
+            <label for="ticket">Typical Investment Range</label>
+            <select id="ticket">
+              <option value="Below ₹25 Lakhs">Below ₹25 Lakhs</option>
+              <option value="₹25 Lakhs – ₹50 Lakhs">₹25 Lakhs – ₹50 Lakhs</option>
+              <option value="₹50 Lakhs – ₹1 Crore">₹50 Lakhs – ₹1 Crore</option>
+              <option value="₹1 Crore – ₹3 Crore">₹1 Crore – ₹3 Crore</option>
+              <option value="₹3 Crore+">₹3 Crore+</option>
+              <option value="Prefer to Discuss">Prefer to Discuss</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="thesis">What interests you about NAD?</label>
+            <textarea id="thesis" placeholder="Tell us briefly about your investment thesis, background or why NAD is of interest."></textarea>
           </div>
         </div>
 
-        <!-- STEP 3: Thesis & Submit -->
-        <div class="form-section" id="sec-3">
-          <h2 class="section-heading">Step 3: Investment Thesis &amp; Submission</h2>
-          <p class="section-sub">Share strategic insights, board expectations, or custom synergy notes.</p>
-
-          <div class="field">
-            <label for="thesis">Strategic Thesis &amp; Non-Monetary Support Offered</label>
-            <textarea id="thesis"
-              placeholder="Tell us how you can help NAD Living scale to ₹50 Cr (e.g. strategic retail network, export logistics, branding, follow-on capital)..."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="link">LinkedIn Profile / Firm Website URL</label>
-            <input type="text" id="link" placeholder="e.g. https://linkedin.com/in/investor-profile">
-            <span class="err-msg" id="err-link"></span>
-          </div>
-
-
-          <div class="btn-row">
-            <button type="button" class="btn-sec" onclick="nextStep(2)">← Back</button>
-            <button type="submit" class="btn-pri" id="submit-btn">Submit Investment Inquiry →</button>
-          </div>
+        <div class="btn-row" style="margin-top:20px;">
+          <div></div>
+          <button type="submit" class="btn-pri" id="submit-btn">REQUEST INVESTOR ACCESS →</button>
         </div>
       </form>
+
+      <!-- 11. CONFIRMATION SCREEN -->
+      <div id="confirmation-screen" style="display:none; text-align:center; padding:24px 12px;">
+        <div style="font-size:36px; margin-bottom:12px;">✨</div>
+        <h2 style="font-family:'Fraunces', serif; font-size:24px; color:var(--brass); margin-bottom:12px;">Thank You for Your Interest in NAD</h2>
+        <p style="font-size:14px; color:var(--ink-dim); max-width:540px; margin:0 auto 24px; line-height:1.6;">We appreciate your interest in being part of NAD’s journey. Our team will review your details and share our investor materials with relevant investment partners.</p>
+        <a href="index.html" class="btn-pri" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">RETURN TO NAD →</a>
+      </div>
     </div>
 
-    <footer>© NAD Living · Nature • Art • Design · Investor Relations &amp; Equity Pitch Deck</footer>
+    <footer>© NAD Living · Nature • Art • Design · Investor Relations</footer>
   </div>
 
   <script>
@@ -963,22 +622,6 @@
       return isValid;
     }
 
-    function checkStepValidity(stepNum) {
-      let isStepValid = true;
-      if (stepNum === 1) {
-        const fnOk = validateSingleField('fn', false);
-        const emOk = validateSingleField('em', false);
-        const phOk = validateSingleField('ph', false);
-        const invOk = validateSingleField('inv-type', false);
-        const fundOk = validateSingleField('fund', false);
-
-        isStepValid = fnOk && emOk && phOk && invOk && fundOk;
-        const btn1 = document.getElementById('btn-step-1');
-        if (btn1) btn1.disabled = !isStepValid;
-      }
-      return isStepValid;
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       const fields = ['fn', 'em', 'ph', 'fund', 'inv-type'];
 
@@ -988,67 +631,13 @@
 
         el.addEventListener('input', () => {
           validateSingleField(id, true);
-          checkStepValidity(1);
         });
 
         el.addEventListener('blur', () => {
           validateSingleField(id, true);
-          checkStepValidity(1);
         });
       });
-
-      checkStepValidity(1);
     });
-
-    function nextStep(stepNum) {
-      if (stepNum === 2) {
-        const fnOk = validateSingleField('fn', true);
-        const emOk = validateSingleField('em', true);
-        const phOk = validateSingleField('ph', true);
-        const invOk = validateSingleField('inv-type', true);
-
-        if (!fnOk || !emOk || !phOk || !invOk) {
-          checkStepValidity(1);
-          return;
-        }
-      }
-
-      document.querySelectorAll('.form-section').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.step-item').forEach((el, idx) => {
-        if (idx + 1 === stepNum) el.classList.add('active');
-        else el.classList.remove('active');
-      });
-
-      document.getElementById('sec-' + stepNum).classList.add('active');
-    }
-
-    function resetForm() {
-      const form = document.getElementById('investor-form');
-      if (form) form.reset();
-
-      const thesis = document.getElementById('thesis');
-      if (thesis) thesis.value = '';
-
-      const fields = ['fn', 'em', 'ph', 'fund', 'inv-type', 'link'];
-      fields.forEach((id) => {
-        const inputEl = document.getElementById(id);
-        const errEl = document.getElementById('err-' + id);
-        if (inputEl) inputEl.classList.remove('invalid-input');
-        if (errEl) {
-          errEl.style.display = 'none';
-          errEl.innerText = '';
-        }
-      });
-
-      const submitBtn = document.getElementById('submit-btn');
-      if (submitBtn) {
-        submitBtn.innerText = 'Submit Investor Inquiry →';
-        submitBtn.disabled = false;
-      }
-
-      nextStep(1);
-      checkStepValidity(1);
-    }
 
     document.getElementById('investor-form').addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -1069,14 +658,10 @@
       const phone = document.getElementById('ph').value.trim();
       const fundName = document.getElementById('fund').value.trim() || 'N/A';
       const investorCategory = document.getElementById('inv-type').value;
-      const ticketSizeEl = document.querySelector('input[name="ticket"]:checked');
-      const ticketSize = ticketSizeEl ? ticketSizeEl.value : 'N/A';
-      const growthInterest = document.getElementById('pillar').value;
-      const horizon = document.getElementById('horizon').value;
+      const ticketRange = document.getElementById('ticket').value;
       const strategicThesis = document.getElementById('thesis').value.trim() || 'None';
-      const profileLink = document.getElementById('link').value.trim() || 'N/A';
 
-      const textContent = `New Investor Inquiry — NAD Living Pitch Deck
+      const textContent = `New Investor Access Request — NAD Living
 
 Investor Profile:
 Name: ${fullName}
@@ -1084,25 +669,20 @@ Email: ${email}
 Phone / WhatsApp: ${phone}
 Organization / Fund: ${fundName}
 Category: ${investorCategory}
+Investment Range: ${ticketRange}
 
-Investment Parameters:
-Intended Ticket Size: ${ticketSize}
-Growth Lever Focus: ${growthInterest}
-Target Horizon: ${horizon}
-Profile / Bio Link: ${profileLink}
-
-Strategic Thesis & Notes:
+Investment Thesis & Notes:
 ${strategicThesis}`;
 
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Submitting Inquiry…';
+      submitBtn.innerText = 'Submitting Request…';
 
       try {
         await fetch('/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            subject: `Investor Inquiry — ${fullName} (${investorCategory})`,
+            subject: `Investor Access Request — ${fullName} (${investorCategory})`,
             replyTo: email,
             text: textContent
           })
@@ -1112,16 +692,14 @@ ${strategicThesis}`;
           await fetch('https://formspree.io/f/xknlqpye', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ category: 'Invest in Us', fullName, email, phone, fundName, investorCategory, ticketSize, growthInterest, strategicThesis })
+            body: JSON.stringify({ category: 'Invest in Us Access Request', fullName, email, phone, fundName, investorCategory, ticketRange, strategicThesis })
           });
         } catch (fsErr) { }
       }
 
-      resetForm();
-      submitBtn.innerText = '✓ Submitted Successfully!';
-      setTimeout(() => {
-        if (submitBtn) submitBtn.innerText = 'Submit Investor Inquiry →';
-      }, 3500);
+      // Show confirmation screen
+      document.getElementById('investor-form').style.display = 'none';
+      document.getElementById('confirmation-screen').style.display = 'block';
     });
   </script>
 
