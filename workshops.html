@@ -1159,7 +1159,7 @@
     }
 
     // ==========================================
-    // WORKSHOP HUB DATA STORE (8 Categories, 69 Products with Photorealistic Images)
+    // WORKSHOP HUB DATA STORE (8 Categories, 68 Products with Photorealistic Images)
     // ==========================================
 
     const CATEGORIES = [
@@ -1259,14 +1259,13 @@
         tagline: 'Print beautiful everyday textiles.',
         description: 'Experience traditional woodblock printing with hand-carved heritage motifs and pigment dyes.',
         products: [
-          { id: 'tote-bag', name: 'Tote Bag', duration: '2 Hours', price: 1300, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Organic Cotton Bag', image: 'https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80' },
-          { id: 'tea-towel', name: 'Tea Towel', duration: '2 Hours', price: 1150, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 2 Kitchen Towels', image: 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=600&q=80' },
-          { id: 'table-runner', name: 'Table Runner', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Linen Table Runner', image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80' },
-          { id: 'napkin-set', name: 'Napkin Set', duration: '2.5 Hours', price: 1600, level: 'Beginner', suitable: ['Friends', 'Corporate'], sizes: 'Set of 6 Cloth Napkins', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80' },
-          { id: 'apron', name: 'Apron', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Artisan Workshop Apron', image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80' },
-          { id: 'cushion-cover', name: 'Cushion Cover', duration: '3 Hours', price: 2100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '18x18" Pillow Case', image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=600&q=80' },
-          { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zipper Pouch', image: 'https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=600&q=80' },
-          { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1450, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Handbound A5 Journal', image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80' }
+          { id: 'tote-bag', name: 'Tote Bag', duration: '2 Hours', price: 1300, level: 'Beginner', suitable: ['Kids', 'Friends', 'Corporate'], sizes: 'Organic Cotton Bag', image: 'assets/workshops/block-tote-bag.webp' },
+          { id: 'tea-towel', name: 'Tea Towel', duration: '2 Hours', price: 1150, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Set of 2 Kitchen Towels', image: 'assets/workshops/block-tea-towel.webp' },
+          { id: 'table-runner', name: 'Table Runner', duration: 'Half Day', price: 2800, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '6-ft Linen Table Runner', image: 'assets/workshops/block-table-runner.webp' },
+          { id: 'apron', name: 'Apron', duration: 'Half Day', price: 2400, level: 'Beginner', suitable: ['Individual', 'Friends'], sizes: 'Artisan Workshop Apron', image: 'assets/workshops/block-apron.webp' },
+          { id: 'cushion-cover', name: 'Cushion Cover', duration: '3 Hours', price: 2100, level: 'Intermediate', suitable: ['Individual', 'Couples'], sizes: '18x18" Pillow Case', image: 'assets/workshops/block-cushion-cover.webp' },
+          { id: 'fabric-pouch', name: 'Fabric Pouch', duration: '2 Hours', price: 1100, level: 'Beginner', suitable: ['Kids', 'Friends'], sizes: 'Zipper Pouch', image: 'assets/workshops/block-fabric-pouch.webp' },
+          { id: 'journal-cover', name: 'Journal Cover', duration: '2.5 Hours', price: 1450, level: 'Beginner', suitable: ['Individual', 'Corporate'], sizes: 'Handbound A5 Journal', image: 'assets/workshops/block-journal-cover.webp' }
         ]
       },
       {
@@ -1462,7 +1461,7 @@
       // Render All Products View
       if (activeTab === 'all-products') {
         mainTitle.innerHTML = `EXPLORE ALL <span class="spark">PRODUCTS</span>`;
-        mainSubtitle.textContent = `Browse our entire range of 69 creative workshop experiences across 8 craft techniques with real product photos.`;
+        mainSubtitle.textContent = `Browse our entire range of 68 creative workshop experiences across 8 craft techniques with real product photos.`;
         filterPanel.style.display = 'flex';
         renderAllProductsView();
         return;
