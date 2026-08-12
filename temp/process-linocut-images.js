@@ -9,10 +9,8 @@ async function main() {
   await convertFolderToWebPNode(workshopsDir, workshopsDir, 85);
 
   const mappings = [
-    { origWebp: 'Linocut printed journal.webp', finalWebp: 'linocut-printed-journal.webp', origImage: 'Linocut printed journal.jpeg' },
-    { origWebp: 'Logo stamp.webp', finalWebp: 'linocut-logo-stamp.webp', origImage: 'Logo stamp.jpeg' },
-    { origWebp: 'Packaging stamps.webp', finalWebp: 'linocut-packaging-stamp.webp', origImage: 'Packaging stamps.jpeg' },
-    { origWebp: 'Tote bag..webp', finalWebp: 'linocut-tote-bag.webp', origImage: 'Tote bag..jpeg' },
+    { origWebp: 'Personalised Name Stamp.webp', finalWebp: 'linocut-name-stamp.webp', origImage: 'Personalised Name Stamp.jpeg' },
+    { origWebp: 'Couple stamp.webp', finalWebp: 'linocut-couple-stamp.webp', origImage: 'Couple stamp.jpeg' },
   ];
 
   for (const item of mappings) {
@@ -31,7 +29,7 @@ async function main() {
     }
   }
 
-  console.log('Linocut printing images conversion completed successfully!');
+  console.log('Linocut name stamp and couple stamp image conversion completed successfully!');
 }
 
 main().catch(err => console.error(err));
