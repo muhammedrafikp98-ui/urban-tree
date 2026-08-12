@@ -107,6 +107,19 @@
       color: var(--brass);
     }
 
+    .brand-logo-img {
+      height: 40px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .brand-logo-img:hover {
+      transform: scale(1.04);
+    }
+
     /* Typography */
     .eyebrow {
       font-family: 'JetBrains Mono', monospace;
@@ -995,7 +1008,9 @@
     <!-- Navigation Bar -->
     <header class="top-nav">
       <a href="index.html" class="back" id="back-link">← Back</a>
-      <span class="brand-badge">NAD Living · by Urbanpots</span>
+      <a href="index.html" style="display:inline-flex; align-items:center; text-decoration:none;">
+        <img src="assets/logo-with-tag.webp" alt="NAD Living — by Urbanpots" class="brand-logo-img">
+      </a>
     </header>
 
     <!-- Dynamic Header Area -->
